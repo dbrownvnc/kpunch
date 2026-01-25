@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>NDS 2026 시험문제</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+        
+        :root {
+            --primary: #1a237e;
+            --secondary: #c62828;
+            --accent: #ffd600;
+            --bg-dark: #0d1421;
+            --bg-card: #1a2332;
+            --text-primary: #ffffff;
+            --text-secondary: #b0bec5;
+            --border: #2d3a4f;
+            --success: #4caf50;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.8;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 4px solid var(--accent);
+        }
+        
+        .header-badge {
+            display: inline-block;
+            background: var(--secondary);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            font-weight: 900;
+            margin-bottom: 8px;
+        }
+        
+        .header-subtitle {
+            font-size: 14px;
+            color: rgba(255,255,255,0.8);
+        }
+        
+        /* Section Title */
+        .section-divider {
+            background: linear-gradient(135deg, var(--secondary) 0%, #d32f2f 100%);
+            padding: 20px;
+            margin: 30px 0 20px 0;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .section-divider h2 {
+            font-size: 20px;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .section-divider.answer {
+            background: linear-gradient(135deg, var(--success) 0%, #66bb6a 100%);
+        }
+        
+        /* Question Card */
+        .question-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 16px 0;
+            border: 1px solid var(--border);
+        }
+        
+        .question-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .question-number {
+            background: var(--primary);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        
+        .question-meta {
+            flex: 1;
+        }
+        
+        .question-type {
+            font-size: 12px;
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        .difficulty {
+            font-size: 12px;
+        }
+        
+        .difficulty.easy { color: #4caf50; }
+        .difficulty.medium { color: #ff9800; }
+        .difficulty.hard { color: #f44336; }
+        
+        .question-text {
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+        
+        .question-text strong {
+            color: var(--accent);
+        }
+        
+        /* Options */
+        .options {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .option {
+            background: rgba(255,255,255,0.05);
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 14px;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+        }
+        
+        .option:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: var(--border);
+        }
+        
+        .option-label {
+            font-weight: 700;
+            color: var(--accent);
+            margin-right: 8px;
+        }
+        
+        /* OX Options */
+        .ox-options {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+        
+        .ox-option {
+            background: rgba(255,255,255,0.05);
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            border: 1px solid var(--border);
+        }
+        
+        /* Blank Box */
+        .blank-box {
+            display: inline-block;
+            min-width: 100px;
+            border-bottom: 2px solid var(--accent);
+            margin: 0 4px;
+        }
+        
+        /* Answer Section */
+        .answer-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 16px 0;
+            border-left: 4px solid var(--success);
+        }
+        
+        .answer-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .answer-number {
+            background: var(--success);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        
+        .answer-text {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        
+        .explanation {
+            background: rgba(76,175,80,0.1);
+            border-radius: 12px;
+            padding: 16px;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        
+        .explanation-title {
+            font-weight: 700;
+            color: var(--success);
+            margin-bottom: 8px;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 12px;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border);
+            margin-top: 30px;
+        }
+        
+        /* Page Break */
+        .page-break {
+            margin: 40px 0;
+            padding: 20px;
+            text-align: center;
+            border: 2px dashed var(--border);
+            border-radius: 12px;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        @media print {
+            .page-break { page-break-after: always; }
+        }
+        
+        /* Responsive */
+        @media (max-width: 480px) {
+            .header h1 { font-size: 20px; }
+            .question-card, .answer-card { padding: 20px 16px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-badge">📝 학습 평가</div>
+        <h1>NDS 2026 시험문제</h1>
+        <p class="header-subtitle">미국 국방전략 변화와 투자 시사점 | 총 10문제</p>
+    </header>
+    
+    <div class="container">
+        
+        <!-- ==================== 문제지 ==================== -->
+        <div class="section-divider">
+            <h2>📋 시험문제 (총 10문제)</h2>
+        </div>
+        
+        <!-- 문제 1 -->
+        <div class="question-card">
+            <div class="question-header">
+                <div class="question-number">1</div>
+                <div class="question-meta">
+                    <div class="question-type">객관식</div>
+                    <div class="difficulty easy">⭐ 쉬움</div>
+                </div>
+            </div>
+            <div class="question-text">
+                NDS 2026 보고서에서 미국 안보의 <strong>최우선 순위</strong>로 새롭게 설정된 것은?
+            </div>
+            <div class="options">
+                <div class="option"><span class="option-label">①</span> 중국 억지</div>
+                <div class="option"><span class="option-label">②</span> 세계 평화 유지</div>
+                <div class="option"><span class="option-label">③</span> 미국 본토 방어</div>
+                <div class="option"><span class="option-label">④</span> 동맹국 보호</div>
+            </div>
+        </div>
+        
+        <!-- 문제 2 -->
+        <div class="question-card">
+            <div class="question-header">
+                <div class="question-number">2</div>
+                <div class="question-meta">
+                    <div class="question-type">단답형</div>
+                    <div class="difficulty easy">⭐ 쉬움</div>
+                </div>
+            </div>
+            <div class="question-text">
+                트럼프의 새로운 안보 전략을 '먼로주의(Monroe Doctrine)'에 빗대어 부르는 명칭은 무엇인가?<br>
+                (힌트: Donald + Monroe의 합성어)
+            </div>
+        </div>
+        
+        <!-- 문제 3 -->
+        <div class="question-card">
+            <div class="question-header">
+                <div class="question-number">3</div>
+                <div class="question-meta">
+                    <div class="question-type">OX 문제</div>
+                    <div class="difficulty easy">⭐ 쉬움</div>
+                </div>
+            </div>
+            <div class="question-text">
+                NDS 2026 보고서에서 "주된 책임(Primary Responsibility)"이라는 표현은 <strong>한국에만 적용</strong>된 것이다.
+            </div>
+            <div class="ox-options">
+                <div class="ox-option">⭕ O</div>
+                <div class="ox-option">❌ X</div>
+            </div>
+        </div>
+        
+        <!-- 문제 4 -->
+        <div class="question-card">
+            <div class="question-header">
+                <div class="question-number">4</div>
+                <div class="question-meta">
+                    <div class="question-type">객관식</div>
+                    <div class="difficulty medium">⭐⭐ 보통</div>
+                </div>
+            </div>
+            <div class="question-text">
+                NDS 2026에서 미국이 동맹국에 요구하는 <strong>GDP 대비 국방비 비율</strong>은?
+            </div>
+            <div class="options">
+                <div class="option"><span class="option-label">①</span> 2%</div>
+                <div class="option"><span class="option-label">②</span> 3.4%</div>
+                <div class="option"><span class="option-label">③</span> 5%</div>
+                <div class="option"><span class="option-label">④</span> 7%</div>
+            </div>
+        </div>
+        
+        <!-- 문제 5 -->
+        <div class="question-card">
+            <div class="question-header">
+                <div class="question-number">5</div>
+                <div class="question-meta">
+                    <div class="question-type">빈칸 채우기</div>
+                    <div class="difficulty medium">⭐⭐ 보통</div>
+                </div>
+            </div>
+            <div class="question-text">
+                대중국 수출 의존도가 가장 높은 3개국을 순서대로 나열하면,<br>
+                1위: <span class="blank-box"></span> (40%),<br>
+                2위: <span class="blank-box"></span> (35%),<br>
+                3위: <span class="blank-box"></span> (25%) 이다.
+            </div>
+        </div>
+        
+        <!-- 문제 6 -->
+        <div class="question-card">
+            <div class="question-header">
+                <div class="question-number">6</div>
+                <div class="question-meta">
+                    <div class="question-type">객관식</div>
+                    <div class="difficulty medium">⭐⭐ 보통</div>
+                </div>
+            </div>
+            <div class="question-text">
+                NDS 2026 '안보환경' 챕터 표지에 삽입된 지도는 어떤 지역의 지도인가?
+            </div>
+            <div class="options">
+                <div class="option"><span class="option-label">①</span> 세계 지도</div>
+                <div class="option"><span class="option-label">②</span> 유럽 지도</div>
+                <div class="option"><span class="option-label">③</span> 아메리카 대륙 고지도</div>
+                <div class="option"><span class="option-label">④</span> 아시아-태평양 지도</div>
+            </div>
+        </div>
+        
+        <!-- 문제 7 -->
+        <div class="question-card">
+            <div class="question-header">
+                <div class="question-number">7</div>
+                <div class="question-meta">
+                    <div class="question-type">객관식</div>
+                    <div class="difficulty medium">⭐⭐ 보통</div>
+                </div>
+            </div>
+            <div class="question-text">
+                NDS 2026에서 미국이 한국의 방산 능력에 관심을 갖는 이유로 <strong>올바르지 않은 것</strong>은?
+            </div>
+            <div class="options">
+                <div class="option"><span class="option-label">①</span> 미국 전투함의 노후화</div>
+                <div class="option"><span class="option-label">②</span> 미국 내 드라이독(수리시설) 부족</div>
+                <div class="option"><span class="option-label">③</span> 한국의 높은 노동비용</div>
+                <div class="option"><span class="option-label">④</span> 한국의 탄탄한 조선업 능력</div>
+            </div>
+        </div>
+        
+        <!-- 문제 8 -->
+        <div class="question-card">
+            <div class="question-header">
+                <div class="question-number">8</div>
+                <div class="question-meta">
+                    <div class="question-type">OX 문제</div>
+                    <div class="difficulty medium">⭐⭐ 보통</div>
+                </div>
+            </div>
+            <div class="question-text">
+                2022년 NDS 문서에서는 중국 억지가 1순위였으나, 2026년 문서에서는 2순위로 밀렸다.
+            </div>
+            <div class="ox-options">
+                <div class="ox-option">⭕ O</div>
+                <div class="ox-option">❌ X</div>
+            </div>
+        </div>
+        
+        <!-- 문제 9 -->
+        <div class="question-card">
+            <div class="question-header">
+                <div class="question-number">9</div>
+                <div class="question-meta">
+                    <div class="question-type">서술형</div>
+                    <div class="difficulty hard">⭐⭐⭐ 어려움</div>
+                </div>
+            </div>
+            <div class="question-text">
+                미국이 "세계 경찰" 역할을 포기할 경우 <strong>달러 패권</strong>에 미치는 영향을 설명하고, 이로 인해 <strong>주목받을 수 있는 자산</strong>을 2가지 이상 제시하시오.
+            </div>
+        </div>
+        
+        <!-- 문제 10 -->
+        <div class="question-card">
+            <div class="question-header">
+                <div class="question-number">10</div>
+                <div class="question-meta">
+                    <div class="question-type">서술형</div>
+                    <div class="difficulty hard">⭐⭐⭐ 어려움</div>
+                </div>
+            </div>
+            <div class="question-text">
+                한국이 방위비 분담금을 "현금"이 아닌 "국방 R&D 투자"로 대체할 경우의 <strong>장점</strong>을 2가지 이상 서술하시오.<br>
+                (힌트: 미국 국방연구소의 사례 참고)
+            </div>
+        </div>
+        
+        <!-- 페이지 구분선 -->
+        <div class="page-break">
+            ✂️ --- 여기서 문제지 끝 / 정답지 시작 --- ✂️
+        </div>
+        
+        <!-- ==================== 정답지 ==================== -->
+        <div class="section-divider answer">
+            <h2>📝 정답 및 해설</h2>
+        </div>
+        
+        <!-- 정답 1 -->
+        <div class="answer-card">
+            <div class="answer-header">
+                <div class="answer-number">1</div>
+                <div class="answer-text">정답: ③ 미국 본토 방어</div>
+            </div>
+            <div class="explanation">
+                <div class="explanation-title">💡 해설</div>
+                NDS 2026에서 미국은 "본토 방어"를 안보의 최우선 순위로 설정했습니다. 과거에는 본토 방어가 안보 순위에서 거론조차 되지 않았으나, 이제 1순위로 격상되었습니다. 이는 미국이 해외 개입보다 자국 보호를 우선시하겠다는 전략적 전환을 의미합니다.
+            </div>
+        </div>
+        
+        <!-- 정답 2 -->
+        <div class="answer-card">
+            <div class="answer-header">
+                <div class="answer-number">2</div>
+                <div class="answer-text">정답: 돈로주의 (Donro Doctrine)</div>
+            </div>
+            <div class="explanation">
+                <div class="explanation-title">💡 해설</div>
+                '돈로주의'는 Donald Trump의 '돈(Don)'과 Monroe Doctrine의 '로(ro)'를 합친 신조어입니다. 1823년 먼로 대통령의 '먼로주의'가 아메리카 대륙에 대한 유럽의 개입을 거부한 것처럼, 트럼프의 '돈로주의'는 아메리카 대륙 외 지역의 안보는 "돈을 내야 지켜준다"는 원칙을 담고 있습니다.
+            </div>
+        </div>
+        
+        <!-- 정답 3 -->
+        <div class="answer-card">
+            <div class="answer-header">
+                <div class="answer-number">3</div>
+                <div class="answer-text">정답: X (틀림)</div>
+            </div>
+            <div class="explanation">
+                <div class="explanation-title">💡 해설</div>
+                "주된 책임(Primary Responsibility)"이라는 표현은 NDS 2026 문서 전반에 걸쳐 여러 지역에 적용되었습니다. 유럽(대러시아), 중동의 이스라엘·사우디(대이란), 그리고 모든 동맹국의 자국 방어에 대해서도 같은 표현이 사용되었습니다. 한국만 타겟팅한 것이 아닙니다.
+            </div>
+        </div>
+        
+        <!-- 정답 4 -->
+        <div class="answer-card">
+            <div class="answer-header">
+                <div class="answer-number">4</div>
+                <div class="answer-text">정답: ③ 5%</div>
+            </div>
+            <div class="explanation">
+                <div class="explanation-title">💡 해설</div>
+                미국은 동맹국들에게 GDP의 5%를 국방비로 지출할 것을 요구했습니다. 참고로 미국 자체는 3.4%를 지출하고 있으며, 한국·대만은 약 2.5%, 유럽 대부분은 2% 미만을 지출해왔습니다. 5% 요구는 기존 대비 2~3배 증가를 의미합니다.
+            </div>
+        </div>
+        
+        <!-- 정답 5 -->
+        <div class="answer-card">
+            <div class="answer-header">
+                <div class="answer-number">5</div>
+                <div class="answer-text">정답: 1위 대만, 2위 호주, 3위 한국</div>
+            </div>
+            <div class="explanation">
+                <div class="explanation-title">💡 해설</div>
+                대중국 수출 의존도는 대만(40%), 호주(35%), 한국(25%) 순입니다. 높은 수출 의존도는 해당 국가들의 외교 정책에 영향을 미칠 수 있으며, 호주는 2007~2010년 케빈 러드 총리 시절 친중 성향을 보인 사례가 있습니다. 미국은 한국이 중국에 기울지 않도록 선제적 견제를 하고 있다고 볼 수 있습니다.
+            </div>
+        </div>
+        
+        <!-- 정답 6 -->
+        <div class="answer-card">
+            <div class="answer-header">
+                <div class="answer-number">6</div>
+                <div class="answer-text">정답: ③ 아메리카 대륙 고지도</div>
+            </div>
+            <div class="explanation">
+                <div class="explanation-title">💡 해설</div>
+                NDS 2026 '안보환경' 챕터 표지에는 세계 지도가 아닌 옛날 아메리카 대륙 고지도가 삽입되었습니다. 이는 1823년 먼로주의의 부활을 시각적으로 상징하며, 미국이 아메리카 대륙(북미·남미)만을 자국의 영역으로 보고, 나머지 지역에는 관심을 줄이겠다는 메시지를 담고 있습니다.
+            </div>
+        </div>
+        
+        <!-- 정답 7 -->
+        <div class="answer-card">
+            <div class="answer-header">
+                <div class="answer-number">7</div>
+                <div class="answer-text">정답: ③ 한국의 높은 노동비용</div>
+            </div>
+            <div class="explanation">
+                <div class="explanation-title">💡 해설</div>
+                미국이 한국의 방산 능력에 관심을 갖는 이유는 ① 미국 전투함의 노후화, ② 드라이독(수리시설) 부족, ④ 한국의 탄탄한 조선업·방산 제조 능력입니다. "높은 노동비용"은 언급되지 않았으며, 오히려 한국의 방산 제조 능력을 "헐값에" 활용하려는 의도가 있다고 분석됩니다.
+            </div>
+        </div>
+        
+        <!-- 정답 8 -->
+        <div class="answer-card">
+            <div class="answer-header">
+                <div class="answer-number">8</div>
+                <div class="answer-text">정답: O (맞음)</div>
+            </div>
+            <div class="explanation">
+                <div class="explanation-title">💡 해설</div>
+                2022년 NDS 문서에서는 중국 억지가 최우선 순위였으나, 2026년 문서에서는 본토 방어가 1순위로 올라가면서 중국 억지는 2순위로 밀렸습니다. 또한 미국은 중국 억지를 동맹국과 "고통 분담"하겠다고 명시하여, 단독 책임에서 공동 책임으로 전환했습니다.
+            </div>
+        </div>
+        
+        <!-- 정답 9 -->
+        <div class="answer-card">
+            <div class="answer-header">
+                <div class="answer-number">9</div>
+                <div class="answer-text">정답 예시</div>
+            </div>
+            <div class="explanation">
+                <div class="explanation-title">💡 해설</div>
+                <strong>[달러 패권에 미치는 영향]</strong><br>
+                미국이 세계 경찰 역할을 포기하면, 동맹국들의 미국에 대한 신뢰가 하락합니다. 이에 따라 달러를 기축통화로 사용하는 것에 대한 의구심이 커지고, "탈달러" 흐름이 가속화됩니다. 덴마크가 그린란드 사태 때 미국 국채 매각을 위협한 것이 대표적 사례입니다.<br><br>
+                <strong>[주목받을 자산]</strong><br>
+                ① <strong>금(Gold)</strong>: 대표적인 안전자산으로, 달러 신뢰 하락 시 수요 급증<br>
+                ② <strong>은(Silver)</strong>: 금과 함께 귀금속으로서 안전자산 역할<br>
+                ③ <strong>방위산업 관련 주식</strong>: 전 세계 국방비 증가에 따른 수혜<br>
+                (2가지 이상 정확히 서술 시 정답)
+            </div>
+        </div>
+        
+        <!-- 정답 10 -->
+        <div class="answer-card">
+            <div class="answer-header">
+                <div class="answer-number">10</div>
+                <div class="answer-text">정답 예시</div>
+            </div>
+            <div class="explanation">
+                <div class="explanation-title">💡 해설</div>
+                <strong>[국방 R&D 투자의 장점]</strong><br><br>
+                ① <strong>혁신 산업의 뿌리 형성</strong>: 자율주행차, mRNA 백신 등 최신 기술의 원천 기술이 미국 국방연구소에서 개발된 사례처럼, 국방 R&D는 민간 혁신 산업의 기반이 될 수 있습니다.<br><br>
+                ② <strong>예산 효율성 제약 완화</strong>: 국방 R&D는 일반 예산과 달리 효율성을 엄격히 따지지 않아, 실패 가능성이 있는 과감한 연구에 투자할 수 있습니다.<br><br>
+                ③ <strong>방위산업 고도화</strong>: 대한민국 방위산업을 한 차원 끌어올려, 해외 방산 수출 경쟁력을 강화할 수 있습니다.<br><br>
+                ④ <strong>협상력 확보</strong>: 핵추진 잠수함 개발 승인 사례처럼, "중국 견제에 기여하겠다"는 명분으로 미국과 윈-윈 협상이 가능합니다.<br><br>
+                (2가지 이상 정확히 서술 시 정답)
+            </div>
+        </div>
+        
+        <!-- 채점 기준표 -->
+        <div class="question-card" style="background: linear-gradient(135deg, rgba(26,35,126,0.3) 0%, rgba(26,35,126,0.1) 100%); border-color: var(--primary);">
+            <h3 style="margin-bottom: 16px; color: var(--accent);">📊 채점 기준</h3>
+            <table style="width: 100%; font-size: 14px; border-collapse: collapse;">
+                <tr style="border-bottom: 1px solid var(--border);">
+                    <td style="padding: 8px 0;"><strong>문제 1~8</strong> (객관식/OX/단답형/빈칸)</td>
+                    <td style="padding: 8px 0; text-align: right;">각 8점 × 8문제 = 64점</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border);">
+                    <td style="padding: 8px 0;"><strong>문제 9</strong> (서술형)</td>
+                    <td style="padding: 8px 0; text-align: right;">18점</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px 0;"><strong>문제 10</strong> (서술형)</td>
+                    <td style="padding: 8px 0; text-align: right;">18점</td>
+                </tr>
+                <tr style="border-top: 2px solid var(--accent);">
+                    <td style="padding: 12px 0; font-weight: 700; color: var(--accent);">총점</td>
+                    <td style="padding: 12px 0; text-align: right; font-weight: 700; color: var(--accent);">100점</td>
+                </tr>
+            </table>
+        </div>
+        
+        <footer class="footer">
+            <p>본 시험문제는 '박종훈의 지식한방' 영상 내용을 바탕으로 출제되었습니다.</p>
+            <p style="margin-top: 8px;">NDS 2026 분석 | 2026.01.25</p>
+        </footer>
+    </div>
+</body>
+</html>
