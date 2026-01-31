@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>금값 대폭락과 1974년 평행이론 분석</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans KR', sans-serif;
+            line-height: 1.7;
+            background: #f8f9fa;
+            color: #333;
+            padding: 16px;
+            max-width: 100%;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        header {
+            background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+            color: white;
+            padding: 24px 16px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        header .meta {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+        .alert-box {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a5a);
+            color: white;
+            padding: 16px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .alert-box h3 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+        .alert-box .number {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        section h2 {
+            color: #b8860b;
+            font-size: 1.2rem;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #f0e6d2;
+        }
+        section h3 {
+            color: #555;
+            font-size: 1.05rem;
+            margin: 16px 0 10px 0;
+        }
+        p {
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .red-highlight {
+            background: #f8d7da;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #721c24;
+        }
+        .green-highlight {
+            background: #d4edda;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #155724;
+        }
+        .price-chart {
+            background: #1a1a2e;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 16px 0;
+        }
+        .price-chart h4 {
+            color: #ffd700;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        .chart-bar-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .chart-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .chart-label {
+            color: #ccc;
+            font-size: 0.8rem;
+            width: 60px;
+            flex-shrink: 0;
+        }
+        .chart-bar {
+            height: 28px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 8px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+        }
+        .bar-gold {
+            background: linear-gradient(90deg, #d4af37, #ffd700);
+        }
+        .bar-red {
+            background: linear-gradient(90deg, #dc3545, #ff6b6b);
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.9rem;
+        }
+        .comparison-table th {
+            background: #b8860b;
+            color: white;
+            padding: 12px 8px;
+            text-align: center;
+        }
+        .comparison-table td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+        .comparison-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        .timeline {
+            position: relative;
+            padding-left: 24px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #d4af37;
+        }
+        .timeline-item {
+            position: relative;
+            padding-bottom: 16px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -22px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            background: #d4af37;
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+        .timeline-date {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 4px;
+        }
+        .trigger-box {
+            background: #fff5e6;
+            border-left: 4px solid #ff9800;
+            padding: 12px 16px;
+            margin: 12px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .trigger-box strong {
+            color: #e65100;
+        }
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 16px 0;
+        }
+        .stat-card {
+            background: #f8f9fa;
+            padding: 16px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .stat-card .value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #b8860b;
+        }
+        .stat-card .label {
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 4px;
+        }
+        .warning-box {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 8px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+        .warning-box h4 {
+            color: #721c24;
+            margin-bottom: 8px;
+        }
+        .policy-list {
+            margin: 12px 0;
+        }
+        .policy-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px dashed #ddd;
+        }
+        .policy-icon {
+            font-size: 1.2rem;
+        }
+        .parallel-chart {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 16px 0;
+            color: white;
+        }
+        .parallel-chart h4 {
+            text-align: center;
+            margin-bottom: 16px;
+            color: #ffd700;
+        }
+        .parallel-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .parallel-year {
+            background: rgba(255,215,0,0.2);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .scenario-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px;
+            border-radius: 10px;
+            margin: 16px 0;
+        }
+        .scenario-box h4 {
+            margin-bottom: 12px;
+        }
+        .quote-box {
+            background: #e8f4f8;
+            border-left: 4px solid #17a2b8;
+            padding: 12px 16px;
+            margin: 16px 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+        }
+        .flow-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 16px 0;
+        }
+        .flow-item {
+            background: #f0f0f0;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            position: relative;
+        }
+        .flow-item::after {
+            content: '↓';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2rem;
+            color: #b8860b;
+        }
+        .flow-item:last-child::after {
+            display: none;
+        }
+        .key-insight {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            color: white;
+            padding: 16px;
+            border-radius: 10px;
+            margin: 16px 0;
+        }
+        .key-insight h4 {
+            margin-bottom: 10px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #888;
+            font-size: 0.85rem;
+        }
+        .debt-chart {
+            margin: 16px 0;
+        }
+        .debt-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .debt-label {
+            width: 80px;
+            font-size: 0.85rem;
+        }
+        .debt-track {
+            flex: 1;
+            height: 24px;
+            background: #eee;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+        .debt-fill {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 8px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: white;
+        }
+        .fill-1974 {
+            background: #4caf50;
+            width: 25%;
+        }
+        .fill-2026 {
+            background: #f44336;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💰 금값 대폭락과 1974년 평행이론</h1>
+            <div class="meta">박종훈의 지식한방 | 2026년 2월 1일</div>
+        </header>
+
+        <div class="alert-box">
+            <h3>📉 2026년 1월 30일 금값 폭락</h3>
+            <div class="number">-9.5% (하루)</div>
+            <p style="margin-top:8px; margin-bottom:0;">43년 만에 최악의 일일 하락폭 기록</p>
+        </div>
+
+        <section>
+            <h2>📊 금값 폭락 현황</h2>
+            
+            <div class="price-chart">
+                <h4>금 현물 가격 변동</h4>
+                <div class="chart-bar-container">
+                    <div class="chart-item">
+                        <span class="chart-label">최고점</span>
+                        <div class="chart-bar bar-gold" style="width: 100%;">$5,595</div>
+                    </div>
+                    <div class="chart-item">
+                        <span class="chart-label">종가</span>
+                        <div class="chart-bar bar-red" style="width: 87.5%;">$4,895</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <div class="value">-14.9%</div>
+                    <div class="label">고점 대비 하락률</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">43년</div>
+                    <div class="label">만에 최악의 하락</div>
+                </div>
+            </div>
+
+            <p><strong>참고:</strong> 인베스팅닷컴 메인 화면의 $4,763은 <span class="highlight">선물 정산가</span>이며, 실제 선물 가격은 $4,895에 마감. 현물 투자자는 현물 가격 기준으로 판단해야 함.</p>
+        </section>
+
+        <section>
+            <h2>🎯 폭락의 근본 원인</h2>
+
+            <h3>1. 과도한 단기 상승</h3>
+            <p>금값이 단기간에 너무 많이 올랐기 때문에 조정은 불가피했음. 특히 <span class="highlight">포물선형 상승(Parabolic Rise)</span> 이후에는 조정 강도가 더욱 강해지는 것이 일반적.</p>
+
+            <h3>2. 단기 투자자의 차익 실현</h3>
+            <p>한두 달 만에 30% 수익을 낸 단기 투자자들이 '1년 장사 다 했다'는 심리로 빠르게 매도에 나섬.</p>
+
+            <h3>3. '겁먹은 손(Weak Hands)' 정리</h3>
+            <div class="trigger-box">
+                <strong>겁먹은 손의 특징:</strong>
+                <p style="margin-top:8px; margin-bottom:0;">금값이 낮을 때 참여하지 못하다가 폭등 후 뒤늦게 진입한 투자자들. 자산이 적고 조급함에 <span class="red-highlight">빚내서 투자</span>하거나 <span class="red-highlight">20~50배 레버리지</span>를 사용한 경우가 많음.</p>
+            </div>
+            <p>시장은 이런 '겁먹은 손'을 털어내는 자정 작용을 함. 고래(큰손)들의 인위적 개입이든, 시장 자체의 '보이지 않는 손'이든 결과적으로 비슷한 현상이 발생.</p>
+        </section>
+
+        <section>
+            <h2>🔥 폭락의 방아쇠(Trigger)</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">1월 27일 - 트럼프 대통령 실언</div>
+                    <p>기자 질문: "달러 가치가 계속 떨어지는데 걱정되지 않나?"<br>
+                    트럼프 답변: <strong>"I think it's great"</strong><br>
+                    → 달러 약세 가속화, 국채 금리 급등, 금값 $5,000→$5,600 (10%↑)</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1월 28일 - 베센트 재무장관 긴급 수습</div>
+                    <p><strong>"Strong Dollar Policy"</strong> 강조<br>
+                    미국의 강달러 정책 재확인으로 첫 번째 하락 트리거 작동</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1월 29일 - 케빈 워시 연준 의장 지명자</div>
+                    <p><strong>양적긴축(QT) 가능성</strong> 시사<br>
+                    두 번째 하락 트리거로 시장 공포 확산</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>⚠️ 트럼프 정책의 위험성</h2>
+
+            <p>'셀 아메리카(Sell America)' 현상이 심화되는 배경에는 트럼프 대통령의 정책들이 있음.</p>
+
+            <div class="policy-list">
+                <div class="policy-item">
+                    <span class="policy-icon">⚔️</span>
+                    <div>
+                        <strong>확전 정책</strong>
+                        <p style="margin:4px 0 0 0; font-size:0.9rem; color:#666;">베네수엘라 침공 시사, 이란 대규모 군대 급파, 그린란드 영구 임대 추진</p>
+                    </div>
+                </div>
+                <div class="policy-item">
+                    <span class="policy-icon">💵</span>
+                    <div>
+                        <strong>현금 살포 정책</strong>
+                        <p style="margin:4px 0 0 0; font-size:0.9rem; color:#666;">2025년생 아기 1명당 $1,000 지급<br>2026년부터 연소득 $100,000 이하에 $2,000 지급</p>
+                    </div>
+                </div>
+                <div class="policy-item">
+                    <span class="policy-icon">🛡️</span>
+                    <div>
+                        <strong>방위비 50% 인상</strong>
+                        <p style="margin:4px 0 0 0; font-size:0.9rem; color:#666;">$9,000억 → $1조 5,000억 (약 2,200조원)</p>
+                    </div>
+                </div>
+                <div class="policy-item">
+                    <span class="policy-icon">🚢</span>
+                    <div>
+                        <strong>트럼프급 전함(Battleship) 25척 건조</strong>
+                        <p style="margin:4px 0 0 0; font-size:0.9rem; color:#666;">1척당 30조원 × 25척 = 750조원 (실제 비용 예상: 1,500조원)<br>현대전에서 쓸모없는 '보여주기식 무기'라는 비판</p>
+                    </div>
+                </div>
+                <div class="policy-item">
+                    <span class="policy-icon">📉</span>
+                    <div>
+                        <strong>빅뷰티풀 법안(세금 감면)</strong>
+                        <p style="margin:4px 0 0 0; font-size:0.9rem; color:#666;">돈은 쓰면서 세금은 깎는 정책 → 국채 신뢰도 하락</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ 배틀십의 문제점</h4>
+                <p>거포거함(Big Gun Big Ship) 시대는 2차 대전 때 종료됨. 일본의 야마토급 전함은 국가 예산의 5%(현재 기준 36조원)를 투입했지만, 오히려 패전을 앞당긴 요인이 됨. 현대전에서 거대 전함은 드론과 미사일의 표적일 뿐.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>🔄 1974년 vs 2026년 평행이론</h2>
+
+            <div class="parallel-chart">
+                <h4>금값 상승 및 조정 비교</h4>
+                <div class="parallel-row">
+                    <span class="parallel-year">1974년</span>
+                    <span>상승폭: 460% (5.6배)</span>
+                </div>
+                <div class="parallel-row">
+                    <span class="parallel-year">2026년</span>
+                    <span>상승폭: 180% (2.8배)</span>
+                </div>
+            </div>
+
+            <table class="comparison-table">
+                <tr>
+                    <th>구분</th>
+                    <th>1974년</th>
+                    <th>2026년</th>
+                </tr>
+                <tr>
+                    <td>상승 기간</td>
+                    <td>3년</td>
+                    <td>약 2년</td>
+                </tr>
+                <tr>
+                    <td>가격 범위</td>
+                    <td>$35 → $195</td>
+                    <td>$2,000 → $5,600</td>
+                </tr>
+                <tr>
+                    <td>상승률</td>
+                    <td>460% (5.6배)</td>
+                    <td>180% (2.8배)</td>
+                </tr>
+                <tr>
+                    <td>조정 기간</td>
+                    <td>20개월</td>
+                    <td>진행 중</td>
+                </tr>
+                <tr>
+                    <td>조정 폭</td>
+                    <td>-47%</td>
+                    <td>-14.9% (현재)</td>
+                </tr>
+                <tr>
+                    <td>조정 후 가격</td>
+                    <td>$103</td>
+                    <td>$4,895</td>
+                </tr>
+            </table>
+
+            <div class="quote-box">
+                <strong>1970년대 금값 전체 흐름:</strong> $35 → $850 (24배 상승). 중간에 1974년 47% 폭락을 겪었지만, 이후 $103에서 $850까지 8배 추가 상승.
+            </div>
+        </section>
+
+        <section>
+            <h2>📌 1974년 vs 2026년의 결정적 차이</h2>
+
+            <h3>1. 거시경제 환경</h3>
+            <table class="comparison-table">
+                <tr>
+                    <th>요인</th>
+                    <th>1974년</th>
+                    <th>2026년</th>
+                </tr>
+                <tr>
+                    <td>원자재</td>
+                    <td>오일쇼크 진정</td>
+                    <td>메탈/원자재 급등 지속</td>
+                </tr>
+                <tr>
+                    <td>전쟁</td>
+                    <td>베트남전 종전 기대</td>
+                    <td>확전 정책 (베네수엘라, 이란)</td>
+                </tr>
+                <tr>
+                    <td>정부 지출</td>
+                    <td>감소 전망</td>
+                    <td>방위비 50%↑, 현금 살포</td>
+                </tr>
+            </table>
+
+            <h3>2. 미국 부채 비율 (GDP 대비)</h3>
+            <div class="debt-chart">
+                <div class="debt-bar">
+                    <span class="debt-label">1974년</span>
+                    <div class="debt-track">
+                        <div class="debt-fill fill-1974">30%</div>
+                    </div>
+                </div>
+                <div class="debt-bar">
+                    <span class="debt-label">2026년</span>
+                    <div class="debt-track">
+                        <div class="debt-fill fill-2026">120%</div>
+                    </div>
+                </div>
+            </div>
+
+            <p><strong>핵심 차이:</strong> 1974년에는 부채 비율이 30%에 불과해 <span class="green-highlight">금리를 10%까지 올릴 여력</span>이 있었음. 반면 2026년 현재 120%의 부채 비율에서 금리 인상은 <span class="red-highlight">미국 정부의 자살행위</span>. 이자 비용 급증으로 국채가 더 빨리 늘어나는 악순환에 빠짐.</p>
+        </section>
+
+        <section>
+            <h2>📈 이번 폭락의 특징</h2>
+
+            <div class="flow-chart">
+                <div class="flow-item">트럼프 실언 ("달러 약세 좋다")</div>
+                <div class="flow-item">달러 약세 가속화 + 국채 금리 급등</div>
+                <div class="flow-item">베센트/케빈 워시 긴급 발언</div>
+                <div class="flow-item">월가 집중 매도세 + 알고리즘 매도</div>
+                <div class="flow-item">스톱로스/마진콜 연쇄 발동</div>
+                <div class="flow-item" style="background: #ffdddd;">금/은 대폭락</div>
+            </div>
+
+            <p><strong>실물 요인 부재:</strong> 1974년과 달리 지정학적 요인, 실물경제, 미국의 상황은 전혀 바뀐 것이 없음. 순수하게 <span class="highlight">심리적 요인과 기술적 매도</span>에 의한 폭락.</p>
+        </section>
+
+        <section>
+            <h2>🔮 향후 전망</h2>
+
+            <div class="scenario-box">
+                <h4>단기 전망</h4>
+                <p>알고리즘 매도가 24시간 가동되므로 월요일 아시아/유럽 장에서 추가 하락 가능성 존재. 악성 물량(레버리지, 빚투자) 해소 시 하락세 멈출 수 있음.</p>
+            </div>
+
+            <h3>V자 반등 vs U자 반등</h3>
+            <p><strong>V자 반등 가능성:</strong> 중국이라는 거대 큰손이 존재하므로 빠른 반등 가능성 있음.</p>
+            <p><strong>U자 반등 가능성(더 높음):</strong> 개미 투자자들의 '본전 심리'로 인해 조금 오르면 다시 매도세 출현 → 기간 조정 후 완만한 상승 패턴.</p>
+
+            <h3>'셀 아메리카' 전망</h3>
+            <p>베센트의 발언으로 일시적 진정되었지만, 트럼프의 확전 정책과 재정 방만 경영이 지속되는 한 <span class="red-highlight">셀 아메리카는 재개될 수밖에 없음</span>. 미국 국채를 팔고 나온 자금이 싸진 금/은으로 다시 유입될 가능성.</p>
+        </section>
+
+        <section>
+            <h2>💡 투자 시사점</h2>
+
+            <div class="key-insight">
+                <h4>✓ 핵심 포인트</h4>
+                <p>금은 '변동성이 없어서' 안전자산이 아님. 주가 급락 시 가치가 덜 떨어지는 의미에서 안전자산으로 불려왔을 뿐, 실제 변동성은 매우 큼.</p>
+            </div>
+
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <div class="value">160배</div>
+                    <div class="label">1971년($35) → 2026년($5,600) 상승률</div>
+                </div>
+                <div class="stat-card">
+                    <div class="value">수많은</div>
+                    <div class="label">등락을 거쳐 도달</div>
+                </div>
+            </div>
+
+            <h3>장기 투자자 전략</h3>
+            <p>금의 초장기 투자자라면 이렇게 <span class="green-highlight">큰 폭의 조정을 받았을 때 물량을 늘려가는 전략</span>이 유효. 그동안 너무 비싸서 편입을 자제했다면, 이런 조정기를 목표 수량 달성의 기회로 활용 가능.</p>
+
+            <h3>투자 원칙</h3>
+            <p>금/은 투자 전 엄청난 변동성이 있음을 인지하고, 이런 풍파에 <strong>어떻게 대응할 것인지 원칙을 미리 세워두는 것</strong>이 투자 성공의 지름길.</p>
+
+            <div class="trigger-box">
+                <strong>미중 패권 전쟁의 한복판:</strong>
+                <p style="margin-top:8px; margin-bottom:0;">금과 은은 이제 미국(떨어뜨리려는 세력)과 중국(실물 확보하려는 세력)의 패권 전쟁에서 핵심 자산이 됨. 앞으로도 엄청난 변동성은 불가피.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>📋 핵심 요약</h2>
+            
+            <table class="comparison-table">
+                <tr>
+                    <th colspan="2">2026년 1월 30일 금값 폭락 핵심 정리</th>
+                </tr>
+                <tr>
+                    <td style="text-align:left;"><strong>발단</strong></td>
+                    <td style="text-align:left;">트럼프의 달러 약세 환영 발언</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left;"><strong>트리거</strong></td>
+                    <td style="text-align:left;">베센트 강달러 발언 + 케빈 워시 QT 시사</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left;"><strong>메커니즘</strong></td>
+                    <td style="text-align:left;">알고리즘 매도 + 스톱로스/마진콜 연쇄</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left;"><strong>실물 변화</strong></td>
+                    <td style="text-align:left;">없음 (순수 심리적/기술적 요인)</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left;"><strong>전망</strong></td>
+                    <td style="text-align:left;">기간 조정 후 U자 반등 가능성 높음</td>
+                </tr>
+                <tr>
+                    <td style="text-align:left;"><strong>셀 아메리카</strong></td>
+                    <td style="text-align:left;">일시 진정, 재개 불가피</td>
+                </tr>
+            </table>
+        </section>
+
+        <footer>
+            <p>출처: 박종훈의 지식한방 (2026.02.01)</p>
+            <p>본 문서는 교육 및 정보 제공 목적으로 작성되었습니다.</p>
+        </footer>
+    </div>
+</body>
+</html>

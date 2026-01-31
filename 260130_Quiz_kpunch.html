@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>금값 대폭락과 1974년 평행이론 - 시험문제</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans KR', sans-serif;
+            line-height: 1.7;
+            background: #f8f9fa;
+            color: #333;
+            padding: 16px;
+            max-width: 100%;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        header {
+            background: linear-gradient(135deg, #4a90a4 0%, #357a8c 100%);
+            color: white;
+            padding: 24px 16px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+        header .meta {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+        .section-title {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px 20px;
+            border-radius: 10px;
+            margin: 24px 0 16px 0;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+        .question-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .question-number {
+            background: #4a90a4;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+        .difficulty {
+            font-size: 0.9rem;
+        }
+        .difficulty-easy {
+            color: #28a745;
+        }
+        .difficulty-medium {
+            color: #ffc107;
+        }
+        .difficulty-hard {
+            color: #dc3545;
+        }
+        .question-type {
+            display: inline-block;
+            background: #e9ecef;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            color: #666;
+            margin-left: 8px;
+        }
+        .question-text {
+            font-size: 1rem;
+            margin-bottom: 16px;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #4a90a4;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .option {
+            padding: 12px 16px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .option:hover {
+            background: #e9ecef;
+            border-color: #4a90a4;
+        }
+        .blank-line {
+            border-bottom: 2px solid #4a90a4;
+            display: inline-block;
+            min-width: 100px;
+            margin: 0 4px;
+        }
+        .answer-section {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 16px 20px;
+            border-radius: 10px;
+            margin: 40px 0 16px 0;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+        .answer-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .answer-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .answer-number {
+            background: #28a745;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+        .correct-answer {
+            background: #d4edda;
+            color: #155724;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+        .explanation {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 12px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .explanation strong {
+            color: #4a90a4;
+        }
+        .page-break {
+            page-break-before: always;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #888;
+            font-size: 0.85rem;
+            margin-top: 40px;
+        }
+        .ox-options {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        .ox-option {
+            padding: 12px 40px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 2px solid #dee2e6;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .short-answer-box {
+            border: 2px dashed #4a90a4;
+            padding: 16px;
+            border-radius: 8px;
+            background: #f8f9fa;
+            min-height: 60px;
+        }
+        .essay-box {
+            border: 2px dashed #4a90a4;
+            padding: 16px;
+            border-radius: 8px;
+            background: #f8f9fa;
+            min-height: 120px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📝 금값 대폭락과 1974년 평행이론</h1>
+            <div class="meta">시험문제 (총 10문제)</div>
+        </header>
+
+        <!-- ===== 문제지 섹션 ===== -->
+        <div class="section-title">📋 시험문제 (총 10문제)</div>
+
+        <!-- 문제 1 -->
+        <div class="question-card">
+            <div class="question-header">
+                <span class="question-number">문제 1</span>
+                <span class="difficulty difficulty-easy">⭐ 쉬움 <span class="question-type">객관식</span></span>
+            </div>
+            <div class="question-text">
+                2026년 1월 30일 금 현물 가격의 하루 하락폭은 몇 %였으며, 이는 몇 년 만에 최악의 기록인가?
+            </div>
+            <div class="options">
+                <div class="option">① 7.5%, 35년</div>
+                <div class="option">② 9.5%, 43년</div>
+                <div class="option">③ 11.5%, 50년</div>
+                <div class="option">④ 14.9%, 32년</div>
+            </div>
+        </div>
+
+        <!-- 문제 2 -->
+        <div class="question-card">
+            <div class="question-header">
+                <span class="question-number">문제 2</span>
+                <span class="difficulty difficulty-easy">⭐ 쉬움 <span class="question-type">단답형</span></span>
+            </div>
+            <div class="question-text">
+                금값 상승 후 뒤늦게 빚내서 투자하거나 고배율 레버리지를 사용한 투자자들을 영어로 무엇이라고 부르는가?
+            </div>
+            <div class="short-answer-box">
+                정답:
+            </div>
+        </div>
+
+        <!-- 문제 3 -->
+        <div class="question-card">
+            <div class="question-header">
+                <span class="question-number">문제 3</span>
+                <span class="difficulty difficulty-medium">⭐⭐ 보통 <span class="question-type">OX문제</span></span>
+            </div>
+            <div class="question-text">
+                트럼프 대통령이 "달러 약세가 좋다(I think it's great)"고 발언한 후, 베센트 재무장관은 "Strong Dollar Policy"를 강조하며 긴급 수습에 나섰다.
+            </div>
+            <div class="ox-options">
+                <div class="ox-option">O</div>
+                <div class="ox-option">X</div>
+            </div>
+        </div>
+
+        <!-- 문제 4 -->
+        <div class="question-card">
+            <div class="question-header">
+                <span class="question-number">문제 4</span>
+                <span class="difficulty difficulty-medium">⭐⭐ 보통 <span class="question-type">객관식</span></span>
+            </div>
+            <div class="question-text">
+                1974년 금값 대폭락 당시 금값은 최고점에서 얼마나 하락했으며, 조정 기간은 얼마나 지속되었는가?
+            </div>
+            <div class="options">
+                <div class="option">① 30% 하락, 12개월</div>
+                <div class="option">② 47% 하락, 20개월</div>
+                <div class="option">③ 55% 하락, 24개월</div>
+                <div class="option">④ 60% 하락, 30개월</div>
+            </div>
+        </div>
+
+        <!-- 문제 5 -->
+        <div class="question-card">
+            <div class="question-header">
+                <span class="question-number">문제 5</span>
+                <span class="difficulty difficulty-medium">⭐⭐ 보통 <span class="question-type">빈칸채우기</span></span>
+            </div>
+            <div class="question-text">
+                1974년 미국의 GDP 대비 부채 비율은 약 <span class="blank-line"></span>%였으나, 2026년 현재는 약 <span class="blank-line"></span>%로 증가했다. 이로 인해 미국은 금리를 올릴 여력이 크게 줄어들었다.
+            </div>
+        </div>
+
+        <!-- 문제 6 -->
+        <div class="question-card">
+            <div class="question-header">
+                <span class="question-number">문제 6</span>
+                <span class="difficulty difficulty-medium">⭐⭐ 보통 <span class="question-type">객관식</span></span>
+            </div>
+            <div class="question-text">
+                트럼프 대통령이 건조하겠다고 발표한 '트럼프급 전함(Battleship)'에 대한 설명으로 옳지 않은 것은?
+            </div>
+            <div class="options">
+                <div class="option">① 25척을 건조할 계획이다</div>
+                <div class="option">② 1척당 약 30조원(실제 60조원 예상)이 소요된다</div>
+                <div class="option">③ 일론 머스크도 현대전에 적합한 무기라고 평가했다</div>
+                <div class="option">④ 2차 대전 당시 일본의 야마토급 전함과 유사한 개념이다</div>
+            </div>
+        </div>
+
+        <!-- 문제 7 -->
+        <div class="question-card">
+            <div class="question-header">
+                <span class="question-number">문제 7</span>
+                <span class="difficulty difficulty-easy">⭐ 쉬움 <span class="question-type">OX문제</span></span>
+            </div>
+            <div class="question-text">
+                금은 '가격 변동성이 없기 때문에' 안전자산으로 불린다.
+            </div>
+            <div class="ox-options">
+                <div class="ox-option">O</div>
+                <div class="ox-option">X</div>
+            </div>
+        </div>
+
+        <!-- 문제 8 -->
+        <div class="question-card">
+            <div class="question-header">
+                <span class="question-number">문제 8</span>
+                <span class="difficulty difficulty-medium">⭐⭐ 보통 <span class="question-type">단답형</span></span>
+            </div>
+            <div class="question-text">
+                중국, 유럽 등 여러 나라들이 미국 국채를 팔고 금을 사는 현상을 무엇이라고 부르는가? (영어 용어)
+            </div>
+            <div class="short-answer-box">
+                정답:
+            </div>
+        </div>
+
+        <!-- 문제 9 -->
+        <div class="question-card">
+            <div class="question-header">
+                <span class="question-number">문제 9</span>
+                <span class="difficulty difficulty-hard">⭐⭐⭐ 어려움 <span class="question-type">객관식</span></span>
+            </div>
+            <div class="question-text">
+                1974년 금값 폭락과 2026년 금값 폭락의 차이점에 대한 설명으로 가장 적절한 것은?
+            </div>
+            <div class="options">
+                <div class="option">① 1974년에는 실물 요인이 없었고, 2026년에는 오일쇼크가 있었다</div>
+                <div class="option">② 1974년에는 베트남전 종전 기대와 오일쇼크 진정이 있었고, 2026년에는 확전 정책이 지속되고 있다</div>
+                <div class="option">③ 두 시기 모두 미국의 부채 비율이 비슷하여 금리 정책의 여력도 동일했다</div>
+                <div class="option">④ 1974년에는 알고리즘 매도가 있었고, 2026년에는 없었다</div>
+            </div>
+        </div>
+
+        <!-- 문제 10 -->
+        <div class="question-card">
+            <div class="question-header">
+                <span class="question-number">문제 10</span>
+                <span class="difficulty difficulty-hard">⭐⭐⭐ 어려움 <span class="question-type">서술형</span></span>
+            </div>
+            <div class="question-text">
+                2026년 금값 폭락 이후 V자 반등보다 U자 반등(기간 조정 후 완만한 상승) 가능성이 더 높다고 분석되는 이유를 '개미 투자자의 심리'와 연관지어 설명하시오.
+            </div>
+            <div class="essay-box">
+                답안:
+            </div>
+        </div>
+
+        <!-- ===== 정답지 섹션 ===== -->
+        <div class="page-break"></div>
+        <div class="answer-section">📝 정답 및 해설</div>
+
+        <!-- 정답 1 -->
+        <div class="answer-card">
+            <div class="answer-header">
+                <span class="answer-number">문제 1</span>
+                <span class="correct-answer">정답: ②</span>
+            </div>
+            <div class="explanation">
+                <strong>해설:</strong> 2026년 1월 30일 금 현물 가격은 하루 동안 <strong>9.5%</strong> 하락했으며, 이는 <strong>43년 만에 최악</strong>의 기록이다. 참고로 14.9%는 고점($5,595) 대비 종가($4,895)의 누적 하락폭이다.
+            </div>
+        </div>
+
+        <!-- 정답 2 -->
+        <div class="answer-card">
+            <div class="answer-header">
+                <span class="answer-number">문제 2</span>
+                <span class="correct-answer">정답: Weak Hands (위크핸즈 / 겁먹은 손)</span>
+            </div>
+            <div class="explanation">
+                <strong>해설:</strong> 금값이 쌌을 때는 참여하지 못하다가 폭등 후 뒤늦게 진입한 투자자들을 <strong>'Weak Hands(겁먹은 손)'</strong>라고 부른다. 이들은 자산이 적고 조급함에 빚내서 투자하거나 20~50배 레버리지를 사용하는 경우가 많아, 조정 시 가장 먼저 손절하며 하락을 가속화시킨다.
+            </div>
+        </div>
+
+        <!-- 정답 3 -->
+        <div class="answer-card">
+            <div class="answer-header">
+                <span class="answer-number">문제 3</span>
+                <span class="correct-answer">정답: O</span>
+            </div>
+            <div class="explanation">
+                <strong>해설:</strong> 트럼프 대통령이 1월 27일 달러 약세에 대해 "I think it's great"이라고 발언하자 달러 약세가 가속화되고 국채 금리가 급등했다. 이에 1월 28일 <strong>베센트 재무장관이 "Strong Dollar Policy"</strong>를 강조하며 긴급 수습에 나섰다. 이것이 금값 하락의 첫 번째 트리거가 되었다.
+            </div>
+        </div>
+
+        <!-- 정답 4 -->
+        <div class="answer-card">
+            <div class="answer-header">
+                <span class="answer-number">문제 4</span>
+                <span class="correct-answer">정답: ②</span>
+            </div>
+            <div class="explanation">
+                <strong>해설:</strong> 1974년 금값 대폭락 당시 금값은 최고점 $195에서 $103까지 <strong>47% 하락</strong>했으며, 조정 기간은 무려 <strong>20개월</strong>이나 지속되었다. 그러나 이후 금값은 $103에서 $850까지 8배 상승하며 강한 반등을 보였다.
+            </div>
+        </div>
+
+        <!-- 정답 5 -->
+        <div class="answer-card">
+            <div class="answer-header">
+                <span class="answer-number">문제 5</span>
+                <span class="correct-answer">정답: 30%, 120%</span>
+            </div>
+            <div class="explanation">
+                <strong>해설:</strong> 1974년 미국의 GDP 대비 부채 비율은 약 <strong>30%</strong>에 불과해 금리를 10%까지 올릴 여력이 있었다. 그러나 2026년 현재 부채 비율은 약 <strong>120%</strong>로 급증해, 금리 인상 시 이자 비용 부담으로 인해 미국 정부의 재정이 더욱 악화되는 구조가 되었다.
+            </div>
+        </div>
+
+        <!-- 정답 6 -->
+        <div class="answer-card">
+            <div class="answer-header">
+                <span class="answer-number">문제 6</span>
+                <span class="correct-answer">정답: ③</span>
+            </div>
+            <div class="explanation">
+                <strong>해설:</strong> 일론 머스크는 오히려 <strong>"유인 전투기조차 만들 필요 없다. 무인 전투기로 대체해야 한다"</strong>고 주장했다. 거대 전함은 현대전에서 드론과 미사일의 표적이 될 뿐이므로 시대에 뒤떨어진 무기라는 것이 전문가들의 평가다.
+            </div>
+        </div>
+
+        <!-- 정답 7 -->
+        <div class="answer-card">
+            <div class="answer-header">
+                <span class="answer-number">문제 7</span>
+                <span class="correct-answer">정답: X</span>
+            </div>
+            <div class="explanation">
+                <strong>해설:</strong> 금은 <strong>'가격 변동성이 없어서' 안전자산이 아니다.</strong> 금이 안전자산으로 불리는 이유는 '주가 급락 시에도 가치가 크게 떨어지지 않는' 경향이 있었기 때문이다. 실제로 금의 가격 변동성은 상당히 크며, 2026년 1월 30일 하루 9.5% 폭락이 이를 잘 보여준다.
+            </div>
+        </div>
+
+        <!-- 정답 8 -->
+        <div class="answer-card">
+            <div class="answer-header">
+                <span class="answer-number">문제 8</span>
+                <span class="correct-answer">정답: Sell America (셀 아메리카)</span>
+            </div>
+            <div class="explanation">
+                <strong>해설:</strong> <strong>'Sell America(셀 아메리카)'</strong>는 중국, 유럽 등 여러 나라들이 미국 국채를 팔고 금 등 대체 자산을 사들이는 현상을 말한다. 트럼프의 그린란드 병합 시도, 확전 정책, 재정 방만 경영 등으로 인해 미국 자산에 대한 신뢰가 하락하면서 이 현상이 가속화되고 있다.
+            </div>
+        </div>
+
+        <!-- 정답 9 -->
+        <div class="answer-card">
+            <div class="answer-header">
+                <span class="answer-number">문제 9</span>
+                <span class="correct-answer">정답: ②</span>
+            </div>
+            <div class="explanation">
+                <strong>해설:</strong> 1974년에는 <strong>오일쇼크 진정</strong>과 <strong>베트남전 종전 기대</strong>라는 실물적 요인이 있어 금값 하락이 정당화될 수 있었다. 반면 2026년에는 트럼프의 확전 정책(베네수엘라, 이란)으로 군사비 지출이 증가하고, 원자재 가격도 여전히 높은 상태다. 또한 1974년 미국 부채 비율은 30%였으나 2026년은 120%로, 금리 정책의 여력이 완전히 다르다.
+            </div>
+        </div>
+
+        <!-- 정답 10 -->
+        <div class="answer-card">
+            <div class="answer-header">
+                <span class="answer-number">문제 10</span>
+                <span class="correct-answer">정답: 서술형 (예시 답안)</span>
+            </div>
+            <div class="explanation">
+                <strong>모범 답안:</strong><br><br>
+                금값이 대폭락한 후 V자 반등보다 U자 반등(기간 조정 후 완만한 상승) 가능성이 더 높은 이유는 개미 투자자들의 <strong>'본전 심리'</strong> 때문이다.<br><br>
+                금값이 폭락하면 손실을 본 개미 투자자들이 많이 발생하는데, 이들은 금값이 조금 반등하여 자신이 매수한 가격에 도달하면 <strong>"내가 산 가격이 돌아왔으니 지금 팔아야 한다"</strong>는 심리로 매도에 나선다.<br><br>
+                이로 인해 금값이 상승하려 할 때마다 본전에서 탈출하려는 매도세가 나타나, 가격이 다시 하락하는 패턴이 반복된다. 결국 이러한 <strong>'본전 심리에 기반한 매도 물량'</strong>이 완전히 소화된 이후에야 본격적인 상승이 가능해지므로, V자 반등보다는 일정 기간의 횡보(기간 조정)를 거친 후 U자형으로 상승하는 패턴이 나타날 가능성이 높다.
+            </div>
+        </div>
+
+        <footer>
+            <p>출처: 박종훈의 지식한방 (2026.02.01)</p>
+            <p>본 시험문제는 교육 목적으로 작성되었습니다.</p>
+        </footer>
+    </div>
+</body>
+</html>
