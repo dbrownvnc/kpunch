@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>트럼프는 왜 이란을 공격하려 할까? - 시험문제</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-dark: #0f1118;
+  --bg-card: #1a1d2e;
+  --accent-red: #e63946;
+  --accent-gold: #f4a236;
+  --accent-blue: #4895ef;
+  --accent-green: #2ec4b6;
+  --text-primary: #e8e8ec;
+  --text-secondary: #9a9ab0;
+  --border: #2a2d42;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-primary);
+  line-height: 1.8;
+  font-size: 15px;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 16px 60px;
+}
+
+.hero {
+  padding: 44px 20px 32px;
+  text-align: center;
+  background: linear-gradient(180deg, #0a0f1a 0%, var(--bg-dark) 100%);
+  border-bottom: 1px solid rgba(72, 149, 239, 0.3);
+  margin-bottom: 28px;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #4895ef, #4361ee);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.hero h1 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 23px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.hero-sub {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.divider-main {
+  text-align: center;
+  margin: 36px 0 28px;
+  position: relative;
+}
+
+.divider-main::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  top: 50%;
+  height: 1px;
+  background: var(--border);
+}
+
+.divider-main span {
+  position: relative;
+  background: var(--bg-dark);
+  padding: 0 16px;
+  font-family: 'Noto Serif KR', serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* Question card */
+.q-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 18px;
+  margin-bottom: 16px;
+}
+
+.q-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.q-num {
+  background: linear-gradient(135deg, var(--accent-blue), #4361ee);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.q-meta {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.q-diff {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.diff-easy { background: rgba(46, 196, 182, 0.15); color: var(--accent-green); }
+.diff-medium { background: rgba(244, 162, 54, 0.15); color: var(--accent-gold); }
+.diff-hard { background: rgba(230, 57, 70, 0.15); color: var(--accent-red); }
+
+.q-type {
+  font-size: 11px;
+  color: var(--text-secondary);
+  padding: 2px 8px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.q-text {
+  font-size: 15px;
+  color: #fff;
+  line-height: 1.75;
+  margin-bottom: 14px;
+  font-weight: 500;
+}
+
+.q-options {
+  list-style: none;
+  padding: 0;
+}
+
+.q-options li {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: var(--text-primary);
+  cursor: default;
+  transition: background 0.2s;
+}
+
+.q-options li:hover {
+  background: rgba(72, 149, 239, 0.08);
+  border-color: rgba(72, 149, 239, 0.3);
+}
+
+.q-blank {
+  display: inline-block;
+  border-bottom: 2px dashed var(--accent-gold);
+  min-width: 120px;
+  text-align: center;
+  color: transparent;
+  margin: 0 4px;
+}
+
+/* Answer card */
+.a-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 14px;
+  border-left: 3px solid var(--accent-green);
+}
+
+.a-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.a-num {
+  background: linear-gradient(135deg, var(--accent-green), #20a39e);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.a-answer {
+  font-weight: 700;
+  color: var(--accent-green);
+  font-size: 15px;
+}
+
+.a-explain {
+  font-size: 14px;
+  color: var(--text-primary);
+  line-height: 1.75;
+  padding-left: 38px;
+}
+
+.footer {
+  text-align: center;
+  padding: 24px 16px;
+  font-size: 12px;
+  color: #6b6b80;
+  border-top: 1px solid var(--border);
+  margin-top: 32px;
+}
+
+strong { color: #fff; }
+.text-red { color: var(--accent-red); }
+.text-gold { color: var(--accent-gold); }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge">📝 시험문제</div>
+  <h1>트럼프는 왜<br>이란을 공격하려 할까?</h1>
+  <div class="hero-sub">박종훈의 지식한방 · 총 10문제</div>
+</div>
+
+<div class="container">
+
+<!-- ━━━━━━━━━━━━━━ 문제지 ━━━━━━━━━━━━━━ -->
+<div class="divider-main"><span>📋 시험문제 (총 10문제)</span></div>
+
+<!-- 문제 1 -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">1</div>
+    <div class="q-meta">
+      <span class="q-diff diff-easy">⭐ 쉬움</span>
+      <span class="q-type">객관식</span>
+    </div>
+  </div>
+  <div class="q-text">'왝 더 독(Wag the Dog)'이라는 용어의 의미로 가장 적절한 것은?</div>
+  <ul class="q-options">
+    <li>① 강대국이 약소국을 침략하는 행위</li>
+    <li>② 본질적 문제를 덮기 위해 부수적 이슈를 만들어 관심을 돌리는 현상</li>
+    <li>③ 전쟁에서 선제공격을 통해 승리하는 전략</li>
+    <li>④ 경제 제재를 통해 적국을 압박하는 외교 전술</li>
+  </ul>
+</div>
+
+<!-- 문제 2 -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">2</div>
+    <div class="q-meta">
+      <span class="q-diff diff-easy">⭐ 쉬움</span>
+      <span class="q-type">OX문제</span>
+    </div>
+  </div>
+  <div class="q-text">앱스타인 리스트 추가 공개(약 300만 페이지)가 이루어진 날짜는 2월 1일이다.</div>
+  <ul class="q-options">
+    <li>⭕ O</li>
+    <li>❌ X</li>
+  </ul>
+</div>
+
+<!-- 문제 3 -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">3</div>
+    <div class="q-meta">
+      <span class="q-diff diff-medium">⭐⭐ 보통</span>
+      <span class="q-type">객관식</span>
+    </div>
+  </div>
+  <div class="q-text">이란 공격의 3대 명분에 해당하지 <strong class="text-red">않는</strong> 것은?</div>
+  <ul class="q-options">
+    <li>① 이란의 고농축 우라늄 생산에 따른 핵 위협</li>
+    <li>② IAEA 사찰 거부에 따른 국제법 위반</li>
+    <li>③ 이란의 호르무즈 해협 봉쇄 시도</li>
+    <li>④ 독재에 저항하는 이란 시민 보호라는 도덕적 명분</li>
+  </ul>
+</div>
+
+<!-- 문제 4 -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">4</div>
+    <div class="q-meta">
+      <span class="q-diff diff-medium">⭐⭐ 보통</span>
+      <span class="q-type">빈칸채우기</span>
+    </div>
+  </div>
+  <div class="q-text">
+    클린턴 대통령은 르윈스키 스캔들로 인한 탄핵 소추 표결 <strong>전날</strong>, 이라크를 폭격하는 <span class="q-blank">____________</span> 작전을 개시하여 하원 투표를 이틀 연기시켰다.
+  </div>
+</div>
+
+<!-- 문제 5 -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">5</div>
+    <div class="q-meta">
+      <span class="q-diff diff-medium">⭐⭐ 보통</span>
+      <span class="q-type">객관식</span>
+    </div>
+  </div>
+  <div class="q-text">월가가 이란 공격 가능성을 낮게 보는 이유로 제시된 '역효과 리스크'의 핵심 내용은?</div>
+  <ul class="q-options">
+    <li>① 이란 군사력이 미국보다 강하기 때문</li>
+    <li>② 미국의 미사일 공격이 반정부 시위를 반미 성전으로 전환시킬 수 있기 때문</li>
+    <li>③ 국제사회가 미국에 경제 제재를 가할 수 있기 때문</li>
+    <li>④ 이란과 러시아의 군사 동맹 때문</li>
+  </ul>
+</div>
+
+<!-- 문제 6 -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">6</div>
+    <div class="q-meta">
+      <span class="q-diff diff-easy">⭐ 쉬움</span>
+      <span class="q-type">단답형</span>
+    </div>
+  </div>
+  <div class="q-text">아버지 부시 대통령이 1991년 걸프전 승리 후 기록한 역대 최고 지지율은 몇 %인가?</div>
+</div>
+
+<!-- 문제 7 -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">7</div>
+    <div class="q-meta">
+      <span class="q-diff diff-medium">⭐⭐ 보통</span>
+      <span class="q-type">객관식</span>
+    </div>
+  </div>
+  <div class="q-text">미국의 이란 공격 준비 3단계 중 '방패'에 해당하는 군사 자산은?</div>
+  <ul class="q-options">
+    <li>① 공중급유기</li>
+    <li>② 전략 폭격기 + 벙커버스터</li>
+    <li>③ 항공모함 타격단 + 이지스함</li>
+    <li>④ 무인 드론 부대</li>
+  </ul>
+</div>
+
+<!-- 문제 8 -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">8</div>
+    <div class="q-meta">
+      <span class="q-diff diff-medium">⭐⭐ 보통</span>
+      <span class="q-type">객관식</span>
+    </div>
+  </div>
+  <div class="q-text">아르헨티나 포클랜드 전쟁이 '국가 실익 없는 전쟁'의 사례로 제시된 이유는?</div>
+  <ul class="q-options">
+    <li>① 영국을 이길 가능성이 전혀 없었음에도 군사 정권의 국내 위기 돌파용으로 전쟁을 감행했기 때문</li>
+    <li>② 포클랜드 섬의 자원이 풍부했기 때문</li>
+    <li>③ 미국이 아르헨티나를 부추겼기 때문</li>
+    <li>④ 아르헨티나 국민의 압도적 지지가 있었기 때문</li>
+  </ul>
+</div>
+
+<!-- 문제 9 -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">9</div>
+    <div class="q-meta">
+      <span class="q-diff diff-hard">⭐⭐⭐ 어려움</span>
+      <span class="q-type">서술형</span>
+    </div>
+  </div>
+  <div class="q-text">
+    영상에서 "만약 미국이 이란을 공격한다면, 앱스타인 사건의 크기가 상상 이상으로 크다고 보면 된다"는 주장의 논리적 근거를 2가지 이상 서술하시오.
+  </div>
+</div>
+
+<!-- 문제 10 -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">10</div>
+    <div class="q-meta">
+      <span class="q-diff diff-hard">⭐⭐⭐ 어려움</span>
+      <span class="q-type">서술형</span>
+    </div>
+  </div>
+  <div class="q-text">
+    영상에서 제시된 이란 공격의 '비용 문제' 시나리오를 설명하고, 하메네이 정권의 충성 군부 규모와 호르무즈 해협의 전략적 중요성을 포함하여 글로벌 경제에 미칠 영향을 논하시오.
+  </div>
+</div>
+
+
+<!-- ━━━━━━━━━━━━━━ 정답지 ━━━━━━━━━━━━━━ -->
+<div class="divider-main"><span>📝 정답 및 해설</span></div>
+
+<!-- 정답 1 -->
+<div class="a-card">
+  <div class="a-header">
+    <div class="a-num">1</div>
+    <div class="a-answer">정답: ②</div>
+  </div>
+  <div class="a-explain">
+    '왝 더 독'은 "꼬리가 개를 흔든다"는 의미로, 정치적 스캔들 등 본질적 문제를 덮기 위해 전쟁이나 외부 위기를 만들어 국민의 관심을 돌리는 현상을 말한다. 1997년 동명의 영화에서 유래했다.
+  </div>
+</div>
+
+<!-- 정답 2 -->
+<div class="a-card">
+  <div class="a-header">
+    <div class="a-num">2</div>
+    <div class="a-answer">정답: X</div>
+  </div>
+  <div class="a-explain">
+    앱스타인 리스트 추가 공개는 <strong>1월 30일(금)</strong>에 이루어졌다. 2월 1일은 트럼프 대통령이 이란에 대한 군사 행동 검토를 발표한 날이다.
+  </div>
+</div>
+
+<!-- 정답 3 -->
+<div class="a-card">
+  <div class="a-header">
+    <div class="a-num">3</div>
+    <div class="a-answer">정답: ③</div>
+  </div>
+  <div class="a-explain">
+    이란 공격의 3대 명분은 ①핵 위협(고농축 우라늄 생산), ②국제법 위반(IAEA 사찰 거부), ③도덕적 명분(독재 저항 시민 보호)이다. 호르무즈 해협 봉쇄는 이란 공격 시 발생할 수 있는 <strong>리스크</strong>이지, 공격의 <strong>명분</strong>이 아니다.
+  </div>
+</div>
+
+<!-- 정답 4 -->
+<div class="a-card">
+  <div class="a-header">
+    <div class="a-num">4</div>
+    <div class="a-answer">정답: 사막의 여우</div>
+  </div>
+  <div class="a-explain">
+    클린턴 대통령은 1998년 12월 16일(탄핵 표결 전날) '사막의 여우 작전(Operation Desert Fox)'을 개시하여 이라크를 폭격했다. 이로 인해 12월 17일 예정된 하원 투표가 12월 19일로 연기되었다.
+  </div>
+</div>
+
+<!-- 정답 5 -->
+<div class="a-card">
+  <div class="a-header">
+    <div class="a-num">5</div>
+    <div class="a-answer">정답: ②</div>
+  </div>
+  <div class="a-explain">
+    미국의 미사일 공격이 이란 내 반정부 시위를 '반미 성전'으로 바꿔버릴 수 있으며, 이는 오히려 하메네이 정권에게 '생명 연장의 꿈'을 실현시켜 주는 역효과를 초래할 수 있다.
+  </div>
+</div>
+
+<!-- 정답 6 -->
+<div class="a-card">
+  <div class="a-header">
+    <div class="a-num">6</div>
+    <div class="a-answer">정답: 89%</div>
+  </div>
+  <div class="a-explain">
+    아버지 부시 대통령은 1991년 걸프전 승리 후 지지율이 89%까지 상승하여 역대 최고 기록을 세웠다. 이는 경기침체로 인기가 하락한 상태에서 전쟁 승리를 통해 회복한 대표적 사례이다.
+  </div>
+</div>
+
+<!-- 정답 7 -->
+<div class="a-card">
+  <div class="a-header">
+    <div class="a-num">7</div>
+    <div class="a-answer">정답: ③</div>
+  </div>
+  <div class="a-explain">
+    3단계 군사 배치에서 '다리'=공중급유기, '망치'=전략 폭격기+벙커버스터, '방패'=항공모함 타격단+이지스함이다. 방패는 이란의 보복 미사일 공격을 방어하기 위한 것이다.
+  </div>
+</div>
+
+<!-- 정답 8 -->
+<div class="a-card">
+  <div class="a-header">
+    <div class="a-num">8</div>
+    <div class="a-answer">정답: ①</div>
+  </div>
+  <div class="a-explain">
+    아르헨티나 군사 정권은 국내 경제 위기와 인권 탄압으로 지지율이 급락하자, 영국을 이길 가능성이 전혀 없음에도 불구하고 국민의 관심을 돌리기 위해 포클랜드 전쟁을 감행했다. 이는 "국가 실익이 없어도 통치자 개인의 위기가 크면 전쟁이 발생할 수 있다"는 논거의 핵심 사례이다.
+  </div>
+</div>
+
+<!-- 정답 9 -->
+<div class="a-card">
+  <div class="a-header">
+    <div class="a-num">9</div>
+    <div class="a-answer">정답 (모범답안):</div>
+  </div>
+  <div class="a-explain">
+    <strong>첫째,</strong> 트럼프는 철저한 '실리 추구형' 정치인으로, 명분이나 인권보다 실익을 중시한다. 이란 공격에는 국가적 실익이 거의 없으므로, 굳이 공격을 감행한다면 그만큼 피해야 할 국내 정치적 위기(앱스타인 사건)가 극도로 크다는 뜻이 된다.<br><br>
+    <strong>둘째,</strong> 앱스타인 사건은 단순 성추문을 넘어 러시아·이스라엘 등 외국 세력이 미국 정치를 조종했을 가능성이 제기되고 있으며, 트럼프 측근(상무부 장관 등)과 멜라니아의 이름까지 거론되고 있다. 사건의 크기가 미국 정치 시스템 전체의 정당성을 흔들 수준이라면, 트럼프는 국가 실익을 무시하고라도 전쟁이라는 극단적 수단으로 관심을 돌릴 동기가 충분하다.<br><br>
+    <strong>셋째,</strong> 역사적으로 통치자 개인의 위기가 클수록 국가 실익이 없는 전쟁(포클랜드, 러일전쟁)이 발발한 선례가 있다.
+  </div>
+</div>
+
+<!-- 정답 10 -->
+<div class="a-card">
+  <div class="a-header">
+    <div class="a-num">10</div>
+    <div class="a-answer">정답 (모범답안):</div>
+  </div>
+  <div class="a-explain">
+    <strong>비용 문제:</strong> 미국의 압도적 군사력으로 이란 수뇌부 타격이나 암살은 가능하지만, 하메네이 정권에 충성하는 군부가 <strong>100만 명 이상</strong>이므로 정권 제거 후에도 잔존 세력이 게릴라전을 수행할 수 있다. 또한 이란의 대리 세력(후티, 헤즈볼라 등)이 중동 곳곳에서 교란 작전을 펼칠 가능성이 높다.<br><br>
+    <strong>호르무즈 해협:</strong> 전 세계 원유 수송의 핵심 통로인 호르무즈 해협을 잔존 세력이 봉쇄하거나 유전을 타격할 경우, 국제유가가 <strong>200달러를 돌파</strong>할 수 있다.<br><br>
+    <strong>글로벌 경제 영향:</strong> 유가 폭등은 전 세계적 인플레이션 쇼크를 야기하여 미국 경제에도 치명적 타격을 줄 수 있다. 이는 MAGA 세력의 "해외에 돈 쓰지 말라"는 핵심 요구와도 정면 충돌하므로, 경제적·정치적으로 자멸적 결과를 초래할 수 있다.
+  </div>
+</div>
+
+<div class="footer">
+  출처: 박종훈의 지식한방 (2026.02.06) 내용 기반 출제<br>
+  총 10문제 · 쉬움 3 / 보통 5 / 어려움 2
+</div>
+
+</div>
+</body>
+</html>

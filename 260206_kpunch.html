@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>트럼프는 왜 이란을 공격하려 할까? - 분석</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-dark: #0f1118;
+  --bg-card: #1a1d2e;
+  --bg-card-alt: #161929;
+  --accent-red: #e63946;
+  --accent-gold: #f4a236;
+  --accent-blue: #4895ef;
+  --accent-green: #2ec4b6;
+  --text-primary: #e8e8ec;
+  --text-secondary: #9a9ab0;
+  --text-muted: #6b6b80;
+  --border: #2a2d42;
+  --gradient-danger: linear-gradient(135deg, #e63946, #d62828);
+  --gradient-warning: linear-gradient(135deg, #f4a236, #e76f51);
+  --gradient-info: linear-gradient(135deg, #4895ef, #4361ee);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-primary);
+  line-height: 1.8;
+  font-size: 15px;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 16px 60px;
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  padding: 48px 20px 36px;
+  text-align: center;
+  background: linear-gradient(180deg, #1a0a0a 0%, var(--bg-dark) 100%);
+  border-bottom: 1px solid rgba(230, 57, 70, 0.3);
+  margin-bottom: 28px;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(230, 57, 70, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: var(--gradient-danger);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.hero h1 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 12px;
+  color: #fff;
+}
+
+.hero-meta {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.hero-meta span { color: var(--accent-gold); font-weight: 500; }
+
+/* Section Styling */
+.section {
+  margin-bottom: 28px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--border);
+}
+
+.section-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.section-header h2 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* Cards */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 14px;
+}
+
+.card-danger {
+  border-left: 3px solid var(--accent-red);
+}
+
+.card-warning {
+  border-left: 3px solid var(--accent-gold);
+}
+
+.card-info {
+  border-left: 3px solid var(--accent-blue);
+}
+
+.card-success {
+  border-left: 3px solid var(--accent-green);
+}
+
+.card-title {
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.card p, .card li {
+  color: var(--text-primary);
+  font-size: 14.5px;
+  line-height: 1.75;
+}
+
+/* Timeline */
+.timeline {
+  position: relative;
+  padding-left: 24px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 4px;
+  bottom: 4px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent-red), var(--accent-gold), var(--accent-blue));
+  border-radius: 2px;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -22px;
+  top: 18px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent-red);
+  border: 2px solid var(--bg-dark);
+}
+
+.timeline-date {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-gold);
+  margin-bottom: 4px;
+}
+
+.timeline-content {
+  font-size: 14px;
+  color: var(--text-primary);
+  line-height: 1.65;
+}
+
+/* Highlight box */
+.highlight-box {
+  background: linear-gradient(135deg, rgba(230, 57, 70, 0.1), rgba(244, 162, 54, 0.08));
+  border: 1px solid rgba(230, 57, 70, 0.25);
+  border-radius: 12px;
+  padding: 18px;
+  margin: 16px 0;
+}
+
+.highlight-box .label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-red);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+/* Quote */
+.quote-box {
+  background: var(--bg-card-alt);
+  border-left: 3px solid var(--accent-gold);
+  border-radius: 0 10px 10px 0;
+  padding: 16px 18px;
+  margin: 16px 0;
+  font-style: italic;
+  color: var(--text-primary);
+  font-size: 14.5px;
+}
+
+.quote-box .source {
+  font-style: normal;
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 8px;
+}
+
+/* Tags */
+.tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 6px;
+  margin: 2px 4px 2px 0;
+}
+
+.tag-red { background: rgba(230, 57, 70, 0.15); color: var(--accent-red); }
+.tag-gold { background: rgba(244, 162, 54, 0.15); color: var(--accent-gold); }
+.tag-blue { background: rgba(72, 149, 239, 0.15); color: var(--accent-blue); }
+.tag-green { background: rgba(46, 196, 182, 0.15); color: var(--accent-green); }
+
+/* Comparison table */
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+  font-size: 13.5px;
+}
+
+.compare-table th {
+  background: rgba(72, 149, 239, 0.12);
+  color: var(--accent-blue);
+  font-weight: 700;
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 2px solid var(--border);
+  font-size: 12px;
+}
+
+.compare-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
+  vertical-align: top;
+}
+
+.compare-table tr:last-child td { border-bottom: none; }
+
+/* Chart container */
+.chart-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 14px;
+  margin: 16px 0;
+}
+
+.chart-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+/* Meter bar */
+.meter {
+  margin: 10px 0;
+}
+
+.meter-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.meter-bar {
+  height: 8px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.meter-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 1s ease;
+}
+
+/* Numbered list */
+.num-list {
+  counter-reset: item;
+  list-style: none;
+  padding: 0;
+}
+
+.num-list li {
+  counter-increment: item;
+  position: relative;
+  padding-left: 36px;
+  margin-bottom: 14px;
+  font-size: 14.5px;
+  line-height: 1.7;
+}
+
+.num-list li::before {
+  content: counter(item);
+  position: absolute;
+  left: 0;
+  top: 1px;
+  width: 24px;
+  height: 24px;
+  background: var(--gradient-danger);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+strong { color: #fff; }
+
+.text-red { color: var(--accent-red); }
+.text-gold { color: var(--accent-gold); }
+.text-blue { color: var(--accent-blue); }
+.text-green { color: var(--accent-green); }
+
+/* Divider */
+.divider {
+  border: none;
+  height: 1px;
+  background: var(--border);
+  margin: 28px 0;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 24px 16px;
+  font-size: 12px;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  margin-top: 32px;
+}
+
+/* Canvas for chart */
+canvas {
+  max-width: 100%;
+  height: auto !important;
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge">🔴 국제 정세 분석</div>
+  <h1>트럼프는 왜<br>이란을 공격하려 할까?</h1>
+  <div class="hero-meta">
+    박종훈의 지식한방 · <span>2026.02.06</span>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ===== 핵심 요약 ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--gradient-danger);">📌</div>
+    <h2>핵심 요약</h2>
+  </div>
+
+  <div class="highlight-box">
+    <div class="label">Core Thesis</div>
+    <p style="font-size:15px; line-height:1.75; color:#fff;">
+      트럼프의 이란 공격 위협은 <strong class="text-red">앱스타인 문서 공개</strong>와 <strong class="text-red">텍사스 선거 이변</strong>이라는 정치적 위기에서 국민의 관심을 돌리기 위한 <strong class="text-gold">'왝 더 독(Wag the Dog)'</strong> 전략일 가능성이 높다. 그러나 역사적으로 <strong>통치자 개인의 위기</strong>가 클수록 국가 실익이 없어도 전쟁이 실제로 발발했던 사례가 다수 존재하므로, 공격 가능성을 완전히 배제할 수 없다.
+    </p>
+  </div>
+
+  <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:12px;">
+    <span class="tag tag-red">왝 더 독</span>
+    <span class="tag tag-red">앱스타인 스캔들</span>
+    <span class="tag tag-gold">이란 핵 위협</span>
+    <span class="tag tag-blue">군사 배치</span>
+    <span class="tag tag-green">오만 회담</span>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ===== 배경: 이란 공격 준비 타임라인 ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--gradient-warning);">⏱️</div>
+    <h2>이란 공격 준비 타임라인</h2>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-date">1월 30일 (금)</div>
+      <div class="timeline-content">
+        <strong class="text-red">앱스타인 리스트 추가 공개</strong> — 약 <strong>300만 페이지</strong> 분량의 문서 공개. 트럼프 대통령의 측근·유력 인사 다수 포함.
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">1월 31일 (토)</div>
+      <div class="timeline-content">
+        공화당 텃밭 <strong class="text-red">텍사스에서 민주당 승리</strong> — 중간선거 민주당 압승 가능성 시사. 트럼프에게 심각한 정치적 타격.
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">2월 1일 (일)</div>
+      <div class="timeline-content">
+        트럼프, <strong class="text-gold">이란 군사 행동 검토 중</strong> 발언. 이란 핵시설 타격 유포. <strong>공중급유기 배치</strong> 시작. 미디어 포커스가 이란으로 급변.
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">2월 2~3일</div>
+      <div class="timeline-content">
+        군사 긴장 최고조. 이란 드론 격추. <strong>금·은·유가 급등</strong>. 미-이란 이스탄불 회담 결렬 위기설.
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">2월 4일</div>
+      <div class="timeline-content">
+        극적 반전 — <strong class="text-green">오만에서 미-이란 회담 합의</strong> 발표. 금값·유가 급락.
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">2월 6일 (오늘)</div>
+      <div class="timeline-content">
+        <strong class="text-blue">오만 회담 개최</strong>. 트럼프 측: 핵·미사일·프록시(대리 세력) 포괄 논의 주장. 이란 측: 핵 문제만 논의 고집. 백악관은 "협상 성공에 극히 회의적"이라고 언론에 전달.
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ===== 왝 더 독 개념 ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--gradient-info);">🎬</div>
+    <h2>'왝 더 독(Wag the Dog)' 전략</h2>
+  </div>
+
+  <div class="card card-info">
+    <div class="card-title">📽️ 왝 더 독이란?</div>
+    <p>
+      1997년 영화 <strong>'왝 더 독(Wag the Dog)'</strong>(로버트 드니로, 더스틴 호프만 주연)에서 유래한 정치 용어. 재선을 앞둔 대통령이 성추행 스캔들을 덮기 위해 <strong>가짜 전쟁을 조작</strong>하여 국민의 관심을 돌리는 내용이다. "꼬리가 개를 흔든다"는 의미로, <strong>본질(스캔들)이 아닌 부수적 이슈(전쟁)가 전체를 지배하는 현상</strong>을 뜻한다.
+    </p>
+  </div>
+
+  <div class="card card-warning">
+    <div class="card-title">🔗 영화와 현실의 놀라운 일치</div>
+    <p style="margin-bottom:8px;">
+      영화 개봉(1997.12) 불과 <strong>한 달 뒤</strong> 르윈스키 스캔들 발생(1998.1). 클린턴 대통령은 탄핵 소추 표결 <strong>전날</strong>(1998.12.16) 이라크 폭격(사막의 여우 작전)을 개시하여 하원 투표를 이틀 연기시켰다.
+    </p>
+    <p>
+      하원에서 탄핵 소추가 가결되었으나, <strong>"전시 대통령" 효과</strong>로 상원에서 탄핵이 저지되었다.
+    </p>
+  </div>
+</div>
+
+<!-- ===== 역대 왝더독 사례 비교 ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--gradient-warning);">📊</div>
+    <h2>미국 대통령의 '이라크 활용' 역사</h2>
+  </div>
+
+  <div class="chart-container">
+    <canvas id="chartPresidents" height="280"></canvas>
+  </div>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>대통령</th>
+        <th>시기</th>
+        <th>배경 / 결과</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>아버지 부시</strong></td>
+        <td>1991</td>
+        <td>경기침체로 인기 하락 → 걸프전 승리 → <strong class="text-gold">지지율 89%</strong>(역대 최고)</td>
+      </tr>
+      <tr>
+        <td><strong>클린턴</strong></td>
+        <td>1998</td>
+        <td>르윈스키 스캔들 → 이라크 폭격(사막의 여우) → <strong class="text-gold">탄핵 상원 저지</strong></td>
+      </tr>
+      <tr>
+        <td><strong>아들 부시</strong></td>
+        <td>2003</td>
+        <td>9/11 이후 → 이라크전(대량살상무기 명분) → <strong class="text-gold">재선 성공</strong>, 그러나 명분이 거짓으로 판명</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="card card-danger">
+    <div class="card-title">⚠️ 이라크에서 이란으로</div>
+    <p>
+      아들 부시가 후세인 정권을 완전히 제거한 이후, 이라크는 더 이상 미국 대통령의 정치적 도구로 활용 불가. 이제 <strong class="text-red">이라크의 역할을 이란이 대체</strong>하고 있으며, 이란은 이라크보다 <strong>훨씬 더 정당한 공격 명분</strong>을 갖춤.
+    </p>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ===== 이란 공격의 3대 명분 ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--gradient-danger);">⚖️</div>
+    <h2>이란 공격의 3대 명분</h2>
+  </div>
+
+  <ol class="num-list">
+    <li>
+      <strong>핵 위협 (실재)</strong><br>
+      이란은 <strong>고농축 우라늄을 실제로 생산</strong> 중이며, 핵 개발이 임박했다는 분석이 있음. 이라크와 달리 <strong>실질적 핵 위협</strong>이 존재.
+    </li>
+    <li>
+      <strong>국제법 위반</strong><br>
+      이란은 <strong>IAEA(국제원자력기구) 사찰을 거부</strong>하여 국제법을 명백히 위반. 국제사회의 지지를 확보할 수 있는 근거.
+    </li>
+    <li>
+      <strong>도덕적 명분</strong><br>
+      이란 반정부 시위로 <strong>수천 명의 시민 사망</strong>. 독재에 저항하는 이란 시민을 보호한다는 인권적 명분.
+    </li>
+  </ol>
+
+  <div class="highlight-box">
+    <div class="label">분석 포인트</div>
+    <p style="font-size:14px;">
+      아들 부시의 이라크 공격 때 대량살상무기 명분이 <strong>거짓</strong>으로 드러났으나, 이란은 3대 명분이 모두 <strong>실제로 존재</strong>하여 트럼프가 훨씬 유리한 위치에 있음.
+    </p>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ===== 월가가 공격 가능성을 0%로 보는 이유 ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--gradient-info);">📉</div>
+    <h2>월가가 공격 가능성을 0%로 보는 3가지 이유</h2>
+  </div>
+
+  <div class="card card-warning">
+    <div class="card-title">❶ 역효과 리스크</div>
+    <p>
+      미국의 미사일 공격이 이란 내 <strong>반정부 시위를 반미(反美) 성전으로 전환</strong>시킬 위험. 오히려 하메네이 정권에 <strong>"생명 연장의 꿈"</strong>을 실현시켜 줄 수 있음. 중동에서 외세 개입 후 성공적 민주화 사례는 사실상 전무.
+    </p>
+  </div>
+
+  <div class="card card-warning">
+    <div class="card-title">❷ 비용 문제 (호르무즈 해협 리스크)</div>
+    <p>
+      이란의 <strong>대리 세력(후티, 헤즈볼라 등)</strong>이 게릴라전 수행 가능. 하메네이 정권에 충성하는 군부가 <strong>100만 명 이상</strong>. 정권 수뇌부 제거 후에도 잔존 세력이 <strong>호르무즈 해협 봉쇄</strong>나 <strong>유전 타격</strong>을 감행하면 유가 <strong class="text-red">200달러 돌파</strong> → 글로벌 인플레이션 쇼크 우려.
+    </p>
+  </div>
+
+  <div class="card card-warning">
+    <div class="card-title">❸ 승자의 저주</div>
+    <p>
+      <strong>'아랍의 봄'</strong> 이후 독재 제거에 성공했으나 더 나쁜 정권이 들어선 사례 다수(이라크, 아프가니스탄, 리비아). 결국 미군이 치안 유지를 위해 장기 주둔 → <strong>미국 납세자 부담</strong>. MAGA 세력의 "해외에 돈 쓰지 말라"는 요구와 정면 충돌.
+    </p>
+  </div>
+
+  <div class="chart-container">
+    <div class="chart-title">이란 공격 시 리스크 심각도</div>
+    <div class="meter">
+      <div class="meter-label">
+        <span>역효과 (반미 전환)</span>
+        <span class="text-red"><strong>높음</strong></span>
+      </div>
+      <div class="meter-bar">
+        <div class="meter-fill" style="width:85%; background:var(--gradient-danger);"></div>
+      </div>
+    </div>
+    <div class="meter">
+      <div class="meter-label">
+        <span>유가 폭등 리스크</span>
+        <span class="text-red"><strong>매우 높음</strong></span>
+      </div>
+      <div class="meter-bar">
+        <div class="meter-fill" style="width:92%; background:var(--gradient-danger);"></div>
+      </div>
+    </div>
+    <div class="meter">
+      <div class="meter-label">
+        <span>장기 주둔 비용</span>
+        <span class="text-gold"><strong>높음</strong></span>
+      </div>
+      <div class="meter-bar">
+        <div class="meter-fill" style="width:78%; background:var(--gradient-warning);"></div>
+      </div>
+    </div>
+    <div class="meter">
+      <div class="meter-label">
+        <span>MAGA 지지층 이탈</span>
+        <span class="text-gold"><strong>상당</strong></span>
+      </div>
+      <div class="meter-bar">
+        <div class="meter-fill" style="width:70%; background:var(--gradient-warning);"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ===== 그럼에도 공격할 수 있는 이유 ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--gradient-danger);">🔥</div>
+    <h2>그럼에도 공격 가능성을 배제할 수 없는 이유</h2>
+  </div>
+
+  <div class="highlight-box">
+    <div class="label">핵심 논리</div>
+    <p style="font-size:15px; color:#fff;">
+      <strong>"국가의 실익이 없더라도, 통치자 개인에게 실익이 있다면 전쟁은 일어났다"</strong>
+    </p>
+  </div>
+
+  <div class="card card-danger">
+    <div class="card-title">🇦🇷 아르헨티나 포클랜드 전쟁 (1982)</div>
+    <p>
+      군사 정권이 <strong>경제 위기 + 인권 탄압</strong>으로 지지율 급락 → 영국령 포클랜드 제도를 공격. 국가 실익 제로, 영국을 이길 가능성도 전무. 결국 패배하며 정권 붕괴. 그러나 <strong>통치자 개인의 생존을 위해 전쟁을 감행</strong>한 대표적 사례.
+    </p>
+  </div>
+
+  <div class="card card-danger">
+    <div class="card-title">🇷🇺 제정 러시아 러일전쟁 (1904)</div>
+    <p>
+      러시아 내무장관의 발언: <strong class="text-gold">"혁명을 막으려면 작고 승리할 수 있는 전쟁이 필요하다"</strong>. 일본과의 전쟁 개시 → 패배 → 러시아 황제의 권위 붕괴 → 혁명의 단초.
+    </p>
+  </div>
+
+  <div class="quote-box">
+    "만약 미국이 이란을 공격한다면, 앱스타인 사건의 크기가 상상 이상으로 크다고 보면 된다."
+    <div class="source">— 박종훈, 지식한방</div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ===== 군사 배치 현황 ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--gradient-info);">🛡️</div>
+    <h2>미국의 군사 배치 현황: 3단계 준비 완료</h2>
+  </div>
+
+  <div class="card card-danger">
+    <div class="card-title">🌉 1단계: 다리 (공중급유기 전진 배치)</div>
+    <p>
+      이란의 광활한 영토를 곳곳 타격하기 위해 필수적인 <strong>공중급유기</strong>가 미국 본토·유럽에서 <strong>카타르·지중해 지역</strong>으로 이동 완료. 작전 수행을 위한 기본 인프라가 구축된 상태.
+    </p>
+  </div>
+
+  <div class="card card-danger">
+    <div class="card-title">🔨 2단계: 망치 (전략 폭격기 + 벙커버스터)</div>
+    <p>
+      <strong>전략 폭격기</strong>와 지하 핵시설 파괴용 <strong>벙커버스터</strong>가 중동 지역 작전 반경 안으로 전진 배치. 타격 수단이 실전 준비 상태.
+    </p>
+  </div>
+
+  <div class="card card-info">
+    <div class="card-title">🛡️ 3단계: 방패 (항모 타격단 + 이지스함)</div>
+    <p>
+      이란의 보복 미사일 공격에 대비한 <strong>항공모함 타격단</strong>이 중동 해역에 급파. <strong>이지스함</strong> 배치로 미사일 방어망 구축 완료.
+    </p>
+  </div>
+
+  <div class="chart-container">
+    <canvas id="chartMilitary" height="220"></canvas>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ===== 오만 회담과 전망 ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--gradient-warning);">🔮</div>
+    <h2>오만 회담과 향후 전망</h2>
+  </div>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>미국 (트럼프)</th>
+        <th>이란</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>의제</strong></td>
+        <td>핵 + 미사일 + 프록시(대리세력) <strong>포괄 논의</strong></td>
+        <td><strong>핵 문제만</strong> 논의</td>
+      </tr>
+      <tr>
+        <td><strong>태도</strong></td>
+        <td>"협상 성공에 극히 회의적"</td>
+        <td>제한적 논의만 수용</td>
+      </tr>
+      <tr>
+        <td><strong>배경</strong></td>
+        <td>아랍국 설득으로 마지못해 참석</td>
+        <td>군사 압박에 대응</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="highlight-box">
+    <div class="label">⚠️ 박종훈의 핵심 판단</div>
+    <p style="font-size:14.5px; line-height:1.75;">
+      협상의 <strong>성공·실패 여부는 중요하지 않다</strong>. 트럼프의 과거 전력상 "협상 성공"이라고 발표한 뒤에도 공격한 사례가 있었다. <strong class="text-red">주말에 트럼프가 어떤 행동을 하느냐</strong>만이 핵심 관전 포인트.
+    </p>
+  </div>
+
+  <div class="card card-danger">
+    <div class="card-title">🔑 앱스타인 사건의 진짜 크기</div>
+    <p>
+      단순 성추문이 아닌, <strong>러시아 또는 이스라엘이 미국 정치를 조종</strong>했을 가능성(재벌·정치인의 성폭행 장면을 CCTV로 촬영하여 협박 도구로 사용)이 제기됨. 사실이라면 <strong>미국 정치 시스템 전체에 대한 근본적 회의</strong>를 야기할 수 있는 역대급 사건. 트럼프 측근(상무부 장관 포함)과 멜라니아의 이름까지 거론되는 상황.
+    </p>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ===== 시장 영향 ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:linear-gradient(135deg, #2ec4b6, #4895ef);">💹</div>
+    <h2>시장 영향 요약</h2>
+  </div>
+
+  <div class="chart-container">
+    <canvas id="chartMarket" height="250"></canvas>
+  </div>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>자산</th>
+        <th>2/2~3 (긴장 고조)</th>
+        <th>2/4~5 (회담 합의)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>금값</strong></td>
+        <td class="text-red">📈 급등</td>
+        <td class="text-green">📉 급락</td>
+      </tr>
+      <tr>
+        <td><strong>은값</strong></td>
+        <td class="text-red">📈 급등</td>
+        <td class="text-green">📉 급락</td>
+      </tr>
+      <tr>
+        <td><strong>국제유가</strong></td>
+        <td class="text-red">📈 급등</td>
+        <td class="text-green">📉 하락</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="card card-info">
+    <p>
+      월가는 현재 이란 공격 가능성을 <strong>사실상 0%</strong>로 판단. 그러나 역사적으로 통치자의 개인적 위기가 크면 시장의 예측을 벗어난 군사행동이 발생한 선례가 있으므로, <strong>주말 리스크에 대한 경계는 필요</strong>.
+    </p>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ===== 결론 ===== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-icon" style="background:var(--gradient-danger);">🎯</div>
+    <h2>결론: 핵심 관전 포인트</h2>
+  </div>
+
+  <div class="highlight-box" style="border-color: rgba(230,57,70,0.5);">
+    <ol class="num-list">
+      <li><strong>오만 회담 결과보다 "주말 트럼프의 행동"</strong>이 결정적</li>
+      <li>앱스타인 사건의 <strong>실제 크기</strong>가 이란 공격 여부를 좌우</li>
+      <li>국가 실익 無 ≠ 전쟁 불가. <strong>통치자 개인 실익이 있으면 전쟁 발발</strong> (포클랜드, 러일전쟁 선례)</li>
+      <li>월가의 <strong>"공격 가능성 0%"</strong> 판단은 과거 사례를 고려하면 <strong class="text-red">위험한 낙관</strong>일 수 있음</li>
+      <li>공격 시 <strong>유가 200달러+, 글로벌 인플레이션 쇼크</strong> 시나리오 대비 필요</li>
+    </ol>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  출처: 박종훈의 지식한방 (2026.02.06)<br>
+  본 문서는 영상 내용을 분석·정리한 것으로, 투자 조언이 아닙니다.
+</div>
+
+</div><!-- /container -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+// Chart 1: Presidents & Wag the Dog History
+const ctx1 = document.getElementById('chartPresidents').getContext('2d');
+new Chart(ctx1, {
+  type: 'bar',
+  data: {
+    labels: ['아버지 부시\n(1991 걸프전)', '클린턴\n(1998 이라크)', '아들 부시\n(2003 이라크전)'],
+    datasets: [{
+      label: '위기 전 지지율 (%)',
+      data: [56, 60, 58],
+      backgroundColor: 'rgba(230, 57, 70, 0.6)',
+      borderColor: '#e63946',
+      borderWidth: 1
+    }, {
+      label: '전쟁 후 지지율 (%)',
+      data: [89, 73, 71],
+      backgroundColor: 'rgba(244, 162, 54, 0.6)',
+      borderColor: '#f4a236',
+      borderWidth: 1
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      title: { display: true, text: '전쟁을 통한 대통령 지지율 변화', color: '#fff', font: { size: 14, weight: 'bold' }},
+      legend: { labels: { color: '#9a9ab0', font: { size: 11 }}},
+    },
+    scales: {
+      y: { beginAtZero: true, max: 100, ticks: { color: '#9a9ab0' }, grid: { color: 'rgba(255,255,255,0.06)' }},
+      x: { ticks: { color: '#9a9ab0', font: { size: 11 }}, grid: { display: false }}
+    }
+  }
+});
+
+// Chart 2: Military Deployment
+const ctx2 = document.getElementById('chartMilitary').getContext('2d');
+new Chart(ctx2, {
+  type: 'doughnut',
+  data: {
+    labels: ['다리: 공중급유기', '망치: 전략폭격기+벙커버스터', '방패: 항모단+이지스함'],
+    datasets: [{
+      data: [33, 34, 33],
+      backgroundColor: ['rgba(244, 162, 54, 0.7)', 'rgba(230, 57, 70, 0.7)', 'rgba(72, 149, 239, 0.7)'],
+      borderColor: '#1a1d2e',
+      borderWidth: 3
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      title: { display: true, text: '이란 공격 3단계 군사 배치 (모두 완료)', color: '#fff', font: { size: 14, weight: 'bold' }},
+      legend: { position: 'bottom', labels: { color: '#9a9ab0', font: { size: 11 }, padding: 14 }},
+    }
+  }
+});
+
+// Chart 3: Market Impact
+const ctx3 = document.getElementById('chartMarket').getContext('2d');
+new Chart(ctx3, {
+  type: 'line',
+  data: {
+    labels: ['2/1', '2/2', '2/3', '2/4', '2/5'],
+    datasets: [{
+      label: '금값 (변동 방향)',
+      data: [100, 104, 107, 101, 99],
+      borderColor: '#f4a236',
+      backgroundColor: 'rgba(244, 162, 54, 0.1)',
+      fill: true,
+      tension: 0.4
+    }, {
+      label: '국제유가 (변동 방향)',
+      data: [100, 105, 108, 102, 100],
+      borderColor: '#e63946',
+      backgroundColor: 'rgba(230, 57, 70, 0.1)',
+      fill: true,
+      tension: 0.4
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      title: { display: true, text: '금값·유가 변동 추이 (기준=100)', color: '#fff', font: { size: 14, weight: 'bold' }},
+      legend: { labels: { color: '#9a9ab0', font: { size: 11 }}},
+    },
+    scales: {
+      y: { ticks: { color: '#9a9ab0' }, grid: { color: 'rgba(255,255,255,0.06)' }},
+      x: { ticks: { color: '#9a9ab0' }, grid: { display: false }}
+    }
+  }
+});
+</script>
+
+</body>
+</html>
