@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>부자들은 절대 현금을 쥐고 있지 않습니다 - 분석</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-card: #111827;
+            --bg-card-hover: #1a2332;
+            --accent-gold: #f0b90b;
+            --accent-gold-dim: rgba(240,185,11,0.15);
+            --accent-red: #ef4444;
+            --accent-red-dim: rgba(239,68,68,0.12);
+            --accent-green: #22c55e;
+            --accent-green-dim: rgba(34,197,94,0.12);
+            --accent-blue: #3b82f6;
+            --accent-blue-dim: rgba(59,130,246,0.12);
+            --accent-purple: #a855f7;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-dim: #64748b;
+            --border: #1e293b;
+            --border-light: #334155;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            font-size: 15px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0 16px 80px;
+        }
+
+        /* Header */
+        .hero {
+            position: relative;
+            padding: 48px 20px 36px;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(240,185,11,0.08) 0%, transparent 100%);
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 32px;
+        }
+        .hero-badge {
+            display: inline-block;
+            padding: 4px 14px;
+            background: var(--accent-gold-dim);
+            border: 1px solid rgba(240,185,11,0.3);
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+        .hero h1 {
+            font-size: 22px;
+            font-weight: 800;
+            line-height: 1.4;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+        .hero h1 em {
+            font-style: normal;
+            color: var(--accent-gold);
+        }
+        .hero-meta {
+            font-size: 12px;
+            color: var(--text-dim);
+        }
+        .hero-meta a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+
+        /* Section */
+        .section {
+            margin-bottom: 36px;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+        .section-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .section-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 14px;
+        }
+        .card-title {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .card p, .card li {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.85;
+        }
+        .card ul {
+            list-style: none;
+            padding: 0;
+        }
+        .card li {
+            padding: 6px 0;
+            padding-left: 18px;
+            position: relative;
+        }
+        .card li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent-gold);
+            font-size: 12px;
+        }
+
+        /* Highlight boxes */
+        .highlight {
+            border-radius: 12px;
+            padding: 16px 18px;
+            margin: 14px 0;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        .highlight-gold {
+            background: var(--accent-gold-dim);
+            border-left: 3px solid var(--accent-gold);
+            color: #fde68a;
+        }
+        .highlight-red {
+            background: var(--accent-red-dim);
+            border-left: 3px solid var(--accent-red);
+            color: #fca5a5;
+        }
+        .highlight-blue {
+            background: var(--accent-blue-dim);
+            border-left: 3px solid var(--accent-blue);
+            color: #93c5fd;
+        }
+        .highlight-green {
+            background: var(--accent-green-dim);
+            border-left: 3px solid var(--accent-green);
+            color: #86efac;
+        }
+
+        /* Stats row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 14px 0;
+        }
+        .stat-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 2px;
+        }
+        .stat-label {
+            font-size: 11px;
+            color: var(--text-dim);
+            font-weight: 500;
+        }
+        .stat-gold .stat-value { color: var(--accent-gold); }
+        .stat-red .stat-value { color: var(--accent-red); }
+        .stat-green .stat-value { color: var(--accent-green); }
+        .stat-blue .stat-value { color: var(--accent-blue); }
+
+        /* Chart */
+        .chart-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 18px 14px;
+            margin: 16px 0;
+        }
+        .chart-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 14px;
+            text-align: center;
+        }
+        .chart-wrap {
+            position: relative;
+            height: 240px;
+        }
+
+        /* Comparison table */
+        .comp-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            margin: 12px 0;
+        }
+        .comp-table th {
+            background: rgba(240,185,11,0.1);
+            color: var(--accent-gold);
+            font-weight: 600;
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        .comp-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+        .comp-table tr:last-child td { border-bottom: none; }
+
+        /* Flow steps */
+        .flow {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin: 14px 0;
+        }
+        .flow-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 14px 0;
+        }
+        .flow-num {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 800;
+            flex-shrink: 0;
+            border: 2px solid;
+        }
+        .flow-step .flow-content {
+            flex: 1;
+        }
+        .flow-step .flow-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+        .flow-step .flow-desc {
+            font-size: 13px;
+            color: var(--text-dim);
+        }
+        .flow-arrow {
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 16px;
+            padding: 0 0 0 8px;
+        }
+
+        /* Tag */
+        strong, b { color: var(--text-primary); font-weight: 600; }
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .tag-red { background: var(--accent-red-dim); color: var(--accent-red); }
+        .tag-gold { background: var(--accent-gold-dim); color: var(--accent-gold); }
+        .tag-green { background: var(--accent-green-dim); color: var(--accent-green); }
+        .tag-blue { background: var(--accent-blue-dim); color: var(--accent-blue); }
+
+        /* Quote */
+        .quote-box {
+            background: linear-gradient(135deg, rgba(240,185,11,0.06), rgba(168,85,247,0.06));
+            border: 1px solid rgba(240,185,11,0.2);
+            border-radius: 14px;
+            padding: 20px;
+            margin: 16px 0;
+            text-align: center;
+        }
+        .quote-box .quote-text {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+        .quote-box .quote-author {
+            font-size: 12px;
+            color: var(--text-dim);
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 32px 0;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 32px 16px;
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
+        }
+        .footer p {
+            font-size: 11px;
+            color: var(--text-dim);
+            line-height: 1.8;
+        }
+
+        /* Gen badge colors */
+        .gen-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Hero -->
+    <div class="hero">
+        <div class="hero-badge">거시경제 · 자산관리 · 투자전략</div>
+        <h1>"부자들은 절대 현금을<br>쥐고 있지 않습니다"<br><em>추격과 역전</em></h1>
+        <p class="hero-meta">
+            박종훈의 지식한방 · 2026.02.17<br>
+            <a href="https://youtu.be/i8JKCUQ69GA?si=Zttuk2JZbOWCuxBg" target="_blank">▶ 원본 영상 보기</a>
+        </p>
+    </div>
+
+    <!-- 핵심 메시지 -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon" style="background:var(--accent-gold-dim);">💡</div>
+            <div class="section-title">핵심 메시지</div>
+        </div>
+        <div class="highlight highlight-gold">
+            원화 예금만 보유하는 것은 <b>실질적으로 가난해지는 길</b>이다. 세계화 종료, 인플레이션 구조 변화, 각국 부채 증가로 <b>돈의 가치가 지속적으로 하락</b>하는 시대에 진입했으며, 거시경제를 이해하고 포트폴리오를 구성하는 것이 그 어느 때보다 중요해졌다.
+        </div>
+    </div>
+
+    <!-- 1. 원화의 가치 하락 -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon" style="background:var(--accent-red-dim);">📉</div>
+            <div class="section-title">1. 원화 보유의 함정 — 실질 구매력 하락</div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">🥇 금값으로 본 구매력 변화</div>
+            <div class="stats-row">
+                <div class="stat-box stat-green">
+                    <div class="stat-value">~48,000원</div>
+                    <div class="stat-label">6년 전 금 1g 가격</div>
+                </div>
+                <div class="stat-box stat-red">
+                    <div class="stat-value">~200,000원</div>
+                    <div class="stat-label">현재 금 1g 가격</div>
+                </div>
+            </div>
+            <p>100만 원으로 6년 전에는 금 <b>20g</b>을 살 수 있었지만, 현재는 <b>5g</b>밖에 구매할 수 없다. 같은 금액의 구매력이 <b>1/4로 축소</b>된 것이다.</p>
+        </div>
+
+        <!-- 금 구매력 차트 -->
+        <div class="chart-container">
+            <div class="chart-title">100만 원의 금 구매력 변화</div>
+            <div class="chart-wrap"><canvas id="chart-gold"></canvas></div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">💱 원/달러 환율 변화</div>
+            <div class="stats-row">
+                <div class="stat-box stat-green">
+                    <div class="stat-value">1,080원</div>
+                    <div class="stat-label">6년 전 환율</div>
+                </div>
+                <div class="stat-box stat-red">
+                    <div class="stat-value">1,470원+</div>
+                    <div class="stat-label">현재 환율</div>
+                </div>
+            </div>
+            <p>2022년 1월 이후 원화 가치가 <b>약 25% 하락</b>. 강남 집값이 원화 기준 10% 올랐어도 달러 기준으로는 제자리이며, 지방 도시는 달러 환산 시 <b>30~50% 하락</b>한 곳도 다수.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-title">🏦 예금 금리의 추락</div>
+            <table class="comp-table">
+                <tr><th>시대</th><th>예금 금리</th></tr>
+                <tr><td>1960~70년대 평균</td><td><b>27%</b></td></tr>
+                <tr><td>1980년 재형저축</td><td><b>40%</b></td></tr>
+                <tr><td>현재 은행 평균</td><td><b>2.5%</b></td></tr>
+            </table>
+            <p>과거에는 은행 예금만으로 자산 증식이 가능했으나, 현재 <b>2.5% 금리</b>로는 인플레이션을 이기는 것 자체가 불가능한 구조.</p>
+        </div>
+
+        <!-- 금리 변화 차트 -->
+        <div class="chart-container">
+            <div class="chart-title">한국 예금 금리 변화 추이</div>
+            <div class="chart-wrap"><canvas id="chart-rate"></canvas></div>
+        </div>
+    </div>
+
+    <!-- 2. 통화량 -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon" style="background:var(--accent-blue-dim);">💵</div>
+            <div class="section-title">2. 통화량(M2) 증가 속도 비교</div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">🇺🇸 vs 🇰🇷 M2 증가율 (2022.1월~현재)</div>
+            <div class="stats-row">
+                <div class="stat-box stat-blue">
+                    <div class="stat-value">3%</div>
+                    <div class="stat-label">미국 M2 증가</div>
+                </div>
+                <div class="stat-box stat-red">
+                    <div class="stat-value">20%</div>
+                    <div class="stat-label">한국 M2 증가</div>
+                </div>
+            </div>
+            <div class="highlight highlight-red">
+                한국의 M2 증가 속도가 미국의 <b>약 7배</b>. 전 세계에서 가장 신뢰받는 기축통화(달러)보다 7배 빠르게 돈을 찍어내면 원화 가치 하락은 필연적.
+            </div>
+        </div>
+
+        <!-- M2 비교 차트 -->
+        <div class="chart-container">
+            <div class="chart-title">M2 통화량 증가율 비교 (2022.1월 기준)</div>
+            <div class="chart-wrap"><canvas id="chart-m2"></canvas></div>
+        </div>
+    </div>
+
+    <!-- 3. 세계화 종료와 인플레이션 -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon" style="background:rgba(168,85,247,0.15);">🌍</div>
+            <div class="section-title">3. 세계화 종료 → 인플레이션 구조 변화</div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">과거 40년: 세계화 시대</div>
+            <p>중국·베트남 등 저임금 국가에 공장을 건설 → 인건비가 미국의 <b>1/100 수준</b>(베트남 기준). 돈을 아무리 찍어내도 생산비용이 급락하여 <b>물가가 오르지 않았던 시대</b>.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-title">현재: 리쇼어링 시대</div>
+            <ul>
+                <li>미국 내 공장 건설 강제화 (트럼프 행정부 정책)</li>
+                <li>베트남 1인당 GDP: <b>~5,000달러</b> vs 미국: <b>86,000달러</b> → <b>약 17배 차이</b></li>
+                <li>인건비 상승 → 물가 상승 불가피</li>
+                <li><b>자원의 무기화</b> → 원자재 가격 상승 가능성</li>
+            </ul>
+            <div class="highlight highlight-red">
+                이제는 돈을 찍어내는 만큼 <b>정확하게 물가가 오르는</b> 구조로 전환. 과거 40년간의 "인플레이션은 일시적" 공식이 깨졌다.
+            </div>
+        </div>
+
+        <!-- GDP 비교 차트 -->
+        <div class="chart-container">
+            <div class="chart-title">1인당 GDP 비교 (인건비 격차)</div>
+            <div class="chart-wrap"><canvas id="chart-gdp"></canvas></div>
+        </div>
+    </div>
+
+    <!-- 4. 부채와 화폐가치 하락 -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon" style="background:var(--accent-red-dim);">⚠️</div>
+            <div class="section-title">4. 각국 부채 급증 → 화폐가치 하락의 악순환</div>
+        </div>
+
+        <div class="card">
+            <table class="comp-table">
+                <tr><th>시기</th><th>GDP 대비 부채 비율</th></tr>
+                <tr><td>1960~70년대 (미국·프랑스 등)</td><td><b>~40%</b></td></tr>
+                <tr><td>현재 (미국·영국·프랑스)</td><td><b>100% 이상</b></td></tr>
+            </table>
+            <p>부채가 과도하게 쌓이면 역사적으로 정부는 <b>돈을 찍어내서 부채를 희석</b>시키는 방법을 택해왔다. 로마 제국의 은화 불순물 혼입부터 현대의 양적완화(QE)까지 본질은 동일.</p>
+            <div class="highlight highlight-gold">
+                양적긴축 → 양적완화 복귀 시 <b>시중 유동성 급증</b> → 인플레이션 재발 가능성. 인플레이션에 대한 경계심을 절대 놓쳐서는 안 된다.
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. 캔틸런 효과 -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon" style="background:rgba(168,85,247,0.15);">⚖️</div>
+            <div class="section-title">5. 캔틸런 효과 — 돈 풀기가 만드는 빈부격차</div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">메커니즘: 누가 이득을 보는가?</div>
+            <table class="comp-table">
+                <tr><th>구분</th><th>재정지출 (정부)</th><th>통화완화 (중앙은행)</th></tr>
+                <tr><td>분배 방식</td><td>1/N 균등 배분</td><td>시중은행 → 신용도 기반</td></tr>
+                <tr><td>대출 조건</td><td>-</td><td>부자: 100억 / 금리 2%<br>저소득: 100만원 / 금리 18%</td></tr>
+                <tr><td>수혜층</td><td>저소득층에 유리</td><td><b>상위 1%에 집중</b></td></tr>
+            </table>
+        </div>
+
+        <div class="card">
+            <div class="card-title">인플레이션의 비대칭 효과</div>
+            <p>물가 2배 상승 시:</p>
+            <ul>
+                <li><b>부자:</b> 자산이 5배 상승 → 물가 상승분 충분히 상쇄</li>
+                <li><b>저소득층:</b> 자산 투자 미참여 → 실질 자산 <b>반토막</b></li>
+            </ul>
+            <div class="highlight highlight-red">
+                중앙은행 돈풀기의 이득은 <b>상위 1%가 독식</b>, 하위 90%는 40년간 지속적으로 가난해져 온 구조. 이것이 <b>캔틸런 효과(Cantillon Effect)</b>.
+            </div>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"돈의 홍수에 서핑하듯 올라타고,<br>물이 빠질 때는 누구보다 먼저 빠져라"</div>
+            <div class="quote-author">— 워런 버핏의 경고 인용</div>
+        </div>
+    </div>
+
+    <!-- 6. 자산 가격 4단계 -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon" style="background:var(--accent-gold-dim);">📊</div>
+            <div class="section-title">6. 자산 가격 상승의 4단계 원칙</div>
+        </div>
+
+        <div class="card">
+            <div class="flow">
+                <div class="flow-step">
+                    <div class="flow-num" style="border-color:var(--accent-green);color:var(--accent-green);">1</div>
+                    <div class="flow-content">
+                        <div class="flow-label">Everything Rally</div>
+                        <div class="flow-desc">모든 자산 가격이 상승. 1997~1999년 여름이 이 단계.</div>
+                    </div>
+                </div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-step">
+                    <div class="flow-num" style="border-color:var(--accent-gold);color:var(--accent-gold);">2</div>
+                    <div class="flow-content">
+                        <div class="flow-label">위험자산 조정</div>
+                        <div class="flow-desc">1999년 여름 20% 조정 → 많은 투자자 이탈</div>
+                    </div>
+                </div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-step">
+                    <div class="flow-num" style="border-color:var(--accent-blue);color:var(--accent-blue);">3</div>
+                    <div class="flow-content">
+                        <div class="flow-label">소수 종목 Rally</div>
+                        <div class="flow-desc">5개 내외 핵심 종목이 시장 견인 → 지수 80% 상승 (닷컴 시절: MS, 시스코 등)</div>
+                    </div>
+                </div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-step">
+                    <div class="flow-num" style="border-color:var(--accent-red);color:var(--accent-red);">4</div>
+                    <div class="flow-content">
+                        <div class="flow-label">Everything Crash</div>
+                        <div class="flow-desc">모든 자산 가격 폭락. 마지막에 올라탄 사람이 가장 큰 피해.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight highlight-blue">
+                현재는 <b>2단계 또는 4단계</b>를 거치고 있는 구간. 핵심 판단 변수: <b>금리, 인플레이션, 경기 침체</b> 세 가지 신호를 관찰해야 한다.
+            </div>
+        </div>
+    </div>
+
+    <!-- 7. 한국 vs 선진국 베이비부머 -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon" style="background:var(--accent-blue-dim);">👥</div>
+            <div class="section-title">7. 베이비부머와 금리의 구조적 관계</div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">전쟁 종료 시기가 만든 결정적 차이</div>
+            <table class="comp-table">
+                <tr><th>구분</th><th>선진국 (미·유·일)</th><th>한국</th></tr>
+                <tr><td>전쟁 종료</td><td>1945년</td><td><b>1953년</b></td></tr>
+                <tr><td>베이비부머</td><td>1946~1964년생</td><td><b>1954~1974년생</b></td></tr>
+                <tr><td>막내 나이 (만)</td><td>61세 → 대부분 은퇴</td><td><b>51세 → 아직 현역 다수</b></td></tr>
+                <tr><td>금리 방향</td><td>2021년부터 상승</td><td><b>아직 저금리 유지 가능 (3~5년)</b></td></tr>
+            </table>
+        </div>
+
+        <div class="card">
+            <div class="card-title">금리 변동 메커니즘</div>
+            <p><b>현역 시절</b> → 은행 예금(돈 공급 증가) → 금리 하락<br>
+            <b>은퇴 후</b> → 예금 인출(돈 공급 감소) → 금리 상승</p>
+            <div class="highlight highlight-gold">
+                한국의 저금리 유지 가능 기간: <b>약 3~5년</b>. 정년(60세) 도달 비율이 전체의 10%에 불과하고 대부분 54~58세에 퇴직하는 현실. 이후 <b>중금리 시대</b> 진입 예상.
+            </div>
+        </div>
+
+        <!-- 베이비부머 차트 -->
+        <div class="chart-container">
+            <div class="chart-title">선진국 vs 한국 베이비부머 은퇴 타임라인</div>
+            <div class="chart-wrap"><canvas id="chart-baby"></canvas></div>
+        </div>
+    </div>
+
+    <!-- 8. 원화 vs 엔화 -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon" style="background:var(--accent-red-dim);">🇰🇷</div>
+            <div class="section-title">8. 원화의 구조적 약점 — 일본보다 위험한 이유</div>
+        </div>
+
+        <div class="card">
+            <table class="comp-table">
+                <tr><th>비교 항목</th><th>일본 (엔화)</th><th>한국 (원화)</th></tr>
+                <tr><td>통화 분류</td><td>경화 (Hard Currency)</td><td><b>연화 (Soft Currency)</b></td></tr>
+                <tr><td>국제적 위상</td><td>G2 → 국제통화</td><td>G10 → 14위로 하락</td></tr>
+                <tr><td>고령화 시 물가</td><td>디플레이션 (세계화 효과)</td><td><b>인플레이션 가능성 ↑</b></td></tr>
+                <tr><td>위기 시 통화 반응</td><td>엔화 강세 (안전자산)</td><td><b>원화 약세 (먼저 투매)</b></td></tr>
+                <tr><td>고령화 시점</td><td>세계화 진행 중</td><td><b>세계화 종료 후</b></td></tr>
+            </table>
+
+            <div class="highlight highlight-red">
+                일본: 고령화 + 세계화 = 디플레이션<br>
+                한국: 고령화 + <b>탈세계화</b> = <b>인플레이션 위험</b><br>
+                글로벌 신용경색 시 원화가 가장 먼저 투매 대상이 됨
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">일본인 vs 한국인 순자산 비교</div>
+            <p>현재 한국인의 순자산이 일본인보다 <b>약 2,000만 원 더 많다</b>. 이는 12년간 엔화 가치가 지속 하락한 결과. 엔화만 보유한 일본인은 크게 가난해졌고, <b>이제 원화 보유자에게 동일한 현상이 진행 중</b>.</p>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 9. 세대별 전략 -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon" style="background:var(--accent-green-dim);">🎯</div>
+            <div class="section-title">9. 세대별 자산관리 전략</div>
+        </div>
+
+        <!-- 20-30대 -->
+        <div class="card" style="border-color: rgba(34,197,94,0.3);">
+            <div class="gen-badge" style="background:var(--accent-green-dim);color:var(--accent-green);">🌱 20~30대</div>
+            <div class="card-title">핵심: 시테크(시간 관리) > 재테크</div>
+            <ul>
+                <li><b>최대 자산 = 시간</b>: 복리 효과에서 가장 유리한 세대</li>
+                <li>매년 15%씩 꾸준히 = 워런 버핏의 방법론</li>
+                <li>변동성 큰 자산(코인 등)에 올인하면 하루 종일 시세 확인 → <b>자기 개발 시간 상실</b></li>
+                <li><b>시간의 90%</b>는 자기 개발, <b>10%</b>를 투자에 할당</li>
+                <li><b>자동 투자 메커니즘</b> 설계가 핵심</li>
+            </ul>
+            <div class="highlight highlight-green">
+                <b>시드머니 1억 모을 때까지 투자하지 말라? → 가장 위험한 조언.</b><br>
+                100만 원부터 실전 투자 경험을 쌓아야 한다. 자산이 적을 때 실패해도 복구 가능. 실전 → 이론 → 실전의 선순환이 핵심.
+            </div>
+        </div>
+
+        <!-- 40-50대 -->
+        <div class="card" style="border-color: rgba(59,130,246,0.3);">
+            <div class="gen-badge" style="background:var(--accent-blue-dim);color:var(--accent-blue);">🏢 40~50대</div>
+            <div class="card-title">핵심: 과거 성공 공식에 대한 경계</div>
+            <ul>
+                <li>대부분의 투자 성공 경험 = <b>부동산</b></li>
+                <li>2000년 금리 20% → 이후 25년간 지속 하락 → <b>"금리는 항상 내려간다"는 착각</b></li>
+                <li>미국·일본·유럽은 이미 금리 상승 → 한국만 예외일 수 없음</li>
+                <li>3~5년 뒤 금리 상승 시 <b>자산 가격 지각변동</b> 가능</li>
+                <li>강남 집값 상승률 < 금값 상승률 < S&P 500 상승률</li>
+            </ul>
+            <div class="highlight highlight-blue">
+                <b>은퇴 시점에 막대한 빚을 안고 퇴직하는 사례 다수</b> — 부동산 성공 후 레버리지를 반복하며 더 큰 부동산에 투자하는 패턴이 위험. 거시경제 변화 무시 시 과거 경험이 오히려 독이 될 수 있다.
+            </div>
+        </div>
+
+        <!-- 60대 -->
+        <div class="card" style="border-color: rgba(168,85,247,0.3);">
+            <div class="gen-badge" style="background:rgba(168,85,247,0.15);color:var(--accent-purple);">🏖️ 60대</div>
+            <div class="card-title">핵심: 인플레이션 방어가 최우선</div>
+            <ul>
+                <li>연금·저축 생활 → 인플레이션이 <b>실질 자산가치를 직접 잠식</b></li>
+                <li>일본의 디플레이션 사례를 한국에 적용하면 안 됨 (구조적 차이)</li>
+                <li><b>달러 분산 투자</b>로 원화 가치 하락에 대한 방어책 필요</li>
+                <li>수명 연장 시대 → 가치 하락을 상쇄할 포트폴리오 구축 필수</li>
+            </ul>
+            <div class="highlight highlight-gold">
+                젊을 때 모은 자산의 실질 가치가 인플레이션으로 계속 하락할 수 있는 시대. 60대도 거시경제 변화를 공부하고 포트폴리오를 재구성할 필요가 있다.
+            </div>
+        </div>
+    </div>
+
+    <!-- 10. 거시경제의 중요성 -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon" style="background:var(--accent-gold-dim);">🔭</div>
+            <div class="section-title">10. 왜 거시경제를 알아야 하는가</div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">종목 분석만으로는 부족한 시대</div>
+            <p><b>사례: 배터리 관련주</b> — 실적 양호 + 미래 성장성 높음에도 주가 하락. 원인은 패권 전쟁에 따른 미국의 에너지 전략 전환 등 거시경제적 패러다임 변화.</p>
+            <ul>
+                <li>2019년부터 "전재산의 50%를 달러로" → 거시경제 분석에서 나온 판단</li>
+                <li>이후 달러 자산 급등 vs 원화 자산 정체</li>
+                <li>이란 사태 → 한국 증시 영향 (초연결 시대)</li>
+            </ul>
+            <div class="highlight highlight-gold">
+                전 세계가 하나로 연결된 초연결 시대에서는 <b>글로벌 거시경제</b>를 이해해야 자산을 지키고 늘릴 수 있다. 종목 분석 + 시황 분석만으로는 큰 패러다임 전환을 포착할 수 없다.
+            </div>
+        </div>
+    </div>
+
+    <!-- 11. 추격과 역전 -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon" style="background:var(--accent-gold-dim);">🏆</div>
+            <div class="section-title">11. 추격과 역전의 경제학</div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">변동성이 큰 시기 = 역전의 기회</div>
+            <p>박종훈 기자의 박사학위 주제인 <b>'추격의 경제학'</b> 핵심 원리:</p>
+            <ul>
+                <li>추격과 역전은 경제가 좋을 때가 아닌 <b>지각변동이 일어날 때</b> 가장 활발</li>
+                <li>공룡 멸종 → 포유류 시대 전환처럼, 기존 질서가 무너질 때 기회 발생</li>
+                <li><b>1998년 외환위기:</b> 한국 기업 순위 대격변</li>
+                <li><b>2008년 금융위기:</b> 미국 기업 순위 대격변</li>
+            </ul>
+            <div class="highlight highlight-green">
+                현재 모든 경제 변수가 급변하는 <b>지각변동의 시대</b> → 포트폴리오를 잘 구성하면 <b>역전과 추격이 가장 쉬운 때</b>. 위기에서 준비된 자가 기회를 잡는다.
+            </div>
+        </div>
+
+        <div class="quote-box">
+            <div class="quote-text">"변화의 속도가 워낙 빠르기 때문에<br>지금이라도 준비하면 늦지 않다.<br>느려서가 아니라 빨라서 걱정이지,<br>뒤처짐을 걱정할 필요는 없다."</div>
+            <div class="quote-author">— 박종훈</div>
+        </div>
+    </div>
+
+    <!-- 핵심 요약 -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon" style="background:var(--accent-gold-dim);">📋</div>
+            <div class="section-title">핵심 요약</div>
+        </div>
+
+        <div class="card">
+            <ul>
+                <li><b>원화 예금만 보유</b> = 실질적 가난의 길. 금·달러 기준 구매력이 급격히 하락 중</li>
+                <li><b>세계화 종료</b>로 돈을 찍으면 찍은 만큼 물가가 오르는 새로운 시대 진입</li>
+                <li><b>한국 M2</b>가 미국보다 7배 빠르게 증가 → 원화 약세 구조적</li>
+                <li><b>캔틸런 효과</b>: 중앙은행 돈풀기는 상위 1%에 집중적 혜택</li>
+                <li>자산 가격 <b>4단계 사이클</b>(에브리싱 랠리→조정→소수 종목→크래시) 이해 필요</li>
+                <li>한국 베이비부머 은퇴까지 <b>3~5년</b> → 이후 금리 상승 가능성</li>
+                <li>원화는 <b>연화(Soft Currency)</b>로 위기 시 가장 먼저 투매 대상</li>
+                <li><b>거시경제</b>를 알아야 포트폴리오를 제대로 구성할 수 있다</li>
+                <li>경제 <b>지각변동기</b> = 추격과 역전의 최적 타이밍</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>본 문서는 '박종훈의 지식한방' 유튜브 영상 내용을 정리·분석한 것입니다.<br>
+        투자 판단은 본인의 책임하에 이루어져야 합니다.<br><br>
+        📺 원본: <a href="https://youtu.be/i8JKCUQ69GA?si=Zttuk2JZbOWCuxBg" target="_blank" style="color:var(--accent-blue);text-decoration:none;">박종훈의 지식한방</a></p>
+    </div>
+</div>
+
+<script>
+    // Chart defaults
+    Chart.defaults.color = '#94a3b8';
+    Chart.defaults.font.family = "'Noto Sans KR', sans-serif";
+    Chart.defaults.font.size = 11;
+
+    // 1. Gold purchasing power
+    new Chart(document.getElementById('chart-gold'), {
+        type: 'bar',
+        data: {
+            labels: ['6년 전', '현재'],
+            datasets: [{
+                label: '100만원으로 구매 가능한 금(g)',
+                data: [20, 5],
+                backgroundColor: ['rgba(34,197,94,0.7)', 'rgba(239,68,68,0.7)'],
+                borderColor: ['#22c55e', '#ef4444'],
+                borderWidth: 1,
+                borderRadius: 6
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: { callbacks: { label: ctx => ctx.parsed.y + 'g' }}
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: { color: '#1e293b' },
+                    ticks: { callback: v => v + 'g' }
+                },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+
+    // 2. Interest rate history
+    new Chart(document.getElementById('chart-rate'), {
+        type: 'line',
+        data: {
+            labels: ['1960~70s', '1980', '1990s', '2000s', '2010s', '현재'],
+            datasets: [{
+                label: '예금 금리 (%)',
+                data: [27, 40, 15, 8, 3, 2.5],
+                borderColor: '#f0b90b',
+                backgroundColor: 'rgba(240,185,11,0.1)',
+                fill: true,
+                tension: 0.4,
+                pointRadius: 5,
+                pointBackgroundColor: '#f0b90b'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: { callbacks: { label: ctx => ctx.parsed.y + '%' }}
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: { color: '#1e293b' },
+                    ticks: { callback: v => v + '%' }
+                },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+
+    // 3. M2 comparison
+    new Chart(document.getElementById('chart-m2'), {
+        type: 'bar',
+        data: {
+            labels: ['미국 M2', '한국 M2'],
+            datasets: [{
+                label: '증가율 (%)',
+                data: [3, 20],
+                backgroundColor: ['rgba(59,130,246,0.7)', 'rgba(239,68,68,0.7)'],
+                borderColor: ['#3b82f6', '#ef4444'],
+                borderWidth: 1,
+                borderRadius: 6
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            indexAxis: 'y',
+            plugins: {
+                legend: { display: false },
+                tooltip: { callbacks: { label: ctx => ctx.parsed.x + '%' }}
+            },
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    grid: { color: '#1e293b' },
+                    ticks: { callback: v => v + '%' }
+                },
+                y: { grid: { display: false } }
+            }
+        }
+    });
+
+    // 4. GDP comparison
+    new Chart(document.getElementById('chart-gdp'), {
+        type: 'bar',
+        data: {
+            labels: ['베트남', '한국', '미국'],
+            datasets: [{
+                label: '1인당 GDP ($)',
+                data: [5000, 33000, 86000],
+                backgroundColor: [
+                    'rgba(34,197,94,0.7)',
+                    'rgba(59,130,246,0.7)',
+                    'rgba(240,185,11,0.7)'
+                ],
+                borderColor: ['#22c55e', '#3b82f6', '#f0b90b'],
+                borderWidth: 1,
+                borderRadius: 6
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: { callbacks: { label: ctx => '$' + ctx.parsed.y.toLocaleString() }}
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: { color: '#1e293b' },
+                    ticks: { callback: v => '$' + (v/1000) + 'K' }
+                },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+
+    // 5. Baby boomer timeline
+    new Chart(document.getElementById('chart-baby'), {
+        type: 'bar',
+        data: {
+            labels: ['선진국 베이비부머\n(1946~1964)', '한국 베이비부머\n(1954~1974)'],
+            datasets: [
+                {
+                    label: '출생 시작연도',
+                    data: [1946, 1954],
+                    backgroundColor: 'rgba(59,130,246,0.6)',
+                    borderRadius: 4
+                },
+                {
+                    label: '현재 막내 나이(만)',
+                    data: [61, 51],
+                    backgroundColor: 'rgba(240,185,11,0.6)',
+                    borderRadius: 4
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: { boxWidth: 12, padding: 12 }
+                }
+            },
+            scales: {
+                y: {
+                    grid: { color: '#1e293b' }
+                },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
