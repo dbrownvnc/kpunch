@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>시험문제 - 베센트의 치밀한 선거전략</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap');
+
+        :root {
+            --bg-primary: #0a0e1a;
+            --bg-card: #111827;
+            --bg-card-alt: #1a2236;
+            --accent-red: #ef4444;
+            --accent-blue: #3b82f6;
+            --accent-gold: #f59e0b;
+            --accent-green: #10b981;
+            --accent-purple: #8b5cf6;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border: #1e293b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        .header {
+            background: linear-gradient(180deg, #1a1035 0%, #0a0e1a 100%);
+            padding: 2rem 1.2rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header h1 {
+            font-size: 1.4rem;
+            font-weight: 900;
+            margin-bottom: 0.3rem;
+            background: linear-gradient(135deg, #f1f5f9, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .container {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0 1rem 3rem;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 2rem 0 1rem;
+            padding: 0.8rem 1rem;
+            background: var(--bg-card);
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .question-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .q-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .q-num {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            color: #fff;
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .q-meta {
+            display: flex;
+            gap: 0.4rem;
+            align-items: center;
+        }
+
+        .q-difficulty {
+            font-size: 0.7rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .q-difficulty.easy {
+            background: rgba(16,185,129,0.15);
+            color: var(--accent-green);
+        }
+
+        .q-difficulty.medium {
+            background: rgba(245,158,11,0.15);
+            color: var(--accent-gold);
+        }
+
+        .q-difficulty.hard {
+            background: rgba(239,68,68,0.15);
+            color: var(--accent-red);
+        }
+
+        .q-type {
+            font-size: 0.7rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 10px;
+            background: rgba(59,130,246,0.15);
+            color: var(--accent-blue);
+            font-weight: 500;
+        }
+
+        .q-text {
+            font-size: 0.92rem;
+            color: var(--text-primary);
+            font-weight: 500;
+            line-height: 1.7;
+            margin-bottom: 0.6rem;
+        }
+
+        .options {
+            margin-top: 0.6rem;
+        }
+
+        .option {
+            display: block;
+            padding: 0.5rem 0.8rem;
+            margin-bottom: 0.4rem;
+            background: var(--bg-card-alt);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            cursor: default;
+        }
+
+        .blank {
+            display: inline-block;
+            min-width: 100px;
+            border-bottom: 2px dashed var(--accent-blue);
+            margin: 0 0.2rem;
+            text-align: center;
+            color: var(--accent-blue);
+        }
+
+        /* 정답지 */
+        .answer-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 3px solid var(--accent-purple);
+        }
+
+        .answer-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent-green);
+            border-radius: 0 12px 12px 0;
+            padding: 1rem 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .answer-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .answer-num {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .answer-value {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent-green);
+            background: rgba(16,185,129,0.1);
+            padding: 0.15rem 0.6rem;
+            border-radius: 6px;
+        }
+
+        .answer-explain {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-top: 0.3rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .ox-options {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .ox-btn {
+            flex: 1;
+            padding: 0.6rem;
+            text-align: center;
+            background: var(--bg-card-alt);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+        }
+
+        .divider-line {
+            border: none;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--border), transparent);
+            margin: 1.5rem 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>📋 시험문제</h1>
+    <p>나스닥은 미끼였다 — 베센트의 치밀한 선거전략 | 총 10문제</p>
+</div>
+
+<div class="container">
+
+    <!-- ============ 문제지 ============ -->
+    <div class="section-title">📋 시험문제 (총 10문제)</div>
+
+    <!-- 문제 1 -->
+    <div class="question-card">
+        <div class="q-header">
+            <div class="q-num">1</div>
+            <div class="q-meta">
+                <span class="q-difficulty easy">⭐ 쉬움</span>
+                <span class="q-type">객관식</span>
+            </div>
+        </div>
+        <div class="q-text">미국 자산 중 고점 대비 가장 큰 하락폭을 기록한 자산은 무엇인가?</div>
+        <div class="options">
+            <div class="option">① 나스닥 (-6%)</div>
+            <div class="option">② 금 현물 (-9%)</div>
+            <div class="option">③ 비트코인 (-45%)</div>
+            <div class="option">④ S&P 500 (-12%)</div>
+        </div>
+    </div>
+
+    <!-- 문제 2 -->
+    <div class="question-card">
+        <div class="q-header">
+            <div class="q-num">2</div>
+            <div class="q-meta">
+                <span class="q-difficulty easy">⭐ 쉬움</span>
+                <span class="q-type">OX 문제</span>
+            </div>
+        </div>
+        <div class="q-text">TGA(Treasury General Account)란 미국 연준(Fed)이 보유한 현금을 의미한다.</div>
+        <div class="ox-options">
+            <div class="ox-btn">⭕ O</div>
+            <div class="ox-btn">❌ X</div>
+        </div>
+    </div>
+
+    <!-- 문제 3 -->
+    <div class="question-card">
+        <div class="q-header">
+            <div class="q-num">3</div>
+            <div class="q-meta">
+                <span class="q-difficulty easy">⭐ 쉬움</span>
+                <span class="q-type">객관식</span>
+            </div>
+        </div>
+        <div class="q-text">2025년 7월에 통과된 OBB 법안에 숨겨진 핵심 조항은 무엇인가?</div>
+        <div class="options">
+            <div class="option">① 금리 인하 의무화</div>
+            <div class="option">② 부채한도 5조 달러 증액</div>
+            <div class="option">③ 연준의 양적완화 재개</div>
+            <div class="option">④ 법인세 완전 폐지</div>
+        </div>
+    </div>
+
+    <!-- 문제 4 -->
+    <div class="question-card">
+        <div class="q-header">
+            <div class="q-num">4</div>
+            <div class="q-meta">
+                <span class="q-difficulty medium">⭐⭐ 보통</span>
+                <span class="q-type">빈칸채우기</span>
+            </div>
+        </div>
+        <div class="q-text">자산 가격이 하락한 순서는 <span class="blank">(    )</span> → <span class="blank">(    )</span> → <span class="blank">(    )</span> 이며, 이는 각 자산이 유동성 변화에 반응하는 속도 차이 때문이다.</div>
+    </div>
+
+    <!-- 문제 5 -->
+    <div class="question-card">
+        <div class="q-header">
+            <div class="q-num">5</div>
+            <div class="q-meta">
+                <span class="q-difficulty medium">⭐⭐ 보통</span>
+                <span class="q-type">단답형</span>
+            </div>
+        </div>
+        <div class="q-text">미국 재무부 공식 문서에 따르면, TGA 잔고를 줄이며 시중에 본격적으로 돈을 살포하기 시작하는 시점은 언제인가?</div>
+    </div>
+
+    <!-- 문제 6 -->
+    <div class="question-card">
+        <div class="q-header">
+            <div class="q-num">6</div>
+            <div class="q-meta">
+                <span class="q-difficulty medium">⭐⭐ 보통</span>
+                <span class="q-type">객관식</span>
+            </div>
+        </div>
+        <div class="q-text">베센트 재무장관이 돈을 한꺼번에 뿌리지 않고 서서히 뿌리는 이유로 가장 적절한 것은?</div>
+        <div class="options">
+            <div class="option">① 법적으로 한꺼번에 뿌릴 수 없기 때문에</div>
+            <div class="option">② 한꺼번에 뿌리면 반짝 상승 후 오버슈팅하여 11월까지 유지 불가</div>
+            <div class="option">③ 의회 승인이 매월 필요하기 때문에</div>
+            <div class="option">④ 연준이 반대하고 있기 때문에</div>
+        </div>
+    </div>
+
+    <!-- 문제 7 -->
+    <div class="question-card">
+        <div class="q-header">
+            <div class="q-num">7</div>
+            <div class="q-meta">
+                <span class="q-difficulty medium">⭐⭐ 보통</span>
+                <span class="q-type">객관식</span>
+            </div>
+        </div>
+        <div class="q-text">미국에서 주가가 선거에 특히 중요한 이유로 가장 적절한 것은?</div>
+        <div class="options">
+            <div class="option">① 미국인의 순자산 중 부동산 비중이 75%이기 때문에</div>
+            <div class="option">② 미국인의 순자산 중 부동산 비중이 30%에 불과하고, 퇴직연금 등 주가 연동 자산이 인생을 좌우하기 때문에</div>
+            <div class="option">③ 미국은 주식 거래에 세금이 없기 때문에</div>
+            <div class="option">④ 미국 대통령이 연준 의장을 겸임하기 때문에</div>
+        </div>
+    </div>
+
+    <!-- 문제 8 -->
+    <div class="question-card">
+        <div class="q-header">
+            <div class="q-num">8</div>
+            <div class="q-meta">
+                <span class="q-difficulty medium">⭐⭐ 보통</span>
+                <span class="q-type">단답형</span>
+            </div>
+        </div>
+        <div class="q-text">2026년 4월 15일이 '3중 세금 폭탄의 날'로 불리는 이유는 무엇이며, 이 시기가 시장에 미치는 영향은?</div>
+    </div>
+
+    <!-- 문제 9 -->
+    <div class="question-card">
+        <div class="q-header">
+            <div class="q-num">9</div>
+            <div class="q-meta">
+                <span class="q-difficulty hard">⭐⭐⭐ 어려움</span>
+                <span class="q-type">서술형</span>
+            </div>
+        </div>
+        <div class="q-text">베센트 재무장관이 5월에 돈을 풀기 시작하는 것이 물가 측면에서 유리한 이유를 '시차(time lag)' 개념을 활용하여 설명하시오.</div>
+    </div>
+
+    <!-- 문제 10 -->
+    <div class="question-card">
+        <div class="q-header">
+            <div class="q-num">10</div>
+            <div class="q-meta">
+                <span class="q-difficulty hard">⭐⭐⭐ 어려움</span>
+                <span class="q-type">서술형</span>
+            </div>
+        </div>
+        <div class="q-text">베센트 전략의 전체 흐름을 '국채 발행 → TGA 비축 → 살포 → 선거'의 구조로 정리하고, 이 전략이 100% 성공하기 어려울 수 있는 리스크 요인 2가지를 설명하시오.</div>
+    </div>
+
+    <!-- ============ 정답지 ============ -->
+    <div class="answer-section">
+        <div class="section-title">📝 정답 및 해설</div>
+
+        <!-- 정답 1 -->
+        <div class="answer-card">
+            <div class="answer-header">
+                <span class="answer-num">[문제 1]</span>
+                <span class="answer-value">정답: ③</span>
+            </div>
+            <div class="answer-explain">비트코인은 2025년 9월 고점 123,000달러에서 2026년 2월 67,600달러로 약 45% 하락했다. 나스닥은 -6%, 금은 -9% 하락에 그쳤다.</div>
+        </div>
+
+        <!-- 정답 2 -->
+        <div class="answer-card">
+            <div class="answer-header">
+                <span class="answer-num">[문제 2]</span>
+                <span class="answer-value">정답: X</span>
+            </div>
+            <div class="answer-explain">TGA는 미국 <strong>재무부(Treasury)</strong>가 보유한 현금이다. 연준(Fed)이 아니라 재무부의 일반 계좌를 말한다. 재무부와 연준은 별개의 기관이다.</div>
+        </div>
+
+        <!-- 정답 3 -->
+        <div class="answer-card">
+            <div class="answer-header">
+                <span class="answer-num">[문제 3]</span>
+                <span class="answer-value">정답: ②</span>
+            </div>
+            <div class="answer-explain">OBB(One Big Beautiful) 법안은 대규모 감세를 주요 내용으로 하지만, 동시에 부채한도를 5조 달러 증액하는 조항이 포함되어 있었다. 이를 통해 미국은 국채를 대량으로 발행할 수 있게 됐다.</div>
+        </div>
+
+        <!-- 정답 4 -->
+        <div class="answer-card">
+            <div class="answer-header">
+                <span class="answer-num">[문제 4]</span>
+                <span class="answer-value">정답: 비트코인 → 주식(나스닥) → 금</span>
+            </div>
+            <div class="answer-explain">유동성에 가장 민감한 비트코인이 2025년 9월부터 먼저 하락했고, 나스닥은 10월부터 지지부진해졌으며, 금은 가장 늦은 2026년 2월부터 하락했다. 이 순서는 각 자산의 유동성 민감도를 반영한다.</div>
+        </div>
+
+        <!-- 정답 5 -->
+        <div class="answer-card">
+            <div class="answer-header">
+                <span class="answer-num">[문제 5]</span>
+                <span class="answer-value">정답: 2026년 5월</span>
+            </div>
+            <div class="answer-explain">미국 재무부 공식 문서에 "5월부터 TGA 잔고를 줄이겠다"고 명시되어 있다. 4월 말까지 1조 250억 달러로 TGA를 최대치까지 쌓은 후, 5월부터 국채 발행은 줄이고 시중에 돈을 풀기 시작하는 계획이다.</div>
+        </div>
+
+        <!-- 정답 6 -->
+        <div class="answer-card">
+            <div class="answer-header">
+                <span class="answer-num">[문제 6]</span>
+                <span class="answer-value">정답: ②</span>
+            </div>
+            <div class="answer-explain">한꺼번에 뿌리면 주가가 반짝 급등 후 오버슈팅하여 9~10월까지 상승세가 유지되지 않는다. 따라서 천천히 서서히 뿌려서 중간선거(11월)까지 꾸준한 상승세를 만드는 것이 핵심 전략이다.</div>
+        </div>
+
+        <!-- 정답 7 -->
+        <div class="answer-card">
+            <div class="answer-header">
+                <span class="answer-num">[문제 7]</span>
+                <span class="answer-value">정답: ②</span>
+            </div>
+            <div class="answer-explain">미국인의 순자산 중 부동산 비중은 30%에 불과하다(한국은 75%). 대신 퇴직연금 등 주식 연동 자산이 인생을 좌우하기 때문에 미국 유권자들은 주가에 매우 민감하다. 다만 이 기억이 1~2주밖에 지속되지 않아, 선거 직전의 주가가 결정적이다.</div>
+        </div>
+
+        <!-- 정답 8 -->
+        <div class="answer-card">
+            <div class="answer-header">
+                <span class="answer-num">[문제 8]</span>
+                <span class="answer-value">정답: 아래 해설 참조</span>
+            </div>
+            <div class="answer-explain">4월 15일은 개인소득세, 법인세 등 여러 세금의 납부 기한이 겹치는 날이다. 이 시기 납세자들은 세금을 마련하기 위해 보유 주식, 국채, 예금 등을 정리하므로 시중의 유동성이 급격히 위축된다. 영상에서는 이 시점을 '마지막 보리고개'라고 표현했다.</div>
+        </div>
+
+        <!-- 정답 9 -->
+        <div class="answer-card">
+            <div class="answer-header">
+                <span class="answer-num">[문제 9]</span>
+                <span class="answer-value">정답: 아래 해설 참조</span>
+            </div>
+            <div class="answer-explain">돈을 풀면 주가는 1개월 내에 부양 효과를 보지만, 물가 상승까지는 6~18개월의 시차가 존재한다. 5월부터 돈을 뿌리면 11월 중간선거 시점까지는 약 6개월밖에 되지 않으므로, 물가 상승이 본격화되기 전에 선거를 치를 수 있다. 즉, 주가는 올라가되 물가 상승이라는 부작용은 아직 나타나지 않는 '최적의 타이밍'을 노린 것이다.</div>
+        </div>
+
+        <!-- 정답 10 -->
+        <div class="answer-card">
+            <div class="answer-header">
+                <span class="answer-num">[문제 10]</span>
+                <span class="answer-value">정답: 아래 해설 참조</span>
+            </div>
+            <div class="answer-explain">
+                <strong>[전체 흐름]</strong><br>
+                ① OBB 법안으로 부채한도 증액 → ② 대규모 국채 발행으로 시중 자금 흡수 (TGA 비축) → ③ 4월까지 실탄 최대 비축 (1조 250억$) → ④ 5월부터 TGA 방출로 시중에 서서히 살포 → ⑤ 7월 신생아 펀드 투자로 추가 부양 → ⑥ 11월 중간선거에서 주가 상승 상태로 투표<br><br>
+                <strong>[리스크 요인]</strong><br>
+                ① <strong>4년 연속 주가 상승의 함정:</strong> 역사적으로 4년차에는 모든 자산이 고르게 오르지 않고, 일부에만 집중되는 '말기 현상'이 나타난다. 전면적 랠리가 되지 않을 수 있다.<br>
+                ② <strong>예측 불가능한 외부 변수:</strong> 지정학 리스크, 예상보다 빠른 인플레이션 재점화, 금융 시스템의 신용 이벤트 등 인간이 통제할 수 없는 요인이 계획을 방해할 수 있다.
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>📺 원본 영상: 박종훈의 지식한방 | 2026년 2월 18일</p>
+        <p style="margin-top:0.3rem;">본 시험문제는 학습 목적으로 제작되었습니다.</p>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>나스닥은 미끼였다 - 베센트의 치밀한 선거전략 분석</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap');
+
+        :root {
+            --bg-primary: #0a0e1a;
+            --bg-card: #111827;
+            --bg-card-alt: #1a2236;
+            --accent-red: #ef4444;
+            --accent-blue: #3b82f6;
+            --accent-gold: #f59e0b;
+            --accent-green: #10b981;
+            --accent-purple: #8b5cf6;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border: #1e293b;
+            --gradient-fire: linear-gradient(135deg, #ef4444, #f59e0b);
+            --gradient-ice: linear-gradient(135deg, #3b82f6, #8b5cf6);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            font-size: 15px;
+            min-height: 100vh;
+        }
+
+        .hero {
+            background: linear-gradient(180deg, #1a1035 0%, #0a0e1a 100%);
+            padding: 2.5rem 1.2rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 30% 50%, rgba(239,68,68,0.08) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 50%, rgba(59,130,246,0.08) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .hero-content { position: relative; z-index: 1; }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(239,68,68,0.15);
+            color: var(--accent-red);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.8rem;
+            border: 1px solid rgba(239,68,68,0.2);
+        }
+
+        .hero h1 {
+            font-size: 1.6rem;
+            font-weight: 900;
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #f1f5f9, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero .subtitle {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .hero .source {
+            margin-top: 0.8rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .hero .source a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0 1rem 3rem;
+        }
+
+        /* Summary Box */
+        .summary-box {
+            background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(139,92,246,0.1));
+            border: 1px solid rgba(59,130,246,0.2);
+            border-radius: 12px;
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .summary-box h3 {
+            color: var(--accent-blue);
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .summary-box p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Section */
+        .section {
+            margin-top: 2rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .section-num {
+            background: var(--gradient-fire);
+            color: #fff;
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .section-num.blue { background: var(--gradient-ice); }
+        .section-num.gold { background: linear-gradient(135deg, #f59e0b, #ef4444); }
+        .section-num.green { background: linear-gradient(135deg, #10b981, #3b82f6); }
+        .section-num.purple { background: linear-gradient(135deg, #8b5cf6, #ec4899); }
+
+        .section-header h2 {
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        .content-block {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border);
+        }
+
+        .content-block p {
+            color: var(--text-secondary);
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+        }
+
+        .content-block p:last-child { margin-bottom: 0; }
+
+        /* Highlight */
+        .highlight {
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+
+        .highlight-red {
+            color: var(--accent-red);
+            font-weight: 600;
+        }
+
+        .highlight-blue {
+            color: var(--accent-blue);
+            font-weight: 600;
+        }
+
+        .highlight-green {
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        /* Key Stat */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+            margin: 1rem 0;
+        }
+
+        .stat-card {
+            background: var(--bg-card-alt);
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        .stat-card .label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-bottom: 0.3rem;
+            font-weight: 500;
+        }
+
+        .stat-card .value {
+            font-size: 1.3rem;
+            font-weight: 900;
+        }
+
+        .stat-card .sub {
+            font-size: 0.7rem;
+            margin-top: 0.2rem;
+        }
+
+        .stat-card.red .value { color: var(--accent-red); }
+        .stat-card.red .sub { color: var(--accent-red); }
+        .stat-card.blue .value { color: var(--accent-blue); }
+        .stat-card.blue .sub { color: var(--accent-blue); }
+        .stat-card.gold .value { color: var(--accent-gold); }
+        .stat-card.gold .sub { color: var(--accent-gold); }
+        .stat-card.green .value { color: var(--accent-green); }
+        .stat-card.green .sub { color: var(--accent-green); }
+
+        /* Chart Container */
+        .chart-container {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 1px solid var(--border);
+        }
+
+        .chart-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.8rem;
+            text-align: center;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            width: 100%;
+            max-height: 280px;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent-red), var(--accent-blue), var(--accent-green));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.2rem;
+            padding-left: 1rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.5rem;
+            top: 0.5rem;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent-blue);
+            border: 2px solid var(--bg-primary);
+        }
+
+        .timeline-item.red::before { background: var(--accent-red); }
+        .timeline-item.gold::before { background: var(--accent-gold); }
+        .timeline-item.green::before { background: var(--accent-green); }
+        .timeline-item.purple::before { background: var(--accent-purple); }
+
+        .timeline-date {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 0.2rem;
+        }
+
+        .timeline-item.red .timeline-date { color: var(--accent-red); }
+        .timeline-item.gold .timeline-date { color: var(--accent-gold); }
+        .timeline-item.green .timeline-date { color: var(--accent-green); }
+        .timeline-item.purple .timeline-date { color: var(--accent-purple); }
+
+        .timeline-text {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Alert Box */
+        .alert-box {
+            background: rgba(239,68,68,0.08);
+            border: 1px solid rgba(239,68,68,0.2);
+            border-left: 3px solid var(--accent-red);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .alert-box.warning {
+            background: rgba(245,158,11,0.08);
+            border-color: rgba(245,158,11,0.2);
+            border-left-color: var(--accent-gold);
+        }
+
+        .alert-box.info {
+            background: rgba(59,130,246,0.08);
+            border-color: rgba(59,130,246,0.2);
+            border-left-color: var(--accent-blue);
+        }
+
+        .alert-box.success {
+            background: rgba(16,185,129,0.08);
+            border-color: rgba(16,185,129,0.2);
+            border-left-color: var(--accent-green);
+        }
+
+        .alert-box h4 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            color: var(--accent-red);
+        }
+
+        .alert-box.warning h4 { color: var(--accent-gold); }
+        .alert-box.info h4 { color: var(--accent-blue); }
+        .alert-box.success h4 { color: var(--accent-green); }
+
+        .alert-box p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Flow Diagram */
+        .flow-diagram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+            margin: 1rem 0;
+        }
+
+        .flow-step {
+            background: var(--bg-card-alt);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0.7rem 1rem;
+            width: 100%;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .flow-step strong {
+            color: var(--text-primary);
+        }
+
+        .flow-arrow {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        /* Comparison Table */
+        .compare-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 1rem 0;
+            font-size: 0.82rem;
+        }
+
+        .compare-table th {
+            background: var(--bg-card-alt);
+            color: var(--text-primary);
+            padding: 0.7rem 0.6rem;
+            font-weight: 600;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .compare-table td {
+            background: var(--bg-card);
+            padding: 0.6rem;
+            text-align: center;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .compare-table tr:last-child td { border-bottom: none; }
+
+        /* Quote Box */
+        .quote-box {
+            background: var(--bg-card-alt);
+            border-left: 3px solid var(--accent-purple);
+            border-radius: 0 10px 10px 0;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .quote-source {
+            font-style: normal;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.4rem;
+        }
+
+        /* Divider */
+        .divider {
+            border: none;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--border), transparent);
+            margin: 1.5rem 0;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+
+        /* 키워드 태그 */
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin: 0.8rem 0;
+        }
+
+        .tag {
+            background: rgba(59,130,246,0.1);
+            color: var(--accent-blue);
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        .tag.red {
+            background: rgba(239,68,68,0.1);
+            color: var(--accent-red);
+        }
+
+        .tag.gold {
+            background: rgba(245,158,11,0.1);
+            color: var(--accent-gold);
+        }
+    </style>
+</head>
+<body>
+
+<div class="hero">
+    <div class="hero-content">
+        <div class="hero-badge">🎯 미국 증시 · 선거 전략 분석</div>
+        <h1>나스닥은 미끼였다<br>베센트의 치밀한 선거전략</h1>
+        <p class="subtitle">박종훈의 지식한방 | 2026년 2월 18일</p>
+        <p class="source">
+            출처: <a href="https://youtu.be/WQisW83YE1E?si=hNVpu9ru_St8iFTN" target="_blank">YouTube 원본 영상</a>
+        </p>
+        <div class="tag-row" style="justify-content: center; margin-top: 0.8rem;">
+            <span class="tag">TGA 잔고</span>
+            <span class="tag red">국채 발행</span>
+            <span class="tag gold">중간선거</span>
+            <span class="tag">유동성</span>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- 핵심 요약 -->
+    <div class="summary-box">
+        <h3>📌 핵심 요약 (3줄 정리)</h3>
+        <p>
+            ① 베센트 재무장관은 <strong style="color:#f59e0b">2026년 11월 중간선거</strong>를 겨냥해, 현재 대규모 국채 발행으로 실탄(TGA 잔고)을 비축 중이다.<br>
+            ② 이 과정에서 시중 유동성이 흡수되어 비트코인(-45%), 나스닥(-6%), 금(-9%)이 순차적으로 하락했다.<br>
+            ③ <strong style="color:#10b981">5월부터 본격 살포</strong> 계획이 재무부 공식 문서에 명시되어 있으며, 7월에는 신생아 펀드 투자까지 예정되어 있다.
+        </p>
+    </div>
+
+    <!-- 섹션 1: 자산 시장 현황 -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-num">1</div>
+            <h2>미국 자산시장 현황 — 순차적 하락</h2>
+        </div>
+
+        <div class="content-block">
+            <p>2025년 하반기부터 미국 주요 자산이 <span class="highlight-red">순서대로 하락</span>하는 패턴이 나타나고 있다. 유동성에 가장 민감한 비트코인이 먼저 꺾이고, 나스닥이 뒤따랐으며, 마지막으로 금까지 하락세에 합류했다.</p>
+        </div>
+
+        <div class="stat-grid">
+            <div class="stat-card red">
+                <div class="label">비트코인</div>
+                <div class="value">-45%</div>
+                <div class="sub">12.3만 → 6.76만 달러</div>
+            </div>
+            <div class="stat-card red">
+                <div class="label">나스닥</div>
+                <div class="value">-6%</div>
+                <div class="sub">24,000 → 22,000대</div>
+            </div>
+            <div class="stat-card gold">
+                <div class="label">금 현물</div>
+                <div class="value">-9%</div>
+                <div class="sub">$5,400 → $4,918</div>
+            </div>
+            <div class="stat-card blue">
+                <div class="label">하락 시작 순서</div>
+                <div class="value" style="font-size:0.9rem;">BTC→주식→금</div>
+                <div class="sub">9월 → 10월 → 2월</div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <div class="chart-title">📉 자산별 하락 시점 및 규모</div>
+            <div class="chart-wrapper">
+                <canvas id="assetDeclineChart"></canvas>
+            </div>
+        </div>
+
+        <div class="alert-box info">
+            <h4>💡 핵심 포인트</h4>
+            <p>비트코인은 나스닥보다 항상 <strong>2주~1개월 먼저</strong> 움직이는 선행지표 역할을 한다. 이번에도 비트코인(9월) → 나스닥(10월) → 금(2월) 순서로 하락이 진행됐다.</p>
+        </div>
+    </div>
+
+    <!-- 섹션 2: OBB 법안과 국채 발행 -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-num blue">2</div>
+            <h2>OBB 법안 — 국채 대량 발행의 시작</h2>
+        </div>
+
+        <div class="content-block">
+            <p>2025년 7월에 통과된 <span class="highlight">OBB(One Big Beautiful) 법안</span>은 대규모 감세를 포함하고 있지만, 동시에 <span class="highlight-red">부채한도를 5조 달러 증액</span>하는 조항이 숨어 있었다. 이 법안 통과 이후 미국은 국채를 대량 발행할 수 있게 됐다.</p>
+        </div>
+
+        <div class="flow-diagram">
+            <div class="flow-step"><strong>OBB 법안 통과</strong> (2025년 7월 4일)</div>
+            <div class="flow-arrow">▼</div>
+            <div class="flow-step">부채한도 <strong style="color:#ef4444">5조 달러</strong> 증액</div>
+            <div class="flow-arrow">▼</div>
+            <div class="flow-step">국채 대량 발행 가능 → <strong>7~9월 1조 달러</strong> 적자 국채 발행</div>
+            <div class="flow-arrow">▼</div>
+            <div class="flow-step">시중 자금 <strong style="color:#ef4444">"진공청소기"</strong>처럼 흡수</div>
+            <div class="flow-arrow">▼</div>
+            <div class="flow-step">자산시장 유동성 고갈 → <strong>순차적 자산 가격 하락</strong></div>
+        </div>
+
+        <div class="content-block">
+            <p><strong>TGA(Treasury General Account) 잔고</strong>란 미국 재무부가 보유한 현금이다. 만성 적자인 미국에서 TGA가 늘어난다는 것은 곧 국채 발행이 대폭 증가했다는 의미다.</p>
+        </div>
+
+        <div class="stat-grid">
+            <div class="stat-card blue">
+                <div class="label">TGA 잔고 (법안 직전)</div>
+                <div class="value">3,000억$</div>
+                <div class="sub">2025년 7월</div>
+            </div>
+            <div class="stat-card gold">
+                <div class="label">TGA 잔고 (10월)</div>
+                <div class="value">9,800억$</div>
+                <div class="sub">+6,800억$ 증가</div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <div class="chart-title">📊 TGA 잔고 변화 추이 (2025.7 ~ 2026.6 전망)</div>
+            <div class="chart-wrapper">
+                <canvas id="tgaChart"></canvas>
+            </div>
+        </div>
+
+        <div class="alert-box">
+            <h4>⚠️ 규모 비교</h4>
+            <p>2026년 1~2월 한 달간 국채 발행으로 흡수된 자금은 약 <strong>4,000억 달러</strong>. 이는 2023년 실리콘밸리은행(SVB) 사태 때 미국 재무부가 시장 안정을 위해 긴급 투입한 금액과 동일한 수준이다.</p>
+        </div>
+    </div>
+
+    <!-- 섹션 3: 유동성 흡수 메커니즘 -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-num gold">3</div>
+            <h2>유동성 흡수 메커니즘</h2>
+        </div>
+
+        <div class="content-block">
+            <p>국채 발행이 시장에 미치는 영향을 간단히 비유하면 다음과 같다.</p>
+            <p>시장에 총 100조 달러의 자금이 있다고 할 때, 미국 재무부가 10조를 빌려가다 20조를 빌려가면 <span class="highlight-red">돈에 대한 수요가 급증</span>한다. 수요가 늘면 돈의 가격(금리)은 올라가고, 투자에 쓸 수 있는 자금은 줄어든다.</p>
+        </div>
+
+        <table class="compare-table">
+            <tr>
+                <th>구분</th>
+                <th>기간</th>
+                <th>영향</th>
+            </tr>
+            <tr>
+                <td><strong>국채 대량 발행기</strong></td>
+                <td>2025.7 ~ 2025.10</td>
+                <td style="color:var(--accent-red)">시중 자금 흡수<br>→ 유동성 고갈</td>
+            </tr>
+            <tr>
+                <td><strong>세금 환급 시즌</strong></td>
+                <td>2026.1 ~ 2026.2</td>
+                <td style="color:var(--accent-gold)">환급금 3,000억$ 지급<br>BUT 국채 발행 4,000억$ 추가</td>
+            </tr>
+            <tr>
+                <td><strong>세금 납부일</strong></td>
+                <td>2026.4.15</td>
+                <td style="color:var(--accent-red)">3중 세금 폭탄<br>→ 추가 유동성 위축</td>
+            </tr>
+            <tr>
+                <td><strong>본격 살포기</strong></td>
+                <td>2026.5~</td>
+                <td style="color:var(--accent-green)">TGA 방출<br>→ 유동성 대량 공급</td>
+            </tr>
+        </table>
+
+        <div class="content-block">
+            <p><strong>금값이 마지막까지 버틴 이유:</strong> 금은 유동성 변화에 비트코인이나 주식보다 느리게 반응한다. 그러나 2026년 초 TGA 잔고가 유지된 채 추가 국채 발행이 이루어지면서 결국 2월부터 금값도 하락세에 합류했다.</p>
+        </div>
+    </div>
+
+    <!-- 섹션 4: 베센트의 선거 전략 -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-num green">4</div>
+            <h2>베센트의 선거 전략 — 왜 지금 떨어뜨리나?</h2>
+        </div>
+
+        <div class="content-block">
+            <p>트럼프 대통령에게 <span class="highlight">가장 중요한 주가는 10월~11월 초의 주가</span>다. 미국 유권자들의 경제 기억은 <span class="highlight-red">1~2주</span>밖에 지속되지 않기 때문이다.</p>
+            <p>만약 지금(2월) 주가를 올려놓으면 11월까지 유지가 불가능하고, 9~10월에 조정이 오면 여당에게 불리해진다. 따라서 <strong>지금은 실탄을 비축하고, 선거 직전에 살포하는 것이 최적의 전략</strong>이다.</p>
+        </div>
+
+        <div class="alert-box success">
+            <h4>🎯 베센트 전략의 핵심 로직</h4>
+            <p><strong>"지금 허리띠를 졸라매고, 5월부터 서서히 풀어 11월까지 상승세를 유지한다"</strong></p>
+        </div>
+
+        <div class="content-block">
+            <p><strong>왜 한꺼번에 안 뿌리나?</strong></p>
+            <p>한꺼번에 뿌리면 주가가 <span class="highlight-red">반짝 상승 후 오버슈팅</span>하고, 9~10월까지 상승세가 유지되지 않는다. 따라서 <span class="highlight-green">천천히 서서히</span> 뿌려서 중간선거까지 꾸준한 상승세를 만들겠다는 것이 공식 계획이다.</p>
+        </div>
+
+        <table class="compare-table">
+            <tr>
+                <th>비교 항목</th>
+                <th>한국 🇰🇷</th>
+                <th>미국 🇺🇸</th>
+            </tr>
+            <tr>
+                <td>순자산 중 부동산 비중</td>
+                <td style="color:var(--accent-gold)"><strong>75%</strong></td>
+                <td style="color:var(--accent-blue)"><strong>30%</strong></td>
+            </tr>
+            <tr>
+                <td>선거에 핵심적인 자산</td>
+                <td>부동산 가격</td>
+                <td>주가 (퇴직연금 등)</td>
+            </tr>
+            <tr>
+                <td>유권자 기억 지속</td>
+                <td>-</td>
+                <td style="color:var(--accent-red)">1~2주</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- 섹션 5: 재무부 공식 계획 -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-num purple">5</div>
+            <h2>재무부 공식 계획 — 타임라인</h2>
+        </div>
+
+        <div class="quote-box">
+            "5월부터 TGA 잔고를 줄이겠다" — 즉, 국채 발행은 줄이고 돈을 뿌리겠다.
+            <div class="quote-source">📄 미국 재무부 공식 문서</div>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item red">
+                <div class="timeline-date">~ 2026년 4월 말</div>
+                <div class="timeline-text">TGA 잔고를 <strong>1조 250억 달러</strong>까지 증액 (실탄 최대 비축)</div>
+            </div>
+            <div class="timeline-item gold">
+                <div class="timeline-date">2026년 4월 15일</div>
+                <div class="timeline-text"><strong>3중 세금 납부일</strong> (개인소득세, 법인세 등) → 유동성 최저점 (보리고개)</div>
+            </div>
+            <div class="timeline-item green">
+                <div class="timeline-date">2026년 5월 ~</div>
+                <div class="timeline-text"><strong>본격 살포 시작.</strong> 국채 발행 최소화 + TGA 방출. 6월 말까지 TGA를 9,000억 달러로 축소 계획</div>
+            </div>
+            <div class="timeline-item purple">
+                <div class="timeline-date">2026년 7월 ~</div>
+                <div class="timeline-text"><strong>신생아 펀드 투자 시작.</strong> 2025.1~2028.12 출생아 1인당 1,000달러를 인덱스펀드에 투자 → 주가 부양 스테로이드</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2026년 11월</div>
+                <div class="timeline-text"><strong>중간선거.</strong> 주가 상승 상태에서 투표 → 여당(공화당) 유리</div>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <div class="chart-title">🗓️ TGA 잔고 계획 vs 시장 유동성 전망</div>
+            <div class="chart-wrapper">
+                <canvas id="planChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- 섹션 6: 돈 풀기의 효과와 리스크 -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-num">6</div>
+            <h2>돈 풀기의 효과 및 시차</h2>
+        </div>
+
+        <div class="content-block">
+            <p>TGA 잔고가 시중에 풀릴 때 자산별 반응 속도는 다르다:</p>
+        </div>
+
+        <table class="compare-table">
+            <tr>
+                <th>자산</th>
+                <th>반응 속도</th>
+                <th>특징</th>
+            </tr>
+            <tr>
+                <td><strong>비트코인</strong></td>
+                <td style="color:var(--accent-green)">즉각 반응</td>
+                <td>유동성 선행지표</td>
+            </tr>
+            <tr>
+                <td><strong>주식(나스닥)</strong></td>
+                <td style="color:var(--accent-blue)">1개월 내</td>
+                <td>부양 효과 체감</td>
+            </tr>
+            <tr>
+                <td><strong>물가 상승</strong></td>
+                <td style="color:var(--accent-red)">6~18개월</td>
+                <td>최대 위협 요인</td>
+            </tr>
+        </table>
+
+        <div class="alert-box warning">
+            <h4>⏰ 물가 시차가 핵심</h4>
+            <p>5월에 돈을 풀기 시작하면, 물가 상승은 11월(선거)까지 본격화되지 않을 가능성이 높다 (6~18개월 시차). 이것이 <strong>5월 살포 시작</strong>의 핵심 근거다.</p>
+        </div>
+    </div>
+
+    <!-- 섹션 7: 보리고개와 단기 전망 -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-num gold">7</div>
+            <h2>단기 전망 — 마지막 보리고개</h2>
+        </div>
+
+        <div class="content-block">
+            <p><strong>2~3월 중순:</strong> 세금 환급금이 시중에 풀리면서 상대적으로 양호. 미국인들의 투자 열기가 높아 환급금이 투자로 유입될 가능성.</p>
+            <p><strong>3월 하순 ~ 4월 15일:</strong> <span class="highlight-red">최대 위험 구간.</span> 세금 납부를 위해 주식·국채·예금 정리가 시작되면서 유동성이 추가 위축. 동시에 재무부는 계속 국채 발행으로 자금을 흡수.</p>
+            <p><strong>4월 15일 이후:</strong> 세금 납부 완료 + 5월부터 TGA 방출 시작으로 유동성 반전 기대.</p>
+        </div>
+
+        <div class="chart-container">
+            <div class="chart-title">📈 유동성 환경 전망 (2026년 2~11월)</div>
+            <div class="chart-wrapper">
+                <canvas id="liquidityChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- 섹션 8: 주의사항 -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-num">8</div>
+            <h2>리스크 요인 및 주의사항</h2>
+        </div>
+
+        <div class="alert-box warning">
+            <h4>🔸 4년 연속 주가 상승의 함정</h4>
+            <p>미국 증시는 현재 <strong>4년째 상승</strong> 중이며, 이는 역사적으로 매우 드문 사례다. 4년차 상승기에는 <span style="color:var(--accent-red)">모든 자산이 고르게 오르는 랠리가 아니라, 일부 자산에만 집중되는 현상</span>이 나타난다.</p>
+        </div>
+
+        <div class="alert-box">
+            <h4>🔸 인간이 하는 일에는 항상 하자가 있다</h4>
+            <p>베센트 재무장관이 뛰어난 지략가인 것은 맞지만, 100% 성공을 보장할 수는 없다. 예상치 못한 외부 변수(지정학 리스크, 인플레이션 재점화, 신용 이벤트 등)가 계획을 방해할 가능성은 언제나 존재한다.</p>
+        </div>
+
+        <div class="alert-box info">
+            <h4>🔸 정치적 증시 부양의 글로벌 확산</h4>
+            <p>미국이 시작한 선거전 증시 부양 전략을 유럽, 일본 등도 모방하고 있다. 이는 시장의 <strong>변동성을 키우는 요인</strong>이며, 장기적으로 큰 부담으로 작용할 수 있다.</p>
+        </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="footer">
+        <p>📺 원본 영상: <a href="https://youtu.be/WQisW83YE1E?si=hNVpu9ru_St8iFTN" target="_blank">박종훈의 지식한방</a></p>
+        <p style="margin-top:0.4rem;">본 문서는 영상 내용을 정리·분석한 것으로, 투자 권유가 아닙니다.</p>
+    </div>
+</div>
+
+<script>
+// Chart.js 공통 설정
+Chart.defaults.color = '#94a3b8';
+Chart.defaults.font.family = "'Noto Sans KR', sans-serif";
+Chart.defaults.font.size = 11;
+
+// 1. 자산별 하락 차트
+new Chart(document.getElementById('assetDeclineChart'), {
+    type: 'bar',
+    data: {
+        labels: ['비트코인\n(25년 9월~)', '나스닥\n(25년 10월~)', '금 현물\n(26년 2월~)'],
+        datasets: [{
+            label: '고점 대비 하락률 (%)',
+            data: [-45, -6, -9],
+            backgroundColor: ['#ef444499', '#3b82f699', '#f59e0b99'],
+            borderColor: ['#ef4444', '#3b82f6', '#f59e0b'],
+            borderWidth: 2,
+            borderRadius: 6,
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        aspectRatio: 1.6,
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                callbacks: {
+                    label: ctx => `${ctx.parsed.y}%`
+                }
+            }
+        },
+        scales: {
+            y: {
+                grid: { color: '#1e293b' },
+                ticks: { callback: v => v + '%' },
+                max: 0,
+                min: -50
+            },
+            x: {
+                grid: { display: false }
+            }
+        }
+    }
+});
+
+// 2. TGA 잔고 변화 차트
+new Chart(document.getElementById('tgaChart'), {
+    type: 'line',
+    data: {
+        labels: ['25.7', '25.8', '25.9', '25.10', '25.11', '25.12', '26.1', '26.2', '26.3', '26.4(E)', '26.5(E)', '26.6(E)'],
+        datasets: [{
+            label: 'TGA 잔고 (억 달러)',
+            data: [3000, 5500, 8000, 9800, 9500, 9200, 8000, 9000, 9500, 10250, 9800, 9000],
+            borderColor: '#3b82f6',
+            backgroundColor: 'rgba(59,130,246,0.1)',
+            fill: true,
+            tension: 0.3,
+            pointRadius: 4,
+            pointBackgroundColor: '#3b82f6',
+            borderWidth: 2.5,
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        aspectRatio: 1.5,
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                callbacks: {
+                    label: ctx => `$${ctx.parsed.y.toLocaleString()}억`
+                }
+            }
+        },
+        scales: {
+            y: {
+                grid: { color: '#1e293b' },
+                ticks: { callback: v => '$' + (v/1000).toFixed(1) + '조' },
+                min: 0,
+            },
+            x: {
+                grid: { display: false }
+            }
+        }
+    }
+});
+
+// 3. 계획 차트 (TGA vs 유동성)
+new Chart(document.getElementById('planChart'), {
+    type: 'line',
+    data: {
+        labels: ['26.1', '26.2', '26.3', '26.4', '26.5', '26.6', '26.7', '26.8', '26.9', '26.10', '26.11'],
+        datasets: [{
+            label: 'TGA 잔고 (억$)',
+            data: [8000, 9000, 9500, 10250, 9800, 9000, 8200, 7500, 7000, 6500, 6000],
+            borderColor: '#ef4444',
+            backgroundColor: 'rgba(239,68,68,0.05)',
+            fill: true,
+            tension: 0.3,
+            borderWidth: 2.5,
+            pointRadius: 3,
+            yAxisID: 'y',
+        },{
+            label: '시중 유동성 (전망)',
+            data: [40, 35, 38, 30, 45, 55, 65, 72, 78, 82, 85],
+            borderColor: '#10b981',
+            backgroundColor: 'rgba(16,185,129,0.05)',
+            fill: true,
+            tension: 0.3,
+            borderWidth: 2.5,
+            pointRadius: 3,
+            borderDash: [5, 3],
+            yAxisID: 'y1',
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        aspectRatio: 1.5,
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: { boxWidth: 12, padding: 15 }
+            }
+        },
+        scales: {
+            y: {
+                position: 'left',
+                grid: { color: '#1e293b' },
+                ticks: { callback: v => '$' + (v/1000).toFixed(1) + '조', color: '#ef4444' },
+                min: 0,
+            },
+            y1: {
+                position: 'right',
+                grid: { display: false },
+                ticks: { callback: v => v, color: '#10b981' },
+                min: 0,
+                max: 100,
+            },
+            x: {
+                grid: { display: false }
+            }
+        }
+    }
+});
+
+// 4. 유동성 환경 전망
+new Chart(document.getElementById('liquidityChart'), {
+    type: 'line',
+    data: {
+        labels: ['2월', '3월초', '3월말', '4/15', '5월', '6월', '7월', '8월', '9월', '10월', '11월'],
+        datasets: [{
+            label: '유동성 수준 (상대적)',
+            data: [45, 50, 35, 25, 45, 60, 75, 80, 85, 88, 90],
+            borderColor: '#8b5cf6',
+            backgroundColor: (ctx) => {
+                const chart = ctx.chart;
+                const {ctx: c, chartArea} = chart;
+                if (!chartArea) return null;
+                const gradient = c.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+                gradient.addColorStop(0, 'rgba(139,92,246,0)');
+                gradient.addColorStop(1, 'rgba(139,92,246,0.2)');
+                return gradient;
+            },
+            fill: true,
+            tension: 0.4,
+            borderWidth: 2.5,
+            pointRadius: 5,
+            pointBackgroundColor: (ctx) => {
+                return ctx.dataIndex === 3 ? '#ef4444' : ctx.dataIndex >= 4 ? '#10b981' : '#8b5cf6';
+            },
+            pointBorderColor: (ctx) => {
+                return ctx.dataIndex === 3 ? '#ef4444' : ctx.dataIndex >= 4 ? '#10b981' : '#8b5cf6';
+            },
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        aspectRatio: 1.5,
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                callbacks: {
+                    afterLabel: (ctx) => {
+                        const labels = {
+                            0: '세금환급 효과',
+                            1: '환급금 유입 지속',
+                            2: '세금납부 준비 시작',
+                            3: '⚠️ 3중 세금 폭탄 (보리고개)',
+                            4: '🟢 TGA 방출 시작',
+                            5: '유동성 개선',
+                            6: '🟢 신생아 펀드 투자 시작',
+                            7: '유동성 풍부',
+                            8: '유동성 풍부',
+                            9: '선거 직전 최적 환경',
+                            10: '🗳️ 중간선거'
+                        };
+                        return labels[ctx.dataIndex] || '';
+                    }
+                }
+            }
+        },
+        scales: {
+            y: {
+                grid: { color: '#1e293b' },
+                ticks: { display: false },
+                min: 0,
+                max: 100,
+            },
+            x: {
+                grid: { display: false }
+            }
+        }
+    }
+});
+</script>
+
+</body>
+</html>
