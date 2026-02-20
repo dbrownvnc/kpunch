@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>시험문제 - 트럼프 이란 공격 분석</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0f1118;
+  --surface: #1a1d2b;
+  --surface2: #232738;
+  --accent: #e63946;
+  --accent2: #f4a261;
+  --blue: #4895ef;
+  --green: #2ec4b6;
+  --text: #e8e8ec;
+  --text-dim: #9a9bb0;
+  --border: #2d3148;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.8;
+  font-size: 15px;
+}
+.container {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 16px 60px;
+}
+.header {
+  background: linear-gradient(135deg, #0a1a2a 0%, #1a1040 50%, #0f1118 100%);
+  border-bottom: 2px solid var(--blue);
+  padding: 28px 16px 24px;
+  margin-bottom: 24px;
+}
+.header-tag {
+  display: inline-block;
+  background: var(--blue);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 3px;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+.header h1 {
+  font-size: 20px;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+.header-meta {
+  font-size: 12px;
+  color: var(--text-dim);
+}
+.section-divider {
+  text-align: center;
+  padding: 20px 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent2);
+  letter-spacing: 2px;
+  border-top: 2px solid var(--border);
+  border-bottom: 2px solid var(--border);
+  margin: 24px 0;
+  background: var(--surface);
+}
+/* Question card */
+.q-card {
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 18px 16px;
+  margin-bottom: 14px;
+  border: 1px solid var(--border);
+}
+.q-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.q-num {
+  background: var(--blue);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 900;
+  min-width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.q-diff {
+  font-size: 12px;
+  color: var(--accent2);
+  font-weight: 500;
+}
+.q-type {
+  font-size: 11px;
+  background: var(--surface2);
+  color: var(--text-dim);
+  padding: 2px 8px;
+  border-radius: 3px;
+  margin-left: auto;
+}
+.q-text {
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 12px;
+  line-height: 1.7;
+}
+.q-options {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.q-opt {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 14px;
+  cursor: default;
+}
+.q-blank {
+  display: inline-block;
+  border-bottom: 2px solid var(--accent2);
+  min-width: 100px;
+  margin: 0 4px;
+  color: transparent;
+}
+/* Answer card */
+.a-card {
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+}
+.a-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.a-num {
+  background: var(--green);
+  color: #000;
+  font-size: 12px;
+  font-weight: 900;
+  min-width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.a-answer {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--green);
+}
+.a-explain {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.7;
+  padding-left: 36px;
+}
+.footer {
+  text-align: center;
+  padding: 24px 16px;
+  font-size: 11px;
+  color: var(--text-dim);
+  border-top: 1px solid var(--border);
+  margin-top: 20px;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <span class="header-tag">📝 시험문제</span>
+  <h1>트럼프, 대규모 이란 공격 임박?<br>미국 언론 보도의 진실</h1>
+  <div class="header-meta">총 10문제 · 박종훈의 지식한방 (2026.02.20) 기반</div>
+</div>
+
+<div class="container">
+
+<!-- ━━━━━━━━ 문제지 ━━━━━━━━ -->
+<div class="section-divider">📋 시험문제 (총 10문제)</div>
+
+<!-- Q1 -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">1</div>
+    <div class="q-diff">⭐ 쉬움</div>
+    <div class="q-type">객관식</div>
+  </div>
+  <div class="q-text">악시오스(Axios) 보도에서 백악관 참모를 인용해 언급된 이란 전쟁 확률은 몇 %인가?</div>
+  <div class="q-options">
+    <div class="q-opt">① 50%</div>
+    <div class="q-opt">② 70%</div>
+    <div class="q-opt">③ 90%</div>
+    <div class="q-opt">④ 100%</div>
+  </div>
+</div>
+
+<!-- Q2 -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">2</div>
+    <div class="q-diff">⭐ 쉬움</div>
+    <div class="q-type">OX 문제</div>
+  </div>
+  <div class="q-text">2025년 6월 '12일 전쟁' 당시 미국은 사전에 애드벌룬을 통해 여론을 시험한 뒤 이란을 공습했다. (O / X)</div>
+</div>
+
+<!-- Q3 -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">3</div>
+    <div class="q-diff">⭐⭐ 보통</div>
+    <div class="q-type">객관식</div>
+  </div>
+  <div class="q-text">이란의 미사일 동시 발사 가능 최대 수량이 제한되는 핵심 이유는?</div>
+  <div class="q-options">
+    <div class="q-opt">① 미사일 자체의 수량 부족</div>
+    <div class="q-opt">② 미사일 발사대(런처)의 수가 부족</div>
+    <div class="q-opt">③ 연료 공급 체계의 한계</div>
+    <div class="q-opt">④ 미국의 전자전 방해</div>
+  </div>
+</div>
+
+<!-- Q4 -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">4</div>
+    <div class="q-diff">⭐⭐ 보통</div>
+    <div class="q-type">단답형</div>
+  </div>
+  <div class="q-text">이란이 핵 보유 없이 사용할 수 있는 마지막 카드로 언급된 전략의 이름은? (영문 약어와 한글 명칭 모두 기술)</div>
+</div>
+
+<!-- Q5 -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">5</div>
+    <div class="q-diff">⭐⭐ 보통</div>
+    <div class="q-type">빈칸채우기</div>
+  </div>
+  <div class="q-text">미국은 현재 항모전단을 명목상 11개 보유하고 있지만, 수리 중인 <span class="q-blank">&nbsp;</span>개를 제외하면 가용 항모전단은 <span class="q-blank">&nbsp;</span>개에 불과하며, 이 중 <span class="q-blank">&nbsp;</span>개를 중동에 배치했다.</div>
+</div>
+
+<!-- Q6 -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">6</div>
+    <div class="q-diff">⭐ 쉬움</div>
+    <div class="q-type">객관식</div>
+  </div>
+  <div class="q-text">네타냐후 이스라엘 총리가 전쟁을 서두르는 정치적 이유와 관련된 날짜는?</div>
+  <div class="q-options">
+    <div class="q-opt">① 2월 28일 — 연립정부 해산 기한</div>
+    <div class="q-opt">② 3월 19일 — 라마단 종료일</div>
+    <div class="q-opt">③ 3월 31일 — 예산안 통과 기한</div>
+    <div class="q-opt">④ 4월 15일 — 총선 예정일</div>
+  </div>
+</div>
+
+<!-- Q7 -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">7</div>
+    <div class="q-diff">⭐⭐ 보통</div>
+    <div class="q-type">객관식</div>
+  </div>
+  <div class="q-text">이란이 호르무즈 해협을 마비시킬 수 있는 구체적 방법으로 언급된 것은?</div>
+  <div class="q-options">
+    <div class="q-opt">① 해군 함정을 이용한 해상 봉쇄</div>
+    <div class="q-opt">② 기뢰(해상 지뢰) 대량 살포</div>
+    <div class="q-opt">③ 잠수함을 이용한 해저 케이블 절단</div>
+    <div class="q-opt">④ 대함 미사일로 유조선 격침</div>
+  </div>
+</div>
+
+<!-- Q8 -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">8</div>
+    <div class="q-diff">⭐⭐ 보통</div>
+    <div class="q-type">OX 문제</div>
+  </div>
+  <div class="q-text">악시오스 보도 당일, 미국 나스닥 지수는 전쟁 우려로 인해 하락했다. (O / X)</div>
+</div>
+
+<!-- Q9 -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">9</div>
+    <div class="q-diff">⭐⭐⭐ 어려움</div>
+    <div class="q-type">서술형</div>
+  </div>
+  <div class="q-text">트럼프 대통령이 이란을 공격하지 못하게 되는 3가지 조건(시나리오)을 설명하시오.</div>
+</div>
+
+<!-- Q10 -->
+<div class="q-card">
+  <div class="q-header">
+    <div class="q-num">10</div>
+    <div class="q-diff">⭐⭐⭐ 어려움</div>
+    <div class="q-type">서술형</div>
+  </div>
+  <div class="q-text">'베이스 시나리오'와 '더티워(dirty war) 시나리오'의 차이점을 금융시장 영향 관점에서 비교·설명하시오.</div>
+</div>
+
+<!-- ━━━━━━━━ 정답지 ━━━━━━━━ -->
+<div class="section-divider">📝 정답 및 해설</div>
+
+<!-- A1 -->
+<div class="a-card">
+  <div class="a-header">
+    <div class="a-num">1</div>
+    <div class="a-answer">정답: ③ 90%</div>
+  </div>
+  <div class="a-explain">악시오스는 백악관 참모를 인용하여 "향후 물리적 군사 행동을 보게 될 가능성이 90%"라고 보도했다. 이는 시장에 큰 반향을 일으켰다.</div>
+</div>
+
+<!-- A2 -->
+<div class="a-card">
+  <div class="a-header">
+    <div class="a-num">2</div>
+    <div class="a-answer">정답: X</div>
+  </div>
+  <div class="a-explain">2025년 6월 '12일 전쟁' 당시 트럼프는 애드벌룬 없이 비밀리에 기습 공습을 진행했다. 반면 이번에는 전면전 가능성이 크기 때문에 사전에 애드벌룬을 띄워 여론 반응을 살피고 있다.</div>
+</div>
+
+<!-- A3 -->
+<div class="a-card">
+  <div class="a-header">
+    <div class="a-num">3</div>
+    <div class="a-answer">정답: ② 미사일 발사대(런처)의 수가 부족</div>
+  </div>
+  <div class="a-explain">이란은 미사일 약 1,800기를 보유하고 있으나 발사대가 150~200대에 불과해 동시 발사가 최대 150~200발로 제한된다. 또한 발사 후 위치가 노출되어 재장전 전 파괴될 위험이 크다.</div>
+</div>
+
+<!-- A4 -->
+<div class="a-card">
+  <div class="a-header">
+    <div class="a-num">4</div>
+    <div class="a-answer">정답: MAD (경제적 상호확증파괴)</div>
+  </div>
+  <div class="a-explain">MAD(Mutual Assured Destruction)는 원래 핵 보유국 간 '상호확증파괴' 전략이나, 이란은 핵이 없으므로 '경제적 MAD'를 사용한다. 아랍 석유시설 파괴 또는 호르무즈 해협 마비로 적국 경제를 붕괴시키겠다는 전략이다.</div>
+</div>
+
+<!-- A5 -->
+<div class="a-card">
+  <div class="a-header">
+    <div class="a-num">5</div>
+    <div class="a-answer">정답: 6개 / 5개 / 2개</div>
+  </div>
+  <div class="a-explain">미국은 명목상 11개 항모전단을 보유하나 6개가 수리 중이어서 가용은 5개뿐. 이 중 2개를 중동에 배치한 것은 40%에 달하는 전력 집중으로, 유럽·중국 방면 전력을 감수한 전쟁 준비 신호로 해석된다.</div>
+</div>
+
+<!-- A6 -->
+<div class="a-card">
+  <div class="a-header">
+    <div class="a-num">6</div>
+    <div class="a-answer">정답: ③ 3월 31일 — 예산안 통과 기한</div>
+  </div>
+  <div class="a-explain">이스라엘법상 예산안 미통과 시 총리가 자동 퇴임해야 한다. 네타냐후는 퇴임 시 재판·수감 위험에 처하므로, 3월 31일 전에 전쟁을 개시해 '전쟁 총리'로서 지위를 유지하려 한다.</div>
+</div>
+
+<!-- A7 -->
+<div class="a-card">
+  <div class="a-header">
+    <div class="a-num">7</div>
+    <div class="a-answer">정답: ② 기뢰(해상 지뢰) 대량 살포</div>
+  </div>
+  <div class="a-explain">이란은 해군력으로 호르무즈 해협을 통제할 능력은 없지만, 대량의 기뢰를 보유하고 있다. 기뢰를 해협에 살포하면 제거에 수개월이 소요되어 유가 급등을 유발할 수 있다.</div>
+</div>
+
+<!-- A8 -->
+<div class="a-card">
+  <div class="a-header">
+    <div class="a-num">8</div>
+    <div class="a-answer">정답: X</div>
+  </div>
+  <div class="a-explain">악시오스 보도 당일 나스닥 지수는 오히려 상승했다. 월가에서는 작년 핀셋 타격 때도 주가가 올랐던 학습 효과로 인해 전쟁 = 주가 상승이라는 인식이 지배적이었다. 이것이 트럼프에게 "국내 여론 문제 없음"이라는 신호를 보냈을 가능성이 크다.</div>
+</div>
+
+<!-- A9 -->
+<div class="a-card">
+  <div class="a-header">
+    <div class="a-num">9</div>
+    <div class="a-answer">정답: (서술형)</div>
+  </div>
+  <div class="a-explain">
+    <strong>① 월가 스마트머니의 경고:</strong> 대규모 주가 폭락 등 금융시장이 극심한 부정적 반응을 보일 경우.<br><br>
+    <strong>② 이란의 전격적 백기투항:</strong> 이란이 핵 포기와 체제 양보를 받아들이는 경우. 다만 이는 지도부의 생존 포기를 의미하므로 가능성 낮음.<br><br>
+    <strong>③ 경제적 MAD 위협 제거 실패:</strong> 이란의 미사일 발사대(150~200대)와 기뢰 창고 위치를 정확히 파악하지 못해, 첫 공습에서 이란의 반격 능력을 무력화할 자신감이 부족한 경우.
+  </div>
+</div>
+
+<!-- A10 -->
+<div class="a-card">
+  <div class="a-header">
+    <div class="a-num">10</div>
+    <div class="a-answer">정답: (서술형)</div>
+  </div>
+  <div class="a-explain">
+    <strong>베이스 시나리오 (미국 일방적 승리):</strong> 첫 공습에서 이란 발사대 대부분 파괴 → 이란 반격 불가 → 체제 붕괴 또는 핵 능력 완전 파괴. 금융시장에는 작년 패턴처럼 긍정적 영향(주가 상승, 유가 안정)을 미침.<br><br>
+    <strong>더티워 시나리오 (비대칭전 장기화):</strong> 이란 혁명수비대·프록시 세력(헤즈볼라, 후티 등)이 민간인 복장으로 중동 곳곳에서 게릴라전·테러를 수행. 석유시설·미군기지 타격이 계속됨. 금융시장에는 부정적 영향(유가 급등, 증시 변동성 확대, 안전자산 수요 증가). 이라크 전쟁·아프간 전쟁의 장기화 사례와 유사한 패턴이 될 수 있음.
+  </div>
+</div>
+
+<div class="footer">
+  📺 원본: 박종훈의 지식한방 (2026.02.20)<br>
+  본 시험문제는 YouTube 콘텐츠 분석 내용을 기반으로 작성되었습니다.
+</div>
+
+</div>
+</body>
+</html>
