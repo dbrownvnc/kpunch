@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>관세 위법판결, 한국에 득인가 실인가?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <style>
+        :root {
+            --bg-primary: #0a0f1a;
+            --bg-card: #111827;
+            --bg-card-alt: #1a2332;
+            --accent-red: #ef4444;
+            --accent-orange: #f97316;
+            --accent-amber: #f59e0b;
+            --accent-green: #22c55e;
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border: #1e293b;
+            --glow-red: rgba(239, 68, 68, 0.15);
+            --glow-blue: rgba(59, 130, 246, 0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.75;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            padding: 48px 0 36px;
+            text-align: center;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 50% 80%, rgba(239,68,68,0.08) 0%, transparent 60%),
+                        radial-gradient(ellipse at 30% 20%, rgba(59,130,246,0.06) 0%, transparent 50%);
+            z-index: 0;
+        }
+        .hero-content { position: relative; z-index: 1; }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(239,68,68,0.1);
+            border: 1px solid rgba(239,68,68,0.25);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--accent-red);
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+        }
+        .hero h1 {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 26px;
+            font-weight: 900;
+            line-height: 1.35;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #fff 30%, var(--accent-red) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-meta {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        .hero-meta a {
+            color: var(--accent-blue);
+            text-decoration: none;
+        }
+
+        /* Section */
+        .section {
+            margin: 28px 0;
+        }
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent-cyan);
+            margin-bottom: 10px;
+        }
+        .section-label::before {
+            content: '';
+            width: 18px;
+            height: 2px;
+            background: var(--accent-cyan);
+        }
+        .section h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            color: var(--text-primary);
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+        .card-red { border-left: 3px solid var(--accent-red); }
+        .card-blue { border-left: 3px solid var(--accent-blue); }
+        .card-green { border-left: 3px solid var(--accent-green); }
+        .card-amber { border-left: 3px solid var(--accent-amber); }
+        .card-orange { border-left: 3px solid var(--accent-orange); }
+
+        .card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        p { margin-bottom: 12px; font-size: 15px; color: var(--text-secondary); }
+        p:last-child { margin-bottom: 0; }
+
+        strong { color: var(--text-primary); font-weight: 700; }
+        .highlight-red { color: var(--accent-red); font-weight: 700; }
+        .highlight-blue { color: var(--accent-blue); font-weight: 700; }
+        .highlight-green { color: var(--accent-green); font-weight: 700; }
+        .highlight-amber { color: var(--accent-amber); font-weight: 700; }
+
+        /* Verdict Box */
+        .verdict-box {
+            background: linear-gradient(135deg, rgba(239,68,68,0.08), rgba(59,130,246,0.08));
+            border: 1px solid rgba(239,68,68,0.2);
+            border-radius: 14px;
+            padding: 24px 20px;
+            text-align: center;
+            margin: 24px 0;
+        }
+        .verdict-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 56px;
+            font-weight: 900;
+            color: var(--accent-red);
+            line-height: 1;
+        }
+        .verdict-sub {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+        .verdict-label {
+            font-size: 18px;
+            font-weight: 700;
+            margin-top: 10px;
+            color: var(--text-primary);
+        }
+
+        /* Data Grid */
+        .data-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 16px 0;
+        }
+        .data-item {
+            background: var(--bg-card-alt);
+            border-radius: 10px;
+            padding: 14px;
+            text-align: center;
+        }
+        .data-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 900;
+        }
+        .data-label {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+        .data-value.red { color: var(--accent-red); }
+        .data-value.green { color: var(--accent-green); }
+        .data-value.amber { color: var(--accent-amber); }
+        .data-value.blue { color: var(--accent-blue); }
+
+        /* Table */
+        .table-wrap {
+            overflow-x: auto;
+            margin: 16px 0;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        thead th {
+            background: var(--bg-card-alt);
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 700;
+            color: var(--text-primary);
+            white-space: nowrap;
+            border-bottom: 1px solid var(--border);
+        }
+        tbody td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+        tbody tr:last-child td { border-bottom: none; }
+        tbody tr:hover { background: rgba(255,255,255,0.02); }
+        .td-red { color: var(--accent-red); font-weight: 700; }
+        .td-green { color: var(--accent-green); font-weight: 700; }
+
+        /* Chart Container */
+        .chart-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 16px;
+            margin: 16px 0;
+        }
+        .chart-title {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 14px;
+            color: var(--text-primary);
+        }
+        canvas { max-height: 300px; }
+
+        /* Risk Meter */
+        .risk-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .risk-item:last-child { border-bottom: none; }
+        .risk-rank {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+        .risk-rank.high { background: rgba(239,68,68,0.15); color: var(--accent-red); }
+        .risk-rank.mid { background: rgba(249,115,22,0.15); color: var(--accent-orange); }
+        .risk-rank.low { background: rgba(245,158,11,0.15); color: var(--accent-amber); }
+        .risk-info h4 { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+        .risk-info p { font-size: 13px; margin: 0; }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 24px;
+            margin: 16px 0;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 4px;
+            bottom: 4px;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent-red), var(--accent-amber), var(--accent-blue));
+            border-radius: 2px;
+        }
+        .timeline-item {
+            position: relative;
+            padding-bottom: 20px;
+        }
+        .timeline-item:last-child { padding-bottom: 0; }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -21px;
+            top: 6px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent-red);
+            border: 2px solid var(--bg-primary);
+        }
+        .timeline-item:nth-child(2)::before { background: var(--accent-orange); }
+        .timeline-item:nth-child(3)::before { background: var(--accent-amber); }
+        .timeline-item:nth-child(4)::before { background: var(--accent-blue); }
+        .timeline-title { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+        .timeline-desc { font-size: 13px; color: var(--text-muted); }
+
+        /* Callout */
+        .callout {
+            background: linear-gradient(135deg, rgba(239,68,68,0.06), rgba(249,115,22,0.06));
+            border: 1px solid rgba(239,68,68,0.15);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .callout-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--accent-red);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Winner/Loser Tags */
+        .tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .tag-winner { background: rgba(34,197,94,0.15); color: var(--accent-green); }
+        .tag-loser { background: rgba(239,68,68,0.15); color: var(--accent-red); }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+            margin: 32px 0;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 32px 0;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+        .footer a { color: var(--accent-blue); text-decoration: none; }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate { animation: fadeUp 0.5s ease-out both; }
+        .d1 { animation-delay: 0.1s; }
+        .d2 { animation-delay: 0.2s; }
+        .d3 { animation-delay: 0.3s; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Hero -->
+    <div class="hero">
+        <div class="hero-content animate">
+            <div class="hero-badge">⚖️ 미 연방대법원 판결 분석</div>
+            <h1>관세 위법판결,<br>한국에 득인가 실인가?</h1>
+            <p class="hero-meta">박종훈의 지식한방 · 2026.02.22<br>
+            <a href="https://youtu.be/oHwt-JEEDZs?si=-lbH1b7AfIWuIror" target="_blank">📺 원본 영상 보기</a></p>
+        </div>
+    </div>
+
+    <!-- 핵심 요약 -->
+    <div class="section animate d1">
+        <div class="section-label">Executive Summary</div>
+        <h2>📌 3줄 핵심 요약</h2>
+        <div class="card card-red">
+            <p><strong>1.</strong> 미 연방대법원이 <span class="highlight-red">6대 3</span>으로 트럼프의 상호관세를 위법 판결. 상호관세 + 중국 펜타닐 관세 <strong>완전 소멸</strong>.</p>
+            <p><strong>2.</strong> 트럼프는 즉시 무역법 122조로 <strong>전 세계 10% 기본관세</strong>를 신설했으나, <span class="highlight-amber">150일 한시적 적용</span>이라는 치명적 약점 존재.</p>
+            <p><strong>3.</strong> 한국은 관세율 15%→10%로 인하됐지만, 중국(-10%p)·멕시코(-15%p)·캐나다(-25%p) 등 경쟁국의 <span class="highlight-red">관세 인하폭이 더 커서 상대적으로 불리</span>해짐.</p>
+        </div>
+    </div>
+
+    <!-- 대법원 판결 -->
+    <div class="section animate d2">
+        <div class="section-label">Ruling</div>
+        <h2>⚖️ 연방대법원 판결 내용</h2>
+
+        <div class="verdict-box">
+            <div class="verdict-number">6 : 3</div>
+            <div class="verdict-sub">연방대법원 판결</div>
+            <div class="verdict-label">상호관세 = 위법</div>
+        </div>
+
+        <div class="card card-blue">
+            <h3>🔨 판결 결과</h3>
+            <p>트럼프 대통령이 전 세계를 상대로 부과해 온 <strong>상호관세(Reciprocal Tariffs)</strong>가 법적 근거가 없다는 판결. 보수 성향 대법관까지 포함한 <strong>6대 3</strong> 압도적 결과로, 정치적으로도 트럼프에게 큰 타격.</p>
+        </div>
+
+        <div class="card card-red">
+            <h3>❌ 소멸된 관세</h3>
+            <p>• <strong>상호관세</strong> — 전 세계 대상, 완전 소멸<br>
+            • <strong>중국 펜타닐 관세</strong> — 동일 법적 근거 사용, 완전 소멸</p>
+        </div>
+
+        <div class="card card-green">
+            <h3>✅ 유지되는 관세</h3>
+            <p>• <strong>무역법 301조</strong> — 중국 지적재산권 보복관세 (평균 20%↑, 일부 100%)<br>
+            • <strong>무역확장법 232조</strong> — 철강 50%, 자동차 15%<br>
+            → 이들은 별도 법적 근거로 대법원 판결 영향 없음</p>
+        </div>
+    </div>
+
+    <!-- 트럼프 긴급대응 -->
+    <div class="section">
+        <div class="section-label">Emergency Response</div>
+        <h2>🚨 트럼프의 긴급 대응</h2>
+
+        <div class="card card-orange">
+            <h3>⚡ 무역법 122조 발동</h3>
+            <p>판결 직후, 트럼프 대통령은 <strong>무역법 122조</strong>를 활용해 <span class="highlight-amber">전 세계 일괄 10% 기본관세</span>를 즉시 부과. 미리 준비해 둔 플랜B였음.</p>
+            <p><strong>한계점:</strong> 최장 <span class="highlight-red">150일</span>(약 5개월)만 유효하며, 이후 미 의회 승인 필요. 관세 최대한도 15%.</p>
+        </div>
+
+        <div class="data-grid">
+            <div class="data-item">
+                <div class="data-value amber">16%</div>
+                <div class="data-label">판결 전 평균 실효관세율</div>
+            </div>
+            <div class="data-item">
+                <div class="data-value blue">13%</div>
+                <div class="data-label">판결 후 (10% 긴급관세 포함)</div>
+            </div>
+            <div class="data-item">
+                <div class="data-value red">8%</div>
+                <div class="data-label">150일 후 의회 미승인 시</div>
+            </div>
+            <div class="data-item">
+                <div class="data-value green">3%p</div>
+                <div class="data-label">실질 관세율 감소폭</div>
+            </div>
+        </div>
+        <p style="font-size:12px; color:var(--text-muted); text-align:center;">※ 웰스파고(Wells Fargo) 분석 기준</p>
+
+        <div class="callout">
+            <div class="callout-title">💬 트럼프 & 배센트 재무장관 발언</div>
+            <p><strong>트럼프:</strong> "우리에겐 매우 강력한 대안이 있다."<br>
+            <strong>배센트:</strong> "전체 관세 수입으로 볼 때 동일한 관세 징수 능력이 있다."<br>
+            → <strong>13%를 다시 16%로 올리겠다</strong>는 의지 표명</p>
+        </div>
+    </div>
+
+    <!-- 시장 반응 -->
+    <div class="section">
+        <div class="section-label">Market Reaction</div>
+        <h2>📊 시장 반응: 왜 미지근했나?</h2>
+        <div class="card">
+            <p>금요일 미국 증시는 <strong>강보합</strong>으로 마감. 국채 시장, 달러 인덱스도 큰 변동 없음.</p>
+            <p><strong>이유:</strong> 트럼프의 즉각적 10% 긴급관세 부과로, 실질 관세율 하락폭이 <span class="highlight-amber">3%p에 불과</span>. 배센트 장관이 "다시 16%로 올리겠다"고 선언하면서 시장은 <em>"결국 그게 그거"</em>로 판단.</p>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 한국에 미치는 영향 -->
+    <div class="section">
+        <div class="section-label">Impact on Korea</div>
+        <h2>🇰🇷 한국 관세율 변화</h2>
+
+        <!-- Chart: 한국 품목별 관세율 -->
+        <div class="chart-container">
+            <div class="chart-title">한국 주요 품목별 관세율 변화</div>
+            <canvas id="koreaChart"></canvas>
+        </div>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr><th>품목</th><th>판결 전</th><th>판결 후</th><th>비고</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>일반 품목</td><td>15%</td><td class="td-green">10%</td><td>상호관세→기본관세</td></tr>
+                    <tr><td>자동차</td><td>15%</td><td>15%</td><td>232조 근거, 변동 없음</td></tr>
+                    <tr><td>반도체</td><td>0%</td><td>0%</td><td>면세 유지 (100% 위협 존재)</td></tr>
+                    <tr><td>철강</td><td>50%</td><td class="td-red">50%</td><td>232조 근거, 변동 없음</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 승자와 패자 -->
+    <div class="section">
+        <div class="section-label">Winners & Losers</div>
+        <h2>🏆 이번 판결의 승자와 패자</h2>
+
+        <div class="card card-red">
+            <h3><span class="tag tag-loser">패자</span> 착하게 협상한 나라들</h3>
+            <p><strong>한국, 일본, 유럽, 대만</strong> — 천문학적 투자를 약속하고 관세를 15%로 낮췄으나, 이제 협상 안 한 나라도 <strong>동일한 10%</strong>를 적용받게 됨. 관세 인하폭은 <span class="highlight-red">-5%p</span>에 불과.</p>
+        </div>
+
+        <div class="card card-green">
+            <h3><span class="tag tag-winner">승자</span> 협상을 거부한 나라들</h3>
+            <p><strong>캐나다</strong>(35%→10%, <span class="highlight-green">-25%p</span>) — 트럼프에 강경 대응하며 자존심을 지킨 결과, 가장 큰 승리자.<br>
+            <strong>미얀마</strong>(40%→10%, -30%p), <strong>아세안</strong>(19%→10%, -9%p), <strong>인도</strong>(18%→10%, -8%p)</p>
+        </div>
+
+        <!-- Chart: 국가별 관세 인하폭 -->
+        <div class="chart-container">
+            <div class="chart-title">국가별 관세율 인하폭 비교 (%p)</div>
+            <canvas id="countryChart"></canvas>
+        </div>
+
+        <div class="callout">
+            <div class="callout-title">⚠️ 핵심: 상대적 관세율이 중요하다</div>
+            <p>관세율의 절대 수치가 아닌, <strong>경쟁국 대비 상대적 관세율</strong>이 미국 시장에서의 가격경쟁력을 결정. 한국(-5%p)보다 <span class="highlight-red">중국(-10%p), 멕시코(-15%p), 캐나다(-25%p)</span>의 인하폭이 훨씬 커서, 한국의 가격경쟁력은 오히려 약화.</p>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 투자 약속 딜레마 -->
+    <div class="section">
+        <div class="section-label">Dilemma</div>
+        <h2>😤 투자 약속의 딜레마</h2>
+        <div class="card card-amber">
+            <p>한국은 상호관세 15%를 받아들이는 대가로 <strong>미국에 대규모 투자를 약속</strong>. 그러나 이제 상호관세 자체가 위법 판결을 받으면서 법적 근거가 소멸.</p>
+            <p><strong>"약속한 투자를 백지화할 수 있나?"</strong> → <span class="highlight-red">사실상 불가능</span>. 트럼프는 <strong>안보 카드</strong>를 내세워 투자 이행을 압박할 것.</p>
+            <p>결국 한국·일본·대만·유럽은 <strong>천문학적 투자를 약속하고도 동등한 대우</strong>를 받게 된 상황.</p>
+        </div>
+
+        <div class="card">
+            <h3>🇯🇵 일본에 대한 비판</h3>
+            <p>일본이 가장 먼저 트럼프와 협상을 타결하면서 한국·유럽·대만까지 "트럼프가 놓은 덫"에 빠지게 만들었다는 지적. <em>1985년 플라자합의</em>로 일본 경제가 망가진 전례와 유사한 판단 실수라는 평가.</p>
+        </div>
+    </div>
+
+    <!-- 150일 시한폭탄 -->
+    <div class="section">
+        <div class="section-label">150-Day Countdown</div>
+        <h2>⏰ 150일 시한폭탄</h2>
+
+        <div class="card card-red">
+            <h3>🧨 의회 승인의 불확실성</h3>
+            <p>무역법 122조의 10% 기본관세는 <span class="highlight-red">150일 후 의회 승인</span>이 필요. 그러나 통과 전망은 <strong>매우 불투명</strong>.</p>
+            <p><strong>이유:</strong> 공화당은 원래 <span class="highlight-blue">자유무역 정당</span>. 당내에서도 관세 반대파가 다수 존재. "우리는 원래 자유무역 정당인데 왜 갑자기 관세야?"라는 반발이 뿌리깊음.</p>
+        </div>
+
+        <!-- Chart: 시나리오별 관세율 -->
+        <div class="chart-container">
+            <div class="chart-title">시나리오별 미국 평균 실효관세율 변화</div>
+            <canvas id="scenarioChart"></canvas>
+        </div>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr><th>시나리오</th><th>관세율</th><th>트럼프 영향</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>판결 전 (기존)</td><td><strong>16%</strong></td><td>관세 정책 정상 가동</td></tr>
+                    <tr><td>판결 후 (현재)</td><td class="td-green"><strong>13%</strong></td><td>3%p 감소, 관리 가능</td></tr>
+                    <tr><td>150일 후 의회 미승인</td><td class="td-red"><strong>8%</strong></td><td>정치생명 위태</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 트럼프의 대안 카드 -->
+    <div class="section">
+        <div class="section-label">Trump's Options</div>
+        <h2>🃏 트럼프의 관세 대안 카드</h2>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-title">1️⃣ 무역법 301조 (슈퍼 301조)</div>
+                <div class="timeline-desc"><strong>불공정 무역 보복</strong> — 관세 한도 없음(무제한). 발동 시 장기적·영구적 지속. 단, USTR 조사·공청회 필요로 <span class="highlight-amber">최소 9~18개월 소요</span>. 150일 시한 내 발동 불가하나 <strong>위협 수단</strong>으로 활용 가능.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-title">2️⃣ 무역확장법 232조 ⭐ 최대 위협</div>
+                <div class="timeline-desc"><strong>국가안보 위협 명목</strong> — 즉시 발동 가능, 절차적 요건 최소. 이번 대법원 판결에서 합법성 인정받아 <span class="highlight-red">"프리패스 무기"</span>가 됨. 러트닉 상무부 장관이 이미 다수 품목 조사 완료.</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-title">3️⃣ 관세법 338조</div>
+                <div class="timeline-desc"><strong>차별대우 보복</strong> — 최대 50% 관세 가능. 단, <span class="highlight-red">대공황을 악화시킨 전력</span>이 있어 정치적 리스크가 매우 커서 사용 가능성 낮음.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 한국 위협 분석 -->
+    <div class="section">
+        <div class="section-label">Korea Risk Assessment</div>
+        <h2>🎯 한국에 대한 3대 위협 카드</h2>
+
+        <div class="card card-red">
+            <div class="risk-item">
+                <div class="risk-rank high">1</div>
+                <div class="risk-info">
+                    <h4>무역확장법 232조 — 🔴 최고 위험</h4>
+                    <p>철강(50%)·자동차(15%) 이미 부과 중. <strong>반도체 관세 부과 여부가 최대 관건</strong>. 러트닉 장관의 "한국 반도체 100% 관세" 위협이 공포탄에서 <span class="highlight-red">실질적 위협</span>으로 격상. 기존 품목 세율 인상 + 신규 품목 발굴 가능성.</p>
+                </div>
+            </div>
+            <div class="risk-item">
+                <div class="risk-rank mid">2</div>
+                <div class="risk-info">
+                    <h4>무역법 301조 — 🟠 장기 위험</h4>
+                    <p>발동까지 시간이 걸리지만, 일단 부과되면 <strong>장기적·영구적 타격</strong>. 세율 제한도 거의 없음. 방어가 매우 어려움.</p>
+                </div>
+            </div>
+            <div class="risk-item">
+                <div class="risk-rank low">3</div>
+                <div class="risk-info">
+                    <h4>협상 압박 — 🟡 지속 위험</h4>
+                    <p>미국 무역적자국 순서대로 압박 예상. 유럽→대만→일본→한국 순. "큰 놈+만만한 상대"를 우선 타겟팅.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 반도체 위협 상세 -->
+    <div class="section">
+        <div class="section-label">Semiconductor Risk</div>
+        <h2>🔬 반도체 관세 위협의 현실화</h2>
+
+        <div class="card card-amber">
+            <h3>기존 vs 현재 인식 변화</h3>
+            <p><strong>과거:</strong> 러트닉의 "반도체 100% 관세" 위협 → 시장은 완전히 무시. HBM 메모리에 관세를 물리면 미국 빅테크가 손해를 보는 <em>자충수</em>이므로 실행 가능성 극히 낮다고 판단. <span class="highlight-green">오히려 주가 상승</span>.</p>
+            <p><strong>현재:</strong> 평균 관세율 16%→8%(150일 후)로 반토막 위기. 트럼프가 <strong>급박해지면서</strong> 관세+안보 두 마리 토끼를 잡기 위해 반도체 관세를 <span class="highlight-red">"만지작거릴"</span> 가능성 부상. 100%는 비현실적이나, <strong>소폭 관세 부과로 평균 관세율 인상</strong>에 활용할 수 있음.</p>
+        </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 향후 전망 -->
+    <div class="section">
+        <div class="section-label">Outlook</div>
+        <h2>🔮 향후 전망: 2차전 시작</h2>
+
+        <div class="card card-blue">
+            <h3>🌐 새로운 눈치 싸움 시작</h3>
+            <p>상호관세 1차전에서 <strong>착하게 협상한 나라가 가장 큰 피해</strong>를 입었다는 학습효과 발생. 한국·유럽·일본·대만은 2차전에서 쉽게 응하지 않을 가능성.</p>
+        </div>
+
+        <div class="card card-amber">
+            <h3>📉 트럼프의 정치적 약점</h3>
+            <p>• 보수 대법관에게 패소 → <strong>정치적 패배</strong><br>
+            • 지지율 <strong>급속 하락</strong> 추세<br>
+            • 관세 = 핵심 경제정책인데, 이것이 흔들리면 정치생명 위태<br>
+            → 오히려 <span class="highlight-red">더 거친 수단</span>을 동원할 가능성</p>
+        </div>
+
+        <!-- Chart: 무역적자국 순위 -->
+        <div class="chart-container">
+            <div class="chart-title">트럼프 타겟: 미국 무역적자국 순서 (관세 압박 우선순위)</div>
+            <canvas id="targetChart"></canvas>
+        </div>
+
+        <div class="callout">
+            <div class="callout-title">🎯 한국이 주목해야 할 포인트</div>
+            <p><strong>① 150일 카운트다운</strong> — 의회 승인 여부에 따라 판세가 완전히 뒤바뀜<br>
+            <strong>② 무역확장법 232조</strong> — 반도체 관세 부과 여부가 한국 증시 최대 변수<br>
+            <strong>③ 협상 전략</strong> — "착한 협상국" 전철을 밟지 않는 것이 핵심<br>
+            <strong>④ 국제 공조</strong> — 유럽·일본·대만과의 공동 대응 가능성</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>원본: <a href="https://youtu.be/oHwt-JEEDZs?si=-lbH1b7AfIWuIror" target="_blank">박종훈의 지식한방</a> (2026.02.22)</p>
+        <p>본 문서는 영상 내용을 분석·정리한 것이며, 투자 조언이 아닙니다.</p>
+    </div>
+
+</div>
+
+<script>
+    // Chart defaults
+    Chart.defaults.color = '#94a3b8';
+    Chart.defaults.font.family = "'Noto Sans KR', sans-serif";
+    Chart.defaults.font.size = 11;
+
+    // 한국 품목별 관세율
+    new Chart(document.getElementById('koreaChart'), {
+        type: 'bar',
+        data: {
+            labels: ['일반 품목', '자동차', '반도체', '철강'],
+            datasets: [
+                {
+                    label: '판결 전',
+                    data: [15, 15, 0, 50],
+                    backgroundColor: 'rgba(249, 115, 22, 0.7)',
+                    borderRadius: 4,
+                    barPercentage: 0.7,
+                },
+                {
+                    label: '판결 후',
+                    data: [10, 15, 0, 50],
+                    backgroundColor: 'rgba(59, 130, 246, 0.7)',
+                    borderRadius: 4,
+                    barPercentage: 0.7,
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'top', labels: { padding: 16, usePointStyle: true, pointStyle: 'rectRounded' } }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 60,
+                    grid: { color: 'rgba(255,255,255,0.05)' },
+                    ticks: { callback: v => v + '%' }
+                },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+
+    // 국가별 관세 인하폭
+    new Chart(document.getElementById('countryChart'), {
+        type: 'bar',
+        data: {
+            labels: ['캐나다', '멕시코', '미얀마', '중국', '아세안', '인도', '한국·일본·EU·대만'],
+            datasets: [{
+                label: '관세 인하폭 (%p)',
+                data: [25, 15, 30, 10, 9, 8, 5],
+                backgroundColor: [
+                    'rgba(34, 197, 94, 0.8)',
+                    'rgba(34, 197, 94, 0.65)',
+                    'rgba(34, 197, 94, 0.5)',
+                    'rgba(249, 115, 22, 0.7)',
+                    'rgba(59, 130, 246, 0.5)',
+                    'rgba(59, 130, 246, 0.4)',
+                    'rgba(239, 68, 68, 0.7)',
+                ],
+                borderRadius: 4,
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            plugins: {
+                legend: { display: false },
+                tooltip: { callbacks: { label: ctx => '-' + ctx.raw + '%p' } }
+            },
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    grid: { color: 'rgba(255,255,255,0.05)' },
+                    ticks: { callback: v => '-' + v + '%p' }
+                },
+                y: { grid: { display: false } }
+            }
+        }
+    });
+
+    // 시나리오별 관세율
+    new Chart(document.getElementById('scenarioChart'), {
+        type: 'bar',
+        data: {
+            labels: ['판결 전', '판결 후 (현재)', '150일 후\n(의회 미승인)'],
+            datasets: [{
+                label: '평균 실효관세율',
+                data: [16, 13, 8],
+                backgroundColor: [
+                    'rgba(249, 115, 22, 0.7)',
+                    'rgba(59, 130, 246, 0.7)',
+                    'rgba(239, 68, 68, 0.7)',
+                ],
+                borderRadius: 6,
+                barPercentage: 0.5,
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false },
+                tooltip: { callbacks: { label: ctx => ctx.raw + '%' } }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 20,
+                    grid: { color: 'rgba(255,255,255,0.05)' },
+                    ticks: { callback: v => v + '%' }
+                },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+
+    // 무역적자국 타겟 순위
+    new Chart(document.getElementById('targetChart'), {
+        type: 'bar',
+        data: {
+            labels: ['유럽연합', '중국', '멕시코', '베트남', '대만', '일본', '인도', '한국'],
+            datasets: [{
+                label: '관세 압박 우선순위',
+                data: [8, 7, 6, 5, 4.5, 4, 3.5, 3],
+                backgroundColor: [
+                    'rgba(239, 68, 68, 0.8)',
+                    'rgba(239, 68, 68, 0.7)',
+                    'rgba(249, 115, 22, 0.7)',
+                    'rgba(249, 115, 22, 0.6)',
+                    'rgba(245, 158, 11, 0.7)',
+                    'rgba(245, 158, 11, 0.6)',
+                    'rgba(59, 130, 246, 0.5)',
+                    'rgba(59, 130, 246, 0.7)',
+                ],
+                borderRadius: 4,
+            }]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: { label: () => '무역적자 규모순 압박 대상' }
+                }
+            },
+            scales: {
+                x: {
+                    display: false,
+                    beginAtZero: true,
+                },
+                y: { grid: { display: false } }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
