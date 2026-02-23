@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>코스피 급등의 비밀, 외국인의 작전? - 분석</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f5f0e8;
+            --bg-alt: #efe8db;
+            --text: #1a1a1a;
+            --text-sub: #555555;
+            --accent: #1a1a1a;
+            --accent-sub: #333333;
+            --chart1: #1a1a1a;
+            --chart2: #4a4a4a;
+            --chart3: #7a7a7a;
+            --chart4: #2563eb;
+            --table-bg: #efe8db;
+            --table-header: #d4cbb8;
+            --table-border: #c4b8a0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.8;
+            font-size: 15px;
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* Header */
+        .paper-header {
+            text-align: center;
+            padding: 24px 16px 16px;
+            border-bottom: 4px double var(--accent);
+        }
+
+        .paper-name {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 11px;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            color: var(--text-sub);
+            margin-bottom: 4px;
+        }
+
+        .paper-date {
+            font-size: 12px;
+            color: var(--text-sub);
+            margin-bottom: 12px;
+        }
+
+        .paper-title {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 26px;
+            font-weight: 900;
+            line-height: 1.3;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .paper-subtitle {
+            font-size: 15px;
+            color: var(--text-sub);
+            font-weight: 400;
+            line-height: 1.5;
+        }
+
+        .paper-source {
+            margin-top: 12px;
+            font-size: 12px;
+            color: var(--text-sub);
+            padding: 6px 12px;
+            background: var(--bg-alt);
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid var(--table-border);
+            margin: 24px 0;
+        }
+
+        .divider-thick {
+            border: none;
+            border-top: 3px solid var(--accent);
+            margin: 28px 0;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 28px;
+        }
+
+        .section-number {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 11px;
+            letter-spacing: 3px;
+            color: var(--text-sub);
+            margin-bottom: 4px;
+        }
+
+        .section-title {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .section-title-sm {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--accent-sub);
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        p {
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .highlight {
+            background: linear-gradient(transparent 60%, #d4cbb8 60%);
+            font-weight: 700;
+        }
+
+        .strong-point {
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        /* Alert Box */
+        .alert-box {
+            background: var(--bg-alt);
+            border-left: 4px solid var(--accent);
+            padding: 14px 16px;
+            margin: 16px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .alert-box .alert-title {
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 6px;
+            color: var(--accent);
+        }
+
+        .alert-box p {
+            margin-bottom: 4px;
+            font-size: 14px;
+            color: var(--text-sub);
+        }
+
+        /* Key Figure */
+        .key-figure {
+            text-align: center;
+            padding: 20px;
+            background: var(--bg-alt);
+            border: 1px solid var(--table-border);
+            border-radius: 6px;
+            margin: 16px 0;
+        }
+
+        .key-figure .number {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--accent);
+            line-height: 1.2;
+        }
+
+        .key-figure .label {
+            font-size: 13px;
+            color: var(--text-sub);
+            margin-top: 4px;
+        }
+
+        /* Stats Row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 16px 0;
+        }
+
+        .stat-card {
+            background: var(--bg-alt);
+            border: 1px solid var(--table-border);
+            border-radius: 6px;
+            padding: 14px;
+            text-align: center;
+        }
+
+        .stat-card .stat-num {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .stat-card .stat-label {
+            font-size: 12px;
+            color: var(--text-sub);
+            margin-top: 2px;
+        }
+
+        .stat-card.negative .stat-num { color: #b91c1c; }
+        .stat-card.positive .stat-num { color: #15803d; }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 13px;
+        }
+
+        th {
+            background: var(--table-header);
+            color: var(--accent);
+            font-weight: 700;
+            padding: 10px 8px;
+            text-align: center;
+            border: 1px solid var(--table-border);
+            font-size: 12px;
+        }
+
+        td {
+            background: var(--table-bg);
+            padding: 9px 8px;
+            border: 1px solid var(--table-border);
+            text-align: center;
+        }
+
+        td.negative { color: #b91c1c; font-weight: 700; }
+        td.positive { color: #15803d; font-weight: 700; }
+
+        /* Chart Container */
+        .chart-container {
+            background: var(--bg-alt);
+            border: 1px solid var(--table-border);
+            border-radius: 6px;
+            padding: 16px 12px;
+            margin: 16px 0;
+        }
+
+        .chart-title {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 14px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 12px;
+            color: var(--accent);
+        }
+
+        canvas {
+            max-width: 100%;
+        }
+
+        /* Flow Diagram */
+        .flow-box {
+            background: var(--bg-alt);
+            border: 1px solid var(--table-border);
+            border-radius: 6px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .flow-step:last-child { margin-bottom: 0; }
+
+        .flow-num {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            background: var(--accent);
+            color: var(--bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+            margin-right: 10px;
+            margin-top: 2px;
+        }
+
+        .flow-text {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .flow-arrow {
+            text-align: center;
+            color: var(--text-sub);
+            font-size: 16px;
+            margin: 4px 0;
+            padding-left: 6px;
+        }
+
+        /* Quote */
+        .quote-box {
+            border-left: 3px solid var(--accent);
+            padding: 12px 16px;
+            margin: 16px 0;
+            background: var(--bg-alt);
+            font-style: italic;
+            color: var(--text-sub);
+            font-size: 14px;
+        }
+
+        /* Tag */
+        .tag {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--bg);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 2px;
+            margin-bottom: 6px;
+            letter-spacing: 1px;
+        }
+
+        /* Summary Box */
+        .summary-box {
+            background: var(--accent);
+            color: var(--bg);
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+
+        .summary-box h3 {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 17px;
+            margin-bottom: 12px;
+        }
+
+        .summary-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .summary-box li {
+            padding: 6px 0;
+            font-size: 14px;
+            border-bottom: 1px solid rgba(245,240,232,0.2);
+            line-height: 1.6;
+        }
+
+        .summary-box li:last-child { border-bottom: none; }
+
+        .summary-box li::before {
+            content: '▸ ';
+            opacity: 0.6;
+        }
+
+        /* Footer */
+        .paper-footer {
+            text-align: center;
+            padding: 20px 16px;
+            border-top: 2px solid var(--accent);
+            margin-top: 32px;
+        }
+
+        .paper-footer p {
+            font-size: 11px;
+            color: var(--text-sub);
+        }
+
+        /* Pill */
+        .pill {
+            display: inline-block;
+            font-size: 11px;
+            padding: 2px 10px;
+            border: 1px solid var(--table-border);
+            border-radius: 12px;
+            color: var(--text-sub);
+            margin: 2px 4px 2px 0;
+        }
+
+        /* Comparison */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 16px 0;
+        }
+
+        .compare-card {
+            background: var(--bg-alt);
+            border: 1px solid var(--table-border);
+            border-radius: 6px;
+            padding: 14px;
+        }
+
+        .compare-card h4 {
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--accent);
+        }
+
+        .compare-card p {
+            font-size: 13px;
+            color: var(--text-sub);
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Header -->
+    <header class="paper-header">
+        <div class="paper-name">M A R K E T &nbsp; A N A L Y S I S</div>
+        <div class="paper-date">2026년 2월 24일 · 박종훈의 지식한방</div>
+        <h1 class="paper-title">코스피 급등의 비밀,<br>외국인의 작전?</h1>
+        <p class="paper-subtitle">증권사가 숨긴 코스피 5,800의 비밀 — 금융투자의 10조원 순매수와 외국인의 선물·현물 조종 메커니즘 분석</p>
+        <div class="paper-source">📺 출처: 박종훈의 지식한방 (YouTube)</div>
+    </header>
+
+    <hr class="divider-thick">
+
+    <!-- Section 1: 핵심 요약 -->
+    <section class="section">
+        <div class="tag">EXECUTIVE SUMMARY</div>
+        <h2 class="section-title">핵심 요약</h2>
+        <p>코스피가 <span class="highlight">5,000을 돌파</span>한 뒤 5,800까지 치솟았다. 5,200까지는 반도체 슈퍼사이클, 유동성 확대, 상법 개정 등 <span class="strong-point">대한민국 경제의 자체 저력</span>으로 올랐으나, <span class="highlight">5,200→5,800 구간</span>에서는 전혀 다른 힘이 작용했다.</p>
+        <p>기관 순매수 11.5조원 중 <span class="strong-point">금융투자가 10.2조원</span>(약 89%)을 차지했으며, 이 자금의 대부분은 외국인의 선물 매수에 기계적으로 연동된 <span class="highlight">초단기 자금</span>이다. 외국인은 선물로 현물 가격을 조종하며 자신들의 보유 주식을 비싸게 매도하고 이탈하고 있다.</p>
+
+        <div class="stats-row">
+            <div class="stat-card positive">
+                <div class="stat-num">+11.5조</div>
+                <div class="stat-label">기관 순매수 (2/3~2/20)</div>
+            </div>
+            <div class="stat-card negative">
+                <div class="stat-num">-7.8조</div>
+                <div class="stat-label">외국인 순매도 (2/3~2/21)</div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- Section 2: KOSPI 상승의 두 구간 -->
+    <section class="section">
+        <div class="section-number">SECTION I</div>
+        <h2 class="section-title">코스피 상승의 두 구간</h2>
+
+        <h3 class="section-title-sm">① 자연스러운 상승: ~5,200</h3>
+        <p>코스피가 2,000대에서 장기 횡보하다 5,000을 돌파한 것은 실체가 있는 상승이다. 세 가지 핵심 동력이 결합되었다.</p>
+
+        <div class="alert-box">
+            <div class="alert-title">📌 5,200까지의 상승 동력 3가지</div>
+            <p><strong>1. 반도체 슈퍼사이클</strong> — HBM 수요 폭발, 메모리 품절 사태</p>
+            <p><strong>2. 유동성 확대</strong> — 정부의 돈풀기 정책</p>
+            <p><strong>3. 제도 개선</strong> — 상법 개정 등으로 자금 흐름이 부동산→주식으로 전환</p>
+        </div>
+
+        <p>과거에는 유동성을 풀어도 부동산으로만 흘러가 강남 집값만 올리는 구조였다. 이번에는 <span class="strong-point">상법 개정 등 제도적 변화</span>로 주식시장으로 자금이 유입되는 통로가 열렸다.</p>
+
+        <h3 class="section-title-sm">② 의문의 급등: 5,200 → 5,800</h3>
+        <p>5,200 이후부터는 <span class="highlight">수급 구조에 심각한 이상 신호</span>가 나타났다. 개인과 외국인 모두 매도하는데 주가는 계속 올라갔다. 시장을 떠받친 것은 <span class="strong-point">기관의 대규모 순매수</span>였으나, 그 내용을 뜯어보면 문제가 드러난다.</p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- Section 3: 수급 현황 분석 -->
+    <section class="section">
+        <div class="section-number">SECTION II</div>
+        <h2 class="section-title">2월 수급 현황: 누가 사고 누가 팔았나</h2>
+
+        <div class="chart-container">
+            <div class="chart-title">주체별 순매수/순매도 현황 (2월 3일~20일)</div>
+            <canvas id="chartSupplyDemand" height="240"></canvas>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>주체</th>
+                    <th>순매수/매도</th>
+                    <th>비고</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>개인</td>
+                    <td class="negative">-6.4조원</td>
+                    <td>지속적 이탈</td>
+                </tr>
+                <tr>
+                    <td>외국인</td>
+                    <td class="negative">-7.8조원</td>
+                    <td>21일 포함 시</td>
+                </tr>
+                <tr>
+                    <td><strong>기관 합계</strong></td>
+                    <td class="positive"><strong>+11.5조원</strong></td>
+                    <td>시장 떠받침</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>언론은 "외국인이 팔아도 기관이 사니 문제없다"고 보도하지만, <span class="highlight">기관 내부 구성이 핵심</span>이다.</p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- Section 4: 기관 자금 해부 -->
+    <section class="section">
+        <div class="section-number">SECTION III</div>
+        <h2 class="section-title">기관 자금 해부: 같은 기관, 다른 성격</h2>
+
+        <div class="chart-container">
+            <div class="chart-title">기관 유형별 순매수 현황 (2/3~2/20)</div>
+            <canvas id="chartInstitution" height="260"></canvas>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>기관 유형</th>
+                    <th>순매수</th>
+                    <th>성격</th>
+                    <th>평가</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>보험사</td>
+                    <td class="negative">-4,500억</td>
+                    <td>장기 투자</td>
+                    <td>⚠️ 매도</td>
+                </tr>
+                <tr>
+                    <td>투신/사모</td>
+                    <td class="positive">+1.6조</td>
+                    <td>중장기</td>
+                    <td>⚠️ 되사기*</td>
+                </tr>
+                <tr>
+                    <td>연기금</td>
+                    <td>-500억</td>
+                    <td>초장기</td>
+                    <td>⚠️ 마비</td>
+                </tr>
+                <tr>
+                    <td><strong>금융투자</strong></td>
+                    <td class="positive"><strong>+10.2조</strong></td>
+                    <td><strong>초단기</strong></td>
+                    <td>🚨 위험</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="alert-box">
+            <div class="alert-title">⚠️ 투신/사모의 '되사기' 현상</div>
+            <p>투신/사모는 1월 22일~2월 2일 동안 -1.6조원 매도 후, 2월에 다시 +1.6조원 매수. 주가 급등으로 수익률 경쟁 압박에 의한 <strong>뒤늦은 추격 매수</strong>로 판단. 실질적 신규 매수가 아님.</p>
+        </div>
+
+        <div class="key-figure">
+            <div class="number">10.2조원</div>
+            <div class="label">금융투자 순매수 — 기관 전체의 89%<br>대부분 초단기 · 방향성 없는 기계적 매수</div>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- Section 5: 금융투자 10조원의 정체 -->
+    <section class="section">
+        <div class="section-number">SECTION IV</div>
+        <h2 class="section-title">금융투자 10조원의 정체</h2>
+
+        <p>금융투자 회사의 순매수는 <span class="strong-point">자기 의지(프롭 트레이딩)</span>가 아니라, 외부 요인에 기계적으로 반응한 결과다. 증권사 리포트 기반 추정은 다음과 같다.</p>
+
+        <div class="chart-container">
+            <div class="chart-title">금융투자 10.2조원 자금 구성 추정</div>
+            <canvas id="chartPie" height="260"></canvas>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>유형</th>
+                    <th>비중</th>
+                    <th>추정 금액</th>
+                    <th>성격</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>선물-현물 차익거래</td>
+                    <td>~30%</td>
+                    <td>~3조원</td>
+                    <td>초단기, 기계적</td>
+                </tr>
+                <tr>
+                    <td>ELS 델타헤지</td>
+                    <td>~50%</td>
+                    <td>~5조원</td>
+                    <td>초단기, 강제적</td>
+                </tr>
+                <tr>
+                    <td>기타/불명</td>
+                    <td>~20%</td>
+                    <td>~2조원</td>
+                    <td>혼합</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p><span class="highlight">전체의 약 80%(8조원)</span>가 방향성 없이 외국인의 선물 조작에 따라 기계적으로 유입된 <span class="strong-point">초단기 자금</span>으로 추정된다.</p>
+
+        <div class="quote-box">
+            "금융투자가 의지를 갖고 주식을 산 것이 있는가? 없다. 외국인이 선물 가격을 올려놓으면 무조건 기계적으로 사는 것이다."
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- Section 6: 외국인의 두 가지 전략 -->
+    <section class="section">
+        <div class="section-number">SECTION V</div>
+        <h2 class="section-title">외국인의 두 가지 전략</h2>
+
+        <h3 class="section-title-sm">전략 ① 선물·현물 차익거래 유도</h3>
+
+        <div class="flow-box">
+            <div class="flow-step">
+                <div class="flow-num">1</div>
+                <div class="flow-text">외국인이 <strong>증거금만으로 선물을 대량 매수</strong> → 선물 가격 급등</div>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step">
+                <div class="flow-num">2</div>
+                <div class="flow-text">선물 가격 > 현물 가격 → <strong>차익거래(아비트리지) 기회</strong> 발생</div>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step">
+                <div class="flow-num">3</div>
+                <div class="flow-text">금융투자 회사들이 <strong>"선물 매도 + 현물 매수"</strong> 차익거래 진행</div>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step">
+                <div class="flow-num">4</div>
+                <div class="flow-text">현물 매수 압력으로 <strong>현물 가격 상승</strong></div>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step">
+                <div class="flow-num">5</div>
+                <div class="flow-text">외국인은 비싸진 현물을 <strong>조단위로 매도하고 이탈</strong></div>
+            </div>
+        </div>
+
+        <p>핵심은 <span class="strong-point">"꼬리가 몸통을 흔드는 구조"</span>다. 선물(꼬리)이 현물(몸통)의 가격을 결정하는 비정상적 상황이 2월 내내 반복되었다.</p>
+
+        <h3 class="section-title-sm">전략 ② ELS 델타헤지 강제 매수 유도</h3>
+
+        <div class="flow-box">
+            <div class="flow-step">
+                <div class="flow-num">1</div>
+                <div class="flow-text">증권사가 ELS 판매 시 <strong>매도 포지션(숏)</strong>을 보유</div>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step">
+                <div class="flow-num">2</div>
+                <div class="flow-text">외국인이 매일 <strong>갭 상승</strong>(전일 종가 대비 ~3% 높은 시초가)을 연출</div>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step">
+                <div class="flow-num">3</div>
+                <div class="flow-text">주가 상승 → 증권사의 매도 포지션에 <strong>대규모 손실 위험</strong> 발생</div>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step">
+                <div class="flow-num">4</div>
+                <div class="flow-text">증권사가 위험 관리 위해 <strong>묻지마 현물 매수(델타헤지)</strong> 실행</div>
+            </div>
+            <div class="flow-arrow">↓</div>
+            <div class="flow-step">
+                <div class="flow-num">5</div>
+                <div class="flow-text">주가 추가 상승 → <strong>외국인은 다시 비싸게 현물 매도</strong></div>
+            </div>
+        </div>
+
+        <div class="alert-box">
+            <div class="alert-title">💡 ELS(주가연계증권)란?</div>
+            <p>기초자산(예: 코스피)이 일정 조건(예: 40% 이상 하락 않을 경우)을 충족하면 확정 수익률(예: 8%)을 지급하는 파생상품. 증권사는 ELS 발행 시 매도 포지션을 잡아 위험을 관리(헤지)한다.</p>
+        </div>
+
+        <div class="alert-box">
+            <div class="alert-title">💡 델타헤지란?</div>
+            <p>파생상품의 가격 변동 위험을 상쇄하기 위해 기초자산을 매수/매도하는 행위. 주가 상승 시 매수, 하락 시 매도하게 되어 <strong>시장 변동성을 증폭</strong>시키는 역설적 효과를 낳는다.</p>
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- Section 7: 반전 시나리오 -->
+    <section class="section">
+        <div class="section-number">SECTION VI</div>
+        <h2 class="section-title">반전 시나리오: 외국인이 변심하면?</h2>
+
+        <p>현재 구조의 핵심 위험은 <span class="highlight">방향이 뒤집히는 순간 모든 메커니즘이 반대로 작동</span>한다는 점이다.</p>
+
+        <div class="compare-grid">
+            <div class="compare-card">
+                <h4>📈 현재 (상승)</h4>
+                <p>외국인 선물 매수 →</p>
+                <p>금융투자 현물 매수 →</p>
+                <p>ELS 델타헤지 매수 →</p>
+                <p><strong>주가 상승</strong></p>
+            </div>
+            <div class="compare-card">
+                <h4>📉 반전 시 (하락)</h4>
+                <p>외국인 선물 매도 →</p>
+                <p>금융투자 현물 매도 →</p>
+                <p>ELS 델타헤지 매도 →</p>
+                <p><strong>주가 폭락</strong></p>
+            </div>
+        </div>
+
+        <p>외국인이 갭 하락(전일 종가 대비 대폭 낮은 시초가)으로 출발시키면, 금융투자 회사들은 <span class="strong-point">엄청난 속도로 현물을 매도</span>하게 된다. 10조원 규모의 자금이 방향을 바꾸면 코스피 <span class="highlight">약 600포인트 변동</span>이 가능하다.</p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- Section 8: 안전판의 부재 -->
+    <section class="section">
+        <div class="section-number">SECTION VII</div>
+        <h2 class="section-title">안전판의 부재: 방어선이 무너졌다</h2>
+
+        <h3 class="section-title-sm">🔴 국민연금 — 매수 여력 소진</h3>
+        <p>국민연금의 국내 주식 목표 비중은 <span class="strong-point">14.9%</span>. 그러나 작년 가을 이미 <span class="highlight">17%를 돌파</span>한 상태이며, 이후 코스피가 계속 상승해 현재 약 18%에 달할 것으로 추정된다. 더 이상 주식을 사기 어려운 상황이며, 주가 하락 시 <span class="strong-point">지수 방어가 불가능</span>하다.</p>
+
+        <div class="chart-container">
+            <div class="chart-title">국민연금 국내 주식 비중 추이</div>
+            <canvas id="chartPension" height="200"></canvas>
+        </div>
+
+        <h3 class="section-title-sm">🔴 스마트 개인 투자자 — 이미 이탈</h3>
+        <p>선제적으로 차익을 실현한 '스마트 머니' 개인 투자자들은 이미 주식시장을 떠났다. 작년에 투자해 <span class="strong-point">더블(100% 수익) 이상</span>을 실현한 후 빠져나온 투자자들이 상당수다. 이들은 대체투자로 이동하며 <span class="highlight">주식시장 복귀 가능성이 낮다</span>.</p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- Section 9: 헤지의 역설 -->
+    <section class="section">
+        <div class="section-number">SECTION VIII</div>
+        <h2 class="section-title">헤지의 역설: 위험 회피가 더 큰 위험을 만든다</h2>
+
+        <p><span class="strong-point">"헤지(Hedge)"</span>는 원래 위험을 회피한다는 뜻이다. 그러나 모든 참여자가 동시에 같은 방향으로 헤지를 실행하면, 그것 자체가 <span class="highlight">시장의 새로운 위험</span>이 된다.</p>
+
+        <p>ELS 델타헤지처럼 모든 증권사가 동시에 같은 방향으로 매수/매도하면 시장 변동성이 극대화된다. 따라서 <span class="strong-point">"헤지 상품 = 안전한 상품"이라는 인식은 매우 위험</span>하다는 경고다.</p>
+
+        <div class="quote-box">
+            "헤지를 다 같이 하면 그게 위험이 된다. 헤지 상품이라고 안전하다고 생각하면 절대 안 된다."
+        </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- Section 10: 펀더멘탈 vs 수급 -->
+    <section class="section">
+        <div class="section-number">SECTION IX</div>
+        <h2 class="section-title">펀더멘탈 vs 수급</h2>
+
+        <p>반도체 펀더멘탈은 여전히 강력하다. HBM 수요 폭발, 메모리 품절, SK하이닉스 역대급 실적 등 긍정적 요인이 존재한다. 그러나 <span class="strong-point">엔비디아 사례</span>가 보여주듯, 기업 실적이 아무리 좋아도 <span class="highlight">단기 수급이 무너지면 주가는 하락할 수 있다</span>.</p>
+
+        <div class="compare-grid">
+            <div class="compare-card">
+                <h4>✅ 긍정 (펀더멘탈)</h4>
+                <p>• HBM 수요 폭발</p>
+                <p>• 메모리 품절</p>
+                <p>• 하이닉스 역대급 실적</p>
+                <p>• 추가 모멘텀 가능</p>
+            </div>
+            <div class="compare-card">
+                <h4>🚨 경고 (수급)</h4>
+                <p>• 10.2조 초단기 자금</p>
+                <p>• 외국인 7.8조 이탈</p>
+                <p>• 연기금 방어력 소진</p>
+                <p>• 스마트머니 이탈</p>
+            </div>
+        </div>
+
+        <p>장기적으로는 펀더멘탈이 중요하지만, <span class="strong-point">단기적으로는 수급이 주가를 결정</span>한다. 현재 수급 구조의 취약성을 인식하고 변동성에 대비하는 것이 핵심 메시지다.</p>
+    </section>
+
+    <hr class="divider">
+
+    <!-- 결론 -->
+    <section class="section">
+        <div class="summary-box">
+            <h3>📋 핵심 결론</h3>
+            <ul>
+                <li>코스피 5,200까지는 경제 저력·제도 개선에 의한 건강한 상승</li>
+                <li>5,200→5,800은 금융투자 10.2조원(초단기 자금)이 만든 모래성</li>
+                <li>10.2조 중 ~80%(8조원)는 외국인 선물 조종에 연동된 기계적 매수</li>
+                <li>선물-현물 차익거래(~3조) + ELS 델타헤지(~5조) = 핵심 구성</li>
+                <li>외국인은 선물로 가격을 올린 뒤 현물을 조단위로 비싸게 매도·이탈</li>
+                <li>국민연금은 목표 비중(14.9%) 초과로 방어 불가 상태</li>
+                <li>스마트 개인 투자자 이미 이탈, 복귀 가능성 낮음</li>
+                <li>외국인 변심 시 10조원이 반대 방향으로 작동 → 급락 위험</li>
+                <li>헤지 상품 ≠ 안전 상품. 모두가 같은 방향으로 헤지하면 그 자체가 위험</li>
+                <li>투자 가이드가 아닌, 변동성 대응력을 키우기 위한 현실 진단</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="paper-footer">
+        <p>본 분석은 '박종훈의 지식한방' 유튜브 콘텐츠를 기반으로 정리한 것입니다.<br>
+        투자 판단은 개인의 책임이며, 본 문서는 투자 권유가 아닙니다.</p>
+        <p style="margin-top: 8px;">© 2026 Market Analysis</p>
+    </footer>
+
+</div>
+
+<!-- Charts -->
+<script>
+    Chart.defaults.font.family = "'Noto Sans KR', sans-serif";
+    Chart.defaults.font.size = 12;
+    Chart.defaults.color = '#555555';
+
+    // Chart 1: 주체별 수급
+    new Chart(document.getElementById('chartSupplyDemand'), {
+        type: 'bar',
+        data: {
+            labels: ['개인', '외국인', '기관'],
+            datasets: [{
+                label: '순매수/매도 (조원)',
+                data: [-6.4, -7.8, 11.5],
+                backgroundColor: ['#7a7a7a', '#1a1a1a', '#2563eb'],
+                borderRadius: 4,
+                barPercentage: 0.6
+            }]
+        },
+        options: {
+            responsive: true,
+            animation: { duration: 1200, easing: 'easeOutQuart' },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: { label: ctx => ctx.parsed.y + '조원' }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: { color: 'rgba(196,184,160,0.4)' },
+                    ticks: { callback: v => v + '조' }
+                },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+
+    // Chart 2: 기관 유형별
+    new Chart(document.getElementById('chartInstitution'), {
+        type: 'bar',
+        data: {
+            labels: ['보험사', '투신/사모', '연기금', '금융투자'],
+            datasets: [{
+                label: '순매수 (조원)',
+                data: [-0.45, 1.6, -0.05, 10.2],
+                backgroundColor: ['#7a7a7a', '#4a4a4a', '#7a7a7a', '#2563eb'],
+                borderRadius: 4,
+                barPercentage: 0.6
+            }]
+        },
+        options: {
+            responsive: true,
+            animation: { duration: 1400, easing: 'easeOutQuart', delay: 200 },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    callbacks: { label: ctx => ctx.parsed.y + '조원' }
+                }
+            },
+            scales: {
+                y: {
+                    grid: { color: 'rgba(196,184,160,0.4)' },
+                    ticks: { callback: v => v + '조' }
+                },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+
+    // Chart 3: 금융투자 10.2조 구성
+    new Chart(document.getElementById('chartPie'), {
+        type: 'doughnut',
+        data: {
+            labels: ['선물-현물 차익거래 (~3조)', 'ELS 델타헤지 (~5조)', '기타/불명 (~2조)'],
+            datasets: [{
+                data: [30, 50, 20],
+                backgroundColor: ['#1a1a1a', '#4a4a4a', '#7a7a7a'],
+                borderColor: '#efe8db',
+                borderWidth: 3
+            }]
+        },
+        options: {
+            responsive: true,
+            animation: { duration: 1500, easing: 'easeInOutQuart', animateRotate: true },
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: { padding: 12, font: { size: 11 } }
+                },
+                tooltip: {
+                    callbacks: { label: ctx => ctx.label + ' (' + ctx.parsed + '%)' }
+                }
+            },
+            cutout: '50%'
+        }
+    });
+
+    // Chart 4: 국민연금 비중
+    new Chart(document.getElementById('chartPension'), {
+        type: 'line',
+        data: {
+            labels: ['목표치', '작년 가을', '현재 추정'],
+            datasets: [{
+                label: '국내 주식 비중 (%)',
+                data: [14.9, 17, 18],
+                borderColor: '#2563eb',
+                backgroundColor: 'rgba(37,99,235,0.1)',
+                fill: true,
+                tension: 0.3,
+                pointBackgroundColor: '#2563eb',
+                pointRadius: 6,
+                pointHoverRadius: 8,
+                borderWidth: 2.5
+            }, {
+                label: '목표 비중 (14.9%)',
+                data: [14.9, 14.9, 14.9],
+                borderColor: '#b91c1c',
+                borderDash: [6, 4],
+                borderWidth: 1.5,
+                pointRadius: 0,
+                fill: false
+            }]
+        },
+        options: {
+            responsive: true,
+            animation: { duration: 1200, easing: 'easeOutQuart' },
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: { font: { size: 11 }, padding: 10 }
+                }
+            },
+            scales: {
+                y: {
+                    min: 12,
+                    max: 20,
+                    grid: { color: 'rgba(196,184,160,0.4)' },
+                    ticks: { callback: v => v + '%' }
+                },
+                x: { grid: { display: false } }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
