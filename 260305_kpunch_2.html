@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>전쟁의 룰이 깨졌다 — 박종훈의 지식한방</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --bg2: #fafafa;
+      --text: #1a1a1a;
+      --text2: #777777;
+      --accent: #e11d48;
+      --accent2: #f43f5e;
+      --border: #e5e5e5;
+      --chart1: #e11d48;
+      --chart2: #1a1a1a;
+      --chart3: #6b7280;
+      --chart4: #2563eb;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 15px;
+      line-height: 1.75;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* HEADER */
+    .masthead {
+      background: var(--text);
+      color: #fff;
+      padding: 14px 20px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .masthead-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: 0.6;
+    }
+    .masthead-date {
+      font-size: 10px;
+      letter-spacing: 1px;
+      opacity: 0.5;
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+
+    .hero {
+      background: var(--text);
+      color: #fff;
+      padding: 28px 20px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0.12;
+    }
+    .hero-label {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      margin-bottom: 16px;
+    }
+    .hero-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 26px;
+      font-weight: 900;
+      line-height: 1.3;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-title em {
+      color: var(--accent2);
+      font-style: normal;
+    }
+    .hero-sub {
+      font-size: 12px;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.5px;
+      position: relative; z-index: 1;
+    }
+
+    /* BODY */
+    .article-body {
+      padding: 0 20px;
+    }
+
+    /* SECTION */
+    .section {
+      padding: 28px 0 24px;
+      border-bottom: 1px solid var(--border);
+    }
+    .section:last-child { border-bottom: none; }
+
+    .section-num {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 19px;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 14px;
+      color: var(--text);
+    }
+    .section-body {
+      font-size: 14px;
+      color: #333;
+      line-height: 1.85;
+    }
+    .section-body p { margin-bottom: 12px; }
+    .section-body p:last-child { margin-bottom: 0; }
+
+    strong, b { color: var(--text); font-weight: 700; }
+    em { color: var(--accent); font-style: normal; font-weight: 600; }
+
+    /* PULLQUOTE */
+    .pullquote {
+      border-left: 3px solid var(--accent);
+      background: var(--bg2);
+      margin: 20px 0;
+      padding: 16px 18px;
+    }
+    .pullquote p {
+      font-family: 'Noto Serif KR', serif;
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.6;
+      color: var(--text);
+      margin: 0;
+    }
+    .pullquote cite {
+      display: block;
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--text2);
+      font-style: normal;
+      letter-spacing: 0.5px;
+    }
+
+    /* STAT BOX */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 20px 0;
+    }
+    .stat-box {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 16px 14px;
+      text-align: center;
+    }
+    .stat-box.accent-box {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-box.accent-box .stat-num { color: #fff; }
+    .stat-label {
+      font-size: 10px;
+      color: var(--text2);
+      letter-spacing: 0.5px;
+      line-height: 1.4;
+    }
+    .stat-box.accent-box .stat-label { color: rgba(255,255,255,0.75); }
+
+    /* TABLE */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0;
+      font-size: 13px;
+    }
+    .data-table th {
+      background: var(--accent);
+      color: #fff;
+      padding: 10px 12px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+    }
+    .data-table td {
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 12px;
+      vertical-align: middle;
+    }
+    .data-table tr:nth-child(even) td { background: #f4f4f4; }
+
+    /* CHART */
+    .chart-container {
+      position: relative;
+      max-height: 340px;
+      margin: 20px 0;
+    }
+    .chart-container canvas {
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      max-height: 300px;
+    }
+    .chart-container.chart-ready canvas { opacity: 1; }
+    .chart-label {
+      font-size: 10px;
+      color: var(--text2);
+      text-align: center;
+      margin-top: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    /* FADE IN */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* INFO CARD */
+    .info-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--accent);
+      padding: 18px 16px;
+      margin: 18px 0;
+    }
+    .info-card-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .info-card ul {
+      padding-left: 0;
+      list-style: none;
+    }
+    .info-card ul li {
+      font-size: 13px;
+      color: #333;
+      padding: 5px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+    .info-card ul li:last-child { border-bottom: none; }
+    .info-card ul li::before {
+      content: '▸';
+      color: var(--accent);
+      font-size: 11px;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    /* DIVIDER */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 24px 0;
+    }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .divider span {
+      color: var(--accent);
+      font-size: 16px;
+    }
+
+    /* CONCLUSION */
+    .conclusion {
+      background: var(--text);
+      color: #fff;
+      padding: 28px 20px 36px;
+      margin-top: 0;
+    }
+    .conclusion .section-num { color: var(--accent2); }
+    .conclusion .section-title { color: #fff; }
+    .conclusion .section-body { color: rgba(255,255,255,0.78); }
+    .conclusion .section-body p { margin-bottom: 12px; }
+    .conclusion .pullquote {
+      border-left-color: var(--accent2);
+      background: rgba(255,255,255,0.07);
+    }
+    .conclusion .pullquote p { color: #fff; }
+
+    /* FOOTER */
+    .footer {
+      background: #111;
+      padding: 16px 20px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 10px;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.5px;
+    }
+
+    /* Tag badge */
+    .tag {
+      display: inline-block;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      font-size: 10px;
+      padding: 3px 8px;
+      color: var(--text2);
+      letter-spacing: 0.5px;
+      margin-right: 4px;
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <span class="masthead-title">박종훈의 지식한방</span>
+  <span class="masthead-date">2026. 03. 05</span>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">전쟁 & 경제 분석</div>
+  <h1 class="hero-title">전쟁의 룰이<br>깨졌다<br><em>약소국 승률은 63%</em></h1>
+  <p class="hero-sub">미국 vs 이란 전쟁이 한국 주가에 미치는 영향<br>전쟁사 통계로 읽는 냉정한 분석</p>
+</div>
+
+<!-- BODY -->
+<div class="article-body">
+
+  <!-- 섹션 1: 핵심 요약 -->
+  <div class="section fade-in">
+    <div class="section-num">01 / 핵심 요약</div>
+    <h2 class="section-title">지금 주가 하락, 전쟁만의 문제가 아니다</h2>
+    <div class="section-body">
+      <p>이번 한국 주가 폭락의 직접적 원인은 미국-이란 전쟁이지만, 전쟁이 주가 하락에 기여한 비중은 약 <em>30%</em>에 불과하다. 나머지 <em>70%</em>는 반도체 시장의 구조적 변화에 기인한다.</p>
+      <p>전쟁이 종결되면 주가의 상당 부분은 반등하겠지만, 이후 방향은 다시 불확실해진다. 특히 SK하이닉스를 중심으로 한 반도체 업황의 근본적 전환이 진행 중이기 때문이다.</p>
+    </div>
+
+    <div class="stat-grid fade-in">
+      <div class="stat-box accent-box">
+        <div class="stat-num">30%</div>
+        <div class="stat-label">전쟁에 의한<br>주가 하락 기여분</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">70%</div>
+        <div class="stat-label">반도체 등<br>구조적 요인</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 섹션 2: SK하이닉스 리스크 -->
+  <div class="section fade-in">
+    <div class="section-num">02 / 반도체 리스크</div>
+    <h2 class="section-title">HBM의 역설 — 더 팔수록 손해?</h2>
+    <div class="section-body">
+      <p>최태원 SK그룹 회장은 2025년 2월 20일 자사 전망에 대해 이례적으로 솔직한 발언을 했다. SK하이닉스의 올해 영업이익 예상치가 <strong>145조원 흑자</strong>가 될 수도, 반대로 <strong>1,000억 달러 손실</strong>이 될 수도 있다고 밝혔다.</p>
+      <p>그 이유는 아래와 같다:</p>
+    </div>
+
+    <div class="info-card fade-in">
+      <div class="info-card-title">HBM vs 일반 D램 수익 구조</div>
+      <ul>
+        <li>HBM(고대역폭 메모리): 마진율 <strong>60%</strong> 이상으로 고수익 제품</li>
+        <li>일반 D램: 마진율 <strong>80%</strong>로 오히려 HBM보다 수익성 높음</li>
+        <li>결과: HBM에 생산 집중 시 일반 D램 판매 기회 손실 → 역설적 손실 구조 발생</li>
+        <li>미국 빅테크 기업들의 반도체 공급업체에 대한 시각이 근본적으로 변화 중</li>
+      </ul>
+    </div>
+
+    <div class="pullquote fade-in">
+      <p>"HBM 대신 일반 칩을 파는 게 더 이익이 되는 아이러니한 상황"</p>
+      <cite>— 최태원 SK그룹 회장, 2025. 2. 20</cite>
+    </div>
+  </div>
+
+  <!-- 섹션 3: 전쟁사 통계 -->
+  <div class="section fade-in">
+    <div class="section-num">03 / 전쟁사 분석</div>
+    <h2 class="section-title">강대국은 항상 이긴다는 선입관을 버려라</h2>
+    <div class="section-body">
+      <p>1800년부터 1998년까지 전쟁 197건을 분석한 연구에 따르면, 강대국의 승률은 생각보다 낮다. 더 중요한 것은 <em>최근으로 올수록 약소국의 승률이 급격히 상승</em>하고 있다는 점이다.</p>
+    </div>
+
+    <div class="chart-container fade-in">
+      <canvas id="chartEra" height="230"></canvas>
+    </div>
+    <p class="chart-label fade-in">시대별 강대국 vs 약소국 승률 변화 (%)</p>
+
+    <div class="section-body" style="margin-top:16px;">
+      <p>설리반(Sullivan)의 연구는 1945년 이후 최근 전쟁 122건을 분석했다. 약소국 승률은 <em>39%</em>까지 올라섰으며, 최근 50년으로 좁히면 <em>약소국 승률이 50%</em>에 달한다.</p>
+    </div>
+
+    <div class="chart-container fade-in">
+      <canvas id="chartRecent" height="220"></canvas>
+    </div>
+    <p class="chart-label fade-in">전쟁 122건 분석 — 1945년 이후 (설리반 연구)</p>
+
+  </div>
+
+  <!-- 섹션 4: 약소국이 이기는 이유 -->
+  <div class="section fade-in">
+    <div class="section-num">04 / 구조적 변화</div>
+    <h2 class="section-title">왜 최근일수록 약소국이 강해졌나</h2>
+
+    <div class="info-card fade-in">
+      <div class="info-card-title">약소국 승률 상승의 3가지 원인</div>
+      <ul>
+        <li><strong>민족주의 강화:</strong> 약소국의 저항 의지가 과거보다 훨씬 강해짐</li>
+        <li><strong>게릴라·비정규전 전술:</strong> 강대국의 압도적 화력을 정면 대응이 아닌 우회로 무력화</li>
+        <li><strong>강대국의 민주주의 딜레마:</strong> 민주 국가는 장기전을 지속하면 선거에서 심판받기 때문에 빠른 승리가 필요 → 지속전에서 불리</li>
+      </ul>
+    </div>
+
+    <div class="pullquote fade-in">
+      <p>홈그라운드에서 게릴라전을 구사하는 약소국의 승률은 무려 <em style="color:var(--accent2)">63%</em>. 강대국 승률은 오히려 <em style="color:var(--accent2)">37%</em>에 불과하다.</p>
+    </div>
+
+    <div class="stat-grid fade-in">
+      <div class="stat-box accent-box">
+        <div class="stat-num">63%</div>
+        <div class="stat-label">홈그라운드 약소국<br>게릴라전 승률</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">37%</div>
+        <div class="stat-label">동일 조건에서<br>강대국 승률</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 섹션 5: 공습만으로는 안 된다 -->
+  <div class="section fade-in">
+    <div class="section-num">05 / 전쟁 분석</div>
+    <h2 class="section-title">공습만으로 체제를 무너뜨린 사례 — 단 한 번도 없다</h2>
+    <div class="section-body">
+      <p>시카고대학교 로버트 페이프 교수(공군력 강제론 세계적 권위자, 저서 <em>Bombing to Win</em>)는 명확히 말한다:</p>
+    </div>
+
+    <div class="pullquote fade-in">
+      <p>"공습만으로 긍정적인 체제 전복을 이루어낸 사례는 드문 게 아니라, 단 한 번도 없었다."</p>
+      <cite>— 로버트 페이프, 시카고대 정치학 교수</cite>
+    </div>
+
+    <div class="section-body">
+      <p>대표 사례인 2011년 나토의 리비아 공습: 7개월간 9,700회 폭격, 목표물 5,900개를 파악했음에도 체제를 무너뜨린 건 결국 <strong>내부 반군의 지상전</strong>이었다.</p>
+      <p>유일하게 공습이 효과를 거둔 사례로 꼽히는 1999년 코소보도, 세르비아 체제가 붕괴된 것이 아니라 <strong>코소보에서 철군</strong>시키는 데 그쳤다. 그것도 지상군 투입 위협이 병행됐기 때문이다.</p>
+    </div>
+
+    <table class="data-table fade-in">
+      <thead>
+        <tr>
+          <th>사례</th>
+          <th>공습 규모</th>
+          <th>결과</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>리비아 (2011)</td>
+          <td>9,700회 / 7개월</td>
+          <td>반군 지상전으로 체제 붕괴</td>
+        </tr>
+        <tr>
+          <td>코소보 (1999)</td>
+          <td>78일 공습</td>
+          <td>철군 유도 (체제 유지)</td>
+        </tr>
+        <tr>
+          <td>이란 (현재)</td>
+          <td>진행 중</td>
+          <td>체제 붕괴 가능성 매우 낮음</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 섹션 6: 이란이 특히 어려운 이유 -->
+  <div class="section fade-in">
+    <div class="section-num">06 / 이란의 강점</div>
+    <h2 class="section-title">이란은 왜 공습으로 무너뜨리기 더 어려운가</h2>
+
+    <div class="chart-container fade-in">
+      <canvas id="chartCompare" height="240"></canvas>
+    </div>
+    <p class="chart-label fade-in">이란 vs 과거 공습 대상국 비교</p>
+
+    <div class="info-card fade-in">
+      <div class="info-card-title">이란의 지정학적·지리적 방어 우위</div>
+      <ul>
+        <li><strong>면적:</strong> 165만 km² — 한국의 18배, 이라크(43만)의 약 4배</li>
+        <li><strong>해발 고도:</strong> 평균 1,300m 산지 — 이라크(300m)·리비아(400m) 대비 압도적으로 험준</li>
+        <li><strong>핵·미사일 시설:</strong> 화강암 지하 100m 이상에 요새화</li>
+        <li><strong>인구:</strong> 8,900만 — 리비아(660만)의 13배 이상</li>
+        <li><strong>GDP:</strong> 1조 5,000억 달러 — 리비아(750억)의 20배</li>
+        <li><strong>프록시 네트워크:</strong> 헤즈볼라, 예멘 후티, 이라크·시리아 민병대</li>
+        <li><strong>지상전 발판 없음:</strong> 이라크(시아파 민병대), 파키스탄, 터키 모두 협조 기대 어려움</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 섹션 7: 동맹 균열 -->
+  <div class="section fade-in">
+    <div class="section-num">07 / 동맹 이탈</div>
+    <h2 class="section-title">혼자 싸우는 미국 — 전례 없는 상황</h2>
+    <div class="section-body">
+      <p>역대 중동 전쟁에서 미국은 항상 대규모 연합을 구성했다. 1991년 사막의 폭풍 작전에 <em>42개국</em>, 2003년 이라크 자유작전에 <em>48개국</em>, 2014년 ISIS 토벌에 <em>60개국</em>, 아프가니스탄 전쟁에 <em>50개국 이상</em>이 참여했다.</p>
+      <p>그러나 2026년 미국-이란 전쟁에는 <strong>미국과 이스라엘만</strong> 적극 참여 중이다.</p>
+    </div>
+
+    <div class="chart-container fade-in">
+      <canvas id="chartAlliance" height="230"></canvas>
+    </div>
+    <p class="chart-label fade-in">역대 미국 주도 중동 작전 참여 국가 수</p>
+
+    <div class="info-card fade-in">
+      <div class="info-card-title">유럽 동맹국의 이탈 현황</div>
+      <ul>
+        <li><strong>영국:</strong> 기지 제공 최초 거부 → 트럼프 압박 후 '방어 목적'으로만 제한 허가</li>
+        <li><strong>스페인:</strong> 군사기지 사용 끝까지 거절 → 트럼프 관세 보복 위협</li>
+        <li><strong>프랑스(마크롱):</strong> "이란 공습은 국제법 위반" 공개 비난</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 섹션 8: 최고지도자 사망의 역설 -->
+  <div class="section fade-in">
+    <div class="section-num">08 / 전략적 판단</div>
+    <h2 class="section-title">순교자가 된 이란 최고지도자 — 혁명을 막다</h2>
+    <div class="section-body">
+      <p>이란 최고지도자의 사망은 체제 붕괴를 앞당기기보다 오히려 역효과를 낳을 가능성이 크다. 도망치거나 숨었다면 이란 국민의 분노가 내부 혁명으로 이어질 수도 있었지만, 사망함으로써 <strong>순교자·상징</strong>이 됐다.</p>
+      <p>전쟁사에서 반복되는 원칙이다. <em>살아 있는 지도자는 부패한 정치가일 수 있지만, 죽으면 신화가 된다.</em> 이란 국민이 내부에서 체제에 저항하기가 훨씬 어려워진 구조다.</p>
+    </div>
+  </div>
+
+</div><!-- /article-body -->
+
+<!-- CONCLUSION -->
+<div class="conclusion">
+  <div style="padding: 0;">
+    <div class="section-num">종합 전망</div>
+    <h2 class="section-title">냉정하게 봐야 할 세 가지</h2>
+    <div class="section-body">
+      <p><strong style="color:#fff;">① 전쟁이 빨리 끝나면:</strong> 낙폭의 상당 부분은 회복 가능하다. 그러나 반도체 구조 문제가 남아 있어 완전 반등 여부는 불확실하다.</p>
+      <p><strong style="color:#fff;">② 전쟁이 장기화되면:</strong> 통계적으로 약소국(이란)이 홈그라운드 게릴라전에서 승률 63%. 미국의 11월 중간선거도 변수다. 장기전은 트럼프 정권의 국내 정치에 치명적이다.</p>
+      <p><strong style="color:#fff;">③ 공습만으로 이란 체제 붕괴 가능성:</strong> 역사적 전례가 단 한 번도 없다. 가능하다면 현대 전쟁사 최초의 사건이 된다.</p>
+    </div>
+
+    <div class="pullquote" style="margin-top:20px;">
+      <p>"우크라이나 전쟁처럼 잘못된 시각으로 전쟁을 보면 재산을 잃습니다. 일방적인 보도에 흔들리지 말고 면밀하게 관찰하세요."</p>
+      <cite style="color:rgba(255,255,255,0.5);">— 박종훈</cite>
+    </div>
+
+    <div style="margin-top: 20px;">
+      <span class="tag" style="background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.5);">#미국이란전쟁</span>
+      <span class="tag" style="background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.5);">#한국주가</span>
+      <span class="tag" style="background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.5);">#반도체</span>
+      <span class="tag" style="background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.5);">#전쟁사</span>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p>박종훈의 지식한방 — 원본 영상 분석 요약본 · 2026. 03. 05</p>
+</div>
+
+<script>
+  // ── Observer 1: 일반 fade-in ──
+  const fadeObs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        fadeObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(el => fadeObs.observe(el));
+
+  // ── chartConfigs: 차트 정의만 저장 (직접 호출 금지) ──
+  const chartConfigs = {};
+
+  // 차트 1: 시대별 강대국 vs 약소국 승률
+  chartConfigs['chartEra'] = () => {
+    new Chart(document.getElementById('chartEra'), {
+      type: 'bar',
+      data: {
+        labels: ['19세기', '1800~1998년\n(197건)', '1945년 이후\n(122건)', '최근 50년'],
+        datasets: [
+          {
+            label: '강대국 승률(%)',
+            data: [88, 71, 61, 50],
+            backgroundColor: '#1a1a1a',
+            borderRadius: 3,
+          },
+          {
+            label: '약소국 승률(%)',
+            data: [12, 29, 39, 50],
+            backgroundColor: '#e11d48',
+            borderRadius: 3,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: { duration: 1500, easing: 'easeInOutQuart', delay: (ctx) => ctx.dataIndex * 150 },
+        animations: { y: { from: 0 } },
+        plugins: {
+          legend: { position: 'bottom', labels: { font: { size: 11, family: 'Noto Sans KR' }, padding: 12 } },
+          tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.raw}%` } }
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { font: { size: 10 } } },
+          y: {
+            max: 100,
+            ticks: { callback: v => v + '%', font: { size: 10 } },
+            grid: { color: '#e5e5e5' }
+          }
+        }
+      }
+    });
+  };
+
+  // 차트 2: 1945년 이후 도넛 차트
+  chartConfigs['chartRecent'] = () => {
+    new Chart(document.getElementById('chartRecent'), {
+      type: 'doughnut',
+      data: {
+        labels: ['강대국 승리 (61%)', '약소국 승리 (39%)'],
+        datasets: [{
+          data: [61, 39],
+          backgroundColor: ['#1a1a1a', '#e11d48'],
+          borderWidth: 0,
+          hoverOffset: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: { animateRotate: true, animateScale: true, duration: 2000, easing: 'easeInOutQuart' },
+        cutout: '62%',
+        plugins: {
+          legend: { position: 'bottom', labels: { font: { size: 11, family: 'Noto Sans KR' }, padding: 14 } },
+          tooltip: { callbacks: { label: ctx => ` ${ctx.label}` } }
+        }
+      }
+    });
+  };
+
+  // 차트 3: 이란 vs 과거 공습 대상국 비교 (가로 바)
+  chartConfigs['chartCompare'] = () => {
+    new Chart(document.getElementById('chartCompare'), {
+      type: 'bar',
+      data: {
+        labels: ['코소보', '리비아', '이라크', '이란'],
+        datasets: [
+          {
+            label: '인구 (백만)',
+            data: [1.8, 6.6, 39, 89],
+            backgroundColor: ['#6b7280','#6b7280','#6b7280','#e11d48'],
+            borderRadius: 3,
+            yAxisID: 'y'
+          }
+        ]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        animations: { x: { from: 0 } },
+        animation: { duration: 1500, easing: 'easeInOutQuart' },
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: ctx => ` 인구 ${ctx.raw}백만 명` } }
+        },
+        scales: {
+          x: {
+            grid: { color: '#e5e5e5' },
+            ticks: { callback: v => v + 'M', font: { size: 10 } }
+          },
+          y: { grid: { display: false }, ticks: { font: { size: 11 } } }
+        }
+      }
+    });
+  };
+
+  // 차트 4: 동맹국 참여 수
+  chartConfigs['chartAlliance'] = () => {
+    new Chart(document.getElementById('chartAlliance'), {
+      type: 'bar',
+      data: {
+        labels: ['사막의 폭풍\n(1991)', '이라크 자유\n(2003)', 'ISIS 토벌\n(2014)', '아프가니스탄', '미-이란\n(2026)'],
+        datasets: [{
+          label: '참여 국가 수',
+          data: [42, 48, 60, 50, 2],
+          backgroundColor: ['#6b7280','#6b7280','#6b7280','#6b7280','#e11d48'],
+          borderRadius: 3
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: { duration: 1500, easing: 'easeInOutQuart', delay: (ctx) => ctx.dataIndex * 150 },
+        animations: { y: { from: 0 } },
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: ctx => ` ${ctx.raw}개국 참여` } }
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { font: { size: 9 } } },
+          y: {
+            grid: { color: '#e5e5e5' },
+            ticks: { font: { size: 10 } },
+            title: { display: true, text: '참여 국가 수', font: { size: 10 } }
+          }
+        }
+      }
+    });
+  };
+
+  // ── Observer 2: 차트 전용 ──
+  const chartObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const canvas = entry.target.querySelector('canvas');
+        if (canvas && chartConfigs[canvas.id]) {
+          setTimeout(() => {
+            chartConfigs[canvas.id]();
+            entry.target.classList.add('chart-ready');
+            delete chartConfigs[canvas.id];
+          }, 200);
+        }
+        chartObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.25 });
+
+  document.querySelectorAll('.chart-container').forEach(el => chartObs.observe(el));
+</script>
+</body>
+</html>
