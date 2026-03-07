@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>중동 유전 영구적 파괴 — 시험문제</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg2: #fafafa;
+      --text: #1a1a1a;
+      --text2: #777777;
+      --red: #e11d48;
+      --red2: #f43f5e;
+      --border: #e5e5e5;
+      --blue: #2563eb;
+      --green: #059669;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 15px;
+      line-height: 1.75;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 0 60px;
+    }
+
+    /* HERO */
+    .hero {
+      background: var(--text);
+      color: #fff;
+      padding: 40px 24px 32px;
+    }
+    .hero-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--red2);
+      margin-bottom: 10px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(20px, 5vw, 26px);
+      font-weight: 900;
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+    .hero h1 span { color: var(--red2); }
+    .hero p { font-size: 13px; color: #aaa; }
+
+    /* SECTION DIVIDERS */
+    .sec-header {
+      background: var(--red);
+      color: #fff;
+      padding: 14px 24px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .sec-header .count {
+      background: rgba(255,255,255,0.2);
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+    }
+
+    /* QUESTION CARDS */
+    .q-card {
+      border-bottom: 1px solid var(--border);
+      padding: 22px 24px;
+    }
+    .q-card:last-of-type { border-bottom: none; }
+    .q-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+    .q-num {
+      background: var(--text);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .q-type {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 20px;
+      border: 1.5px solid var(--border);
+      color: var(--text2);
+    }
+    .q-diff { font-size: 13px; }
+    .q-text {
+      font-size: 14.5px;
+      font-weight: 600;
+      line-height: 1.6;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .q-options { list-style: none; margin: 0; padding: 0; }
+    .q-options li {
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      margin-bottom: 6px;
+      font-size: 13.5px;
+      background: var(--bg2);
+      cursor: default;
+    }
+    .q-blank {
+      display: inline-block;
+      min-width: 60px;
+      border-bottom: 2px solid var(--red);
+      color: var(--red);
+      font-weight: 700;
+      padding: 0 4px;
+      font-size: 16px;
+    }
+    .q-hint {
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--text2);
+      background: var(--bg2);
+      border-left: 3px solid var(--border);
+      padding: 7px 12px;
+    }
+
+    /* ANSWER SECTION */
+    .a-card {
+      border-bottom: 1px solid var(--border);
+      padding: 20px 24px;
+    }
+    .a-card:last-of-type { border-bottom: none; }
+    .a-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .a-num {
+      background: var(--green);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .a-answer {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--green);
+    }
+    .a-explain {
+      font-size: 13.5px;
+      color: var(--text);
+      line-height: 1.7;
+      margin-top: 6px;
+      padding: 10px 12px;
+      background: #f0fdf4;
+      border-radius: 6px;
+    }
+    .a-explain strong { color: var(--red); }
+
+    /* SCORE BOX */
+    .score-box {
+      margin: 20px 24px;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      padding: 18px;
+      display: flex;
+      justify-content: space-around;
+      text-align: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .score-item .score-n {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--red);
+    }
+    .score-item .score-l { font-size: 11px; color: var(--text2); }
+
+    /* FADE-IN */
+    .fade-in { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    /* FOOTER */
+    .footer { padding: 24px; border-top: 2px solid var(--text); }
+    .footer p { font-size: 11.5px; color: var(--text2); }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero fade-in">
+  <div class="hero-tag">📝 시험문제 — 박종훈의 지식한방 2026.03.07</div>
+  <h1>중동 유전 영구적 파괴,<br><span>딱 2주 남았다</span></h1>
+  <p>총 10문제 | 객관식 · 단답형 · OX · 빈칸 · 서술형</p>
+</div>
+
+<!-- SCORE INFO -->
+<div class="score-box fade-in">
+  <div class="score-item"><div class="score-n">10</div><div class="score-l">총 문제</div></div>
+  <div class="score-item"><div class="score-n">3</div><div class="score-l">⭐ 쉬움</div></div>
+  <div class="score-item"><div class="score-n">5</div><div class="score-l">⭐⭐ 보통</div></div>
+  <div class="score-item"><div class="score-n">2</div><div class="score-l">⭐⭐⭐ 어려움</div></div>
+</div>
+
+<!-- ════════════════════════════════════════ -->
+<!-- QUESTION SECTION -->
+<!-- ════════════════════════════════════════ -->
+<div class="sec-header fade-in">
+  📋 시험문제 (총 10문제)
+  <span class="count">문제지</span>
+</div>
+
+<!-- Q1 -->
+<div class="q-card fade-in">
+  <div class="q-header">
+    <div class="q-num">1</div>
+    <span class="q-type">객관식</span>
+    <span class="q-diff">⭐ 쉬움</span>
+  </div>
+  <div class="q-text">이번 전쟁 발발 후 서부 텍사스 원유(WTI)의 하루 최대 상승폭은 얼마였으며, 이는 몇 년 만에 최대 기록인가?</div>
+  <ul class="q-options">
+    <li>① 약 5%, 20년 만에 최대</li>
+    <li>② 약 7%, 30년 만에 최대</li>
+    <li>③ 약 12%, 43년 만에 최대</li>
+    <li>④ 약 20%, 50년 만에 최대</li>
+  </ul>
+</div>
+
+<!-- Q2 -->
+<div class="q-card fade-in">
+  <div class="q-header">
+    <div class="q-num">2</div>
+    <span class="q-type">OX 문제</span>
+    <span class="q-diff">⭐ 쉬움</span>
+  </div>
+  <div class="q-text">다음 문장이 맞으면 O, 틀리면 X로 답하시오.<br><br>"골드만삭스는 2026년 3월 5일에 코스피 목표치를 6,400에서 7,000으로 상향 조정했다."</div>
+  <div class="q-hint">⌞ O 또는 X로 답하세요.</div>
+</div>
+
+<!-- Q3 -->
+<div class="q-card fade-in">
+  <div class="q-header">
+    <div class="q-num">3</div>
+    <span class="q-type">단답형</span>
+    <span class="q-diff">⭐ 쉬움</span>
+  </div>
+  <div class="q-text">전 세계 원유의 약 20% 이상이 통과하는 해협의 이름은 무엇인가?</div>
+  <div class="q-hint">⌞ 중동에 위치한 해협입니다.</div>
+</div>
+
+<!-- Q4 -->
+<div class="q-card fade-in">
+  <div class="q-header">
+    <div class="q-num">4</div>
+    <span class="q-type">객관식</span>
+    <span class="q-diff">⭐⭐ 보통</span>
+  </div>
+  <div class="q-text">산유국의 저장 탱크가 가득 찰 경우 선택할 수 있는 방법이 아닌 것은?</div>
+  <ul class="q-options">
+    <li>① 원유를 바다에 투기</li>
+    <li>② 원유를 태우기(플레어링)</li>
+    <li>③ 유전 밸브를 잠근다(셧인)</li>
+    <li>④ 원유를 정제하여 곧바로 수출</li>
+  </ul>
+</div>
+
+<!-- Q5 -->
+<div class="q-card fade-in">
+  <div class="q-header">
+    <div class="q-num">5</div>
+    <span class="q-type">빈칸 채우기</span>
+    <span class="q-diff">⭐⭐ 보통</span>
+  </div>
+  <div class="q-text">
+    아래 괄호 안에 들어갈 알맞은 숫자를 쓰시오.<br><br>
+    한국의 에너지 자급률은 <span class="q-blank">(  A  )</span>%이며, 일본은 <span class="q-blank">(  B  )</span>%, 대만은 <span class="q-blank">(  C  )</span>%이다. 이 수치에는 원전이 포함되어 있다.
+  </div>
+</div>
+
+<!-- Q6 -->
+<div class="q-card fade-in">
+  <div class="q-header">
+    <div class="q-num">6</div>
+    <span class="q-type">객관식</span>
+    <span class="q-diff">⭐⭐ 보통</span>
+  </div>
+  <div class="q-text">유전 밸브를 잠가 셧인(shut-in)을 하면 어떤 문제가 발생하는가?</div>
+  <ul class="q-options">
+    <li>① 원유 가격이 즉시 하락한다.</li>
+    <li>② 원유가 지하 암반 틈새에서 굳어 유전이 영구적으로 손상된다.</li>
+    <li>③ 지하수가 유전 속으로 유입되어 원유 품질이 낮아진다.</li>
+    <li>④ 지진 발생 위험이 높아진다.</li>
+  </ul>
+</div>
+
+<!-- Q7 -->
+<div class="q-card fade-in">
+  <div class="q-header">
+    <div class="q-num">7</div>
+    <span class="q-type">단답형</span>
+    <span class="q-diff">⭐⭐ 보통</span>
+  </div>
+  <div class="q-text">한국의 원전 가동에 필요한 농축 우라늄 중 몇 퍼센트가 러시아산인가? 그리고 이 사실이 한국의 에너지 자급률 19%에 대해 무엇을 시사하는가를 간단히 설명하시오.</div>
+</div>
+
+<!-- Q8 -->
+<div class="q-card fade-in">
+  <div class="q-header">
+    <div class="q-num">8</div>
+    <span class="q-type">객관식</span>
+    <span class="q-diff">⭐⭐ 보통</span>
+  </div>
+  <div class="q-text">영상에서 중국의 실질 에너지 자급률과 전체 에너지 중 석유·가스 의존 비중에 대한 올바른 설명은?</div>
+  <ul class="q-options">
+    <li>① 에너지 자급률 40%, 석유 의존 약 40%</li>
+    <li>② 에너지 자급률 85%, 석유 의존 약 9%</li>
+    <li>③ 에너지 자급률 60%, 석유 의존 약 20%</li>
+    <li>④ 에너지 자급률 70%, 석유 의존 약 15%</li>
+  </ul>
+</div>
+
+<!-- Q9 -->
+<div class="q-card fade-in">
+  <div class="q-header">
+    <div class="q-num">9</div>
+    <span class="q-type">서술형</span>
+    <span class="q-diff">⭐⭐⭐ 어려움</span>
+  </div>
+  <div class="q-text">중국이 호르무즈 해협 봉쇄 해제에 소극적일 수 있는 전략적 이유를 3가지 이상 서술하시오.</div>
+  <div class="q-hint">⌞ 미국의 무기 소모, 항모 전단, 대만 등의 키워드를 활용하세요.</div>
+</div>
+
+<!-- Q10 -->
+<div class="q-card fade-in">
+  <div class="q-header">
+    <div class="q-num">10</div>
+    <span class="q-type">서술형</span>
+    <span class="q-diff">⭐⭐⭐ 어려움</span>
+  </div>
+  <div class="q-text">유가 상승이 한국 증시(KOSPI)에 영향을 미치는 경로를 무역수지 → 환율 → 외국인 투자자 행동까지 연결하여 논리적으로 설명하시오.</div>
+  <div class="q-hint">⌞ 유가 $100 돌파 시 무역수지 변화 → 원화 가치 → 외국인 이탈의 공포 심리를 포함하세요.</div>
+</div>
+
+
+<!-- ════════════════════════════════════════ -->
+<!-- ANSWER SECTION -->
+<!-- ════════════════════════════════════════ -->
+<div class="sec-header fade-in" style="margin-top:40px; background: var(--text);">
+  📝 정답 및 해설
+  <span class="count" style="background:rgba(255,255,255,0.15);">정답지</span>
+</div>
+
+<!-- A1 -->
+<div class="a-card fade-in">
+  <div class="a-header">
+    <div class="a-num">1</div>
+    <div class="a-answer">정답: ③ 약 12%, 43년 만에 최대</div>
+  </div>
+  <div class="a-explain">
+    영상에서 "어제 하루 동안 <strong>12%가 넘게 올랐거든요</strong>. 이렇게 엄청나게 올랐던 건 <strong>43년 만에 처음</strong>"이라고 명시했다. 전쟁 발발 후 첫 1주간 누적 상승률은 35.6%였다.
+  </div>
+</div>
+
+<!-- A2 -->
+<div class="a-card fade-in">
+  <div class="a-header">
+    <div class="a-num">2</div>
+    <div class="a-answer">정답: O (맞다)</div>
+  </div>
+  <div class="a-explain">
+    영상에서 <strong>"골드만삭스가 3월 5일에 코스피 지수 목표치를 6,400에서 7,000으로 상향 조정했다"</strong>고 구체적으로 언급했다. "2월 5일이 아니라 3월 5일"임을 강조했다.
+  </div>
+</div>
+
+<!-- A3 -->
+<div class="a-card fade-in">
+  <div class="a-header">
+    <div class="a-num">3</div>
+    <div class="a-answer">정답: 호르무즈 해협</div>
+  </div>
+  <div class="a-explain">
+    영상에서 "전 세계 각국이 원유의 <strong>20% 이상이 지나가는 호르무즈</strong>가 마비됐다"고 설명했다. 사우디의 원유 역시 대부분 이 해협을 통과해야 하므로 사우디 증산도 사실상 무의미하다.
+  </div>
+</div>
+
+<!-- A4 -->
+<div class="a-card fade-in">
+  <div class="a-header">
+    <div class="a-num">4</div>
+    <div class="a-answer">정답: ④ 원유를 정제하여 곧바로 수출</div>
+  </div>
+  <div class="a-explain">
+    영상에서 저장 탱크가 가득 찰 경우 선택지는 <strong>① 바다에 투기(국제법 위반, 불가), ② 원유 태우기(폭발 위험, 사실상 불가), ③ 유전 셧인(영구 손상 위험)</strong> 세 가지만 언급됐다. 정제·수출은 호르무즈가 봉쇄된 상황에서 불가능하며 영상에서 언급되지 않은 선택지다.
+  </div>
+</div>
+
+<!-- A5 -->
+<div class="a-card fade-in">
+  <div class="a-header">
+    <div class="a-num">5</div>
+    <div class="a-answer">정답: A = 19, B = 13, C = 4</div>
+  </div>
+  <div class="a-explain">
+    영상에서 국가별 에너지 자급률(원전 포함)을 다음과 같이 제시했다: <strong>미국 105%, 중국 85%, 유럽 45%, 한국 19%, 일본 13%, 대만 4%</strong>. 동아시아 3국(한·일·대)이 가장 취약하다.
+  </div>
+</div>
+
+<!-- A6 -->
+<div class="a-card fade-in">
+  <div class="a-header">
+    <div class="a-num">6</div>
+    <div class="a-answer">정답: ② 원유가 지하 암반 틈새에서 굳어 유전이 영구적으로 손상된다.</div>
+  </div>
+  <div class="a-explain">
+    영상에서 "우리 몸의 혈관처럼 피가 흐르지 않으면 굳어 막힌다"는 비유를 들었다. 밸브를 잠그면 <strong>아스팔트 등 중질 성분이 암반 틈새를 굳혀</strong> 파이프를 전부 폐기해야 한다. 1991년 걸프전 당시 쿠웨이트 유전이 망가져 복구에 <strong>5년</strong>이 걸린 게 대표 사례다.
+  </div>
+</div>
+
+<!-- A7 -->
+<div class="a-card fade-in">
+  <div class="a-header">
+    <div class="a-num">7</div>
+    <div class="a-answer">정답: 40% (러시아산 우라늄)</div>
+  </div>
+  <div class="a-explain">
+    한국 원전 가동에 필요한 농축 우라늄의 <strong>40%가 러시아산</strong>이다. IEA 기준으로 우라늄 수입도 '자급'으로 분류해 자급률 19%가 나오지만, 실질적으로 <strong>적대국인 러시아에서 우라늄을 수입하는 상황</strong>이므로 실질 자급률은 19%에도 미치지 못한다는 게 영상의 핵심 주장이다.
+  </div>
+</div>
+
+<!-- A8 -->
+<div class="a-card fade-in">
+  <div class="a-header">
+    <div class="a-num">8</div>
+    <div class="a-answer">정답: ② 에너지 자급률 85%, 석유 의존 약 9%</div>
+  </div>
+  <div class="a-explain">
+    영상에서 중국의 에너지 자급률을 <strong>85%</strong>(태양광·풍력·수력·원전 포함)로 설명했다. 나머지 15% 중 석유·가스가 약 60%를 차지하므로, 전체 에너지에서 석유·가스 수입 의존 비중은 <strong>약 9%</strong>다(15% × 60% = 9%). 이는 한국의 석유 의존도(~82%)와 극명한 대비를 이룬다.
+  </div>
+</div>
+
+<!-- A9 -->
+<div class="a-card fade-in">
+  <div class="a-header">
+    <div class="a-num">9</div>
+    <div class="a-answer">정답: 아래 3가지 이상 포함 시 정답</div>
+  </div>
+  <div class="a-explain">
+    <strong>① 미국 정밀 무기 소모:</strong> 미국이 이란과 장기전을 치르면서 토마호크·공대지 정밀 미사일을 대량 소진하게 된다.<br><br>
+    <strong>② 미국 항모전단 분산:</strong> 미국이 운용할 수 있는 항모전단은 총 5개. 이란전에 2개 투입 시 3개만 남아 중국 견제 전력이 현저히 약화된다.<br><br>
+    <strong>③ 대만 침공 기회 확대:</strong> 미국 전력이 소모된 틈을 이용해 대만 침공 최적 타이밍이 앞당겨질 수 있다는 중국의 전략적 계산이 작용한다.<br><br>
+    <strong>④ 중국의 에너지 대안 존재:</strong> 유가 소폭 상승은 러시아산 원유로 상쇄 가능하므로 감내할 수 있다.
+  </div>
+</div>
+
+<!-- A10 -->
+<div class="a-card fade-in">
+  <div class="a-header">
+    <div class="a-num">10</div>
+    <div class="a-answer">정답: 아래 논리 흐름을 포함 시 정답</div>
+  </div>
+  <div class="a-explain">
+    <strong>[1] 유가 상승 → 무역수지 적자:</strong> 한국은 에너지 수입 의존도 81%로, 유가 $100 돌파 시 수입 비용이 급증해 무역수지가 적자로 전환된다.<br><br>
+    <strong>[2] 무역수지 적자 → 원화 약세:</strong> 달러 유입이 줄고 유출이 늘면서 원/달러 환율이 급등한다(원화 가치 하락).<br><br>
+    <strong>[3] 원화 약세 → 외국인 이탈:</strong> 외국인 투자자들은 주가 상승 이익보다 환전 시 원화 가치 하락으로 인한 손실을 더 두려워한다. 과거 1998년(IMF), 2008년 환율 급등 경험이 공포 심리로 남아 있어 선제적으로 한국 주식을 매도한다.<br><br>
+    <strong>[결론]:</strong> 외국인 순매도 지속 → KOSPI 하락 압력. 불안 요인이 해소되지 않은 상황에서 전망치 상향은 근거가 없다.
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer fade-in">
+  <p>본 시험문제는 박종훈의 지식한방(2026.03.07) 영상 분석을 바탕으로 제작된 교육 자료입니다.</p>
+</div>
+
+<script>
+const fadeObs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 60);
+      fadeObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade-in').forEach(el => fadeObs.observe(el));
+</script>
+</body>
+</html>

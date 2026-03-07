@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>중동 유전 영구적 파괴, 딱 2주 남았다 — 분석 리포트</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg2: #fafafa;
+      --text: #1a1a1a;
+      --text2: #777777;
+      --red: #e11d48;
+      --red2: #f43f5e;
+      --border: #e5e5e5;
+      --blue: #2563eb;
+      --gray: #6b7280;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 15px;
+      line-height: 1.75;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 0 60px;
+    }
+
+    /* ── HEADER ── */
+    .hero {
+      background: var(--text);
+      color: #fff;
+      padding: 48px 24px 36px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      background: var(--red);
+      opacity: 0.18;
+    }
+    .hero-label {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--red2);
+      margin-bottom: 14px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', 'Noto Serif KR', serif;
+      font-size: clamp(22px, 5.5vw, 30px);
+      font-weight: 900;
+      line-height: 1.3;
+      margin-bottom: 16px;
+      color: #fff;
+    }
+    .hero h1 span { color: var(--red2); }
+    .hero-meta {
+      font-size: 12px;
+      color: #aaa;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .hero-meta b { color: #ddd; }
+
+    /* ── DIVIDER ── */
+    .rule { border: none; border-top: 1px solid var(--border); margin: 28px 24px; }
+    .rule-red { border-color: var(--red); margin: 0 24px 28px; }
+
+    /* ── SECTION ── */
+    .section { padding: 0 24px; margin-bottom: 36px; }
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 6px;
+    }
+    .section h2 {
+      font-family: 'Playfair Display', 'Noto Serif KR', serif;
+      font-size: clamp(18px, 4.5vw, 22px);
+      font-weight: 700;
+      line-height: 1.35;
+      margin-bottom: 14px;
+      color: var(--text);
+    }
+    .section p { color: var(--text); margin-bottom: 12px; }
+    .section p:last-child { margin-bottom: 0; }
+
+    /* ── PULL QUOTE ── */
+    .pull-quote {
+      border-left: 4px solid var(--red);
+      padding: 12px 18px;
+      background: var(--bg2);
+      margin: 20px 0;
+      font-family: 'Noto Serif KR', serif;
+      font-size: 15px;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.65;
+    }
+    .pull-quote strong { color: var(--red); font-style: normal; }
+
+    /* ── STAT CARDS ── */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin: 18px 0;
+    }
+    .stat-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      text-align: center;
+    }
+    .stat-card .num {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--red);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-card .num.blue { color: var(--blue); }
+    .stat-card .num.dark { color: var(--text); }
+    .stat-card .label { font-size: 11px; color: var(--text2); line-height: 1.4; }
+
+    /* ── HIGHLIGHT BOX ── */
+    .highlight-box {
+      background: var(--red);
+      color: #fff;
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin: 20px 0;
+    }
+    .highlight-box .hl-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0.8;
+      margin-bottom: 8px;
+    }
+    .highlight-box p {
+      font-size: 14px;
+      line-height: 1.65;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .highlight-box p:last-child { margin-bottom: 0; }
+    .highlight-box strong { color: #ffe0e7; }
+
+    /* ── WARN BOX ── */
+    .warn-box {
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 20px 0;
+      font-size: 13.5px;
+    }
+    .warn-box .warn-title { font-weight: 700; color: #856404; margin-bottom: 6px; }
+
+    /* ── TABLE ── */
+    .tbl-wrap { overflow-x: auto; margin: 16px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead th {
+      background: var(--red);
+      color: #fff;
+      padding: 10px 12px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 12px;
+    }
+    tbody td {
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 9px 12px;
+      color: var(--text);
+    }
+    tbody tr:hover td { background: #f0f0f0; }
+    .td-red { color: var(--red); font-weight: 700; }
+    .td-blue { color: var(--blue); font-weight: 700; }
+
+    /* ── TIMELINE ── */
+    .timeline { margin: 18px 0; }
+    .tl-item {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 16px;
+      align-items: flex-start;
+    }
+    .tl-dot {
+      flex-shrink: 0;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--red);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      line-height: 1.2;
+    }
+    .tl-dot.gray { background: var(--gray); }
+    .tl-content { flex: 1; padding-top: 6px; }
+    .tl-content strong { color: var(--red); font-size: 13px; display: block; margin-bottom: 2px; }
+    .tl-content p { font-size: 13px; color: var(--text2); margin: 0; }
+
+    /* ── STEP BOX ── */
+    .step-list { margin: 16px 0; }
+    .step-item {
+      display: flex;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .step-item:last-child { border-bottom: none; }
+    .step-num {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      background: var(--text);
+      color: #fff;
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .step-text { flex: 1; font-size: 13.5px; }
+    .step-text strong { color: var(--text); }
+    .step-text .verdict {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 20px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+    .verdict-ok { background: #059669; }
+
+    /* ── CHART ── */
+    .chart-container {
+      position: relative;
+      max-height: 340px;
+      margin: 18px 0;
+    }
+    .chart-container canvas {
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      max-height: 300px;
+    }
+    .chart-container.chart-ready canvas { opacity: 1; }
+    .chart-caption {
+      font-size: 11px;
+      color: var(--text2);
+      text-align: center;
+      margin-top: 6px;
+    }
+
+    /* ── FADE-IN ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      padding: 28px 24px;
+      border-top: 2px solid var(--text);
+      margin-top: 20px;
+    }
+    .footer p { font-size: 11.5px; color: var(--text2); line-height: 1.7; }
+    .footer strong { color: var(--text); }
+
+    /* ── SUMMARY BADGE ── */
+    .badge-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0; }
+    .badge {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 1.5px solid var(--red);
+      color: var(--red);
+    }
+    .badge.filled { background: var(--red); color: #fff; }
+
+    .section-divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 24px;
+      margin: 8px 0 24px;
+    }
+    .section-divider span {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--text2);
+      white-space: nowrap;
+    }
+    .section-divider::before,
+    .section-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero fade-in">
+  <div class="hero-label">📺 박종훈의 지식한방 — 2026.03.07</div>
+  <h1>중동 유전 영구적 파괴,<br><span>딱 2주 남았다</span></h1>
+  <div class="hero-meta">
+    <span><b>채널:</b> 박종훈의 지식한방</span>
+    <span><b>분야:</b> 에너지·유가·한국 증시</span>
+    <span><b>원본:</b> youtu.be/iamPkJz6TAQ</span>
+  </div>
+</div>
+
+<!-- KEY NUMBERS -->
+<div style="padding: 28px 24px 0;" class="fade-in">
+  <div class="section-label">핵심 수치 한눈에</div>
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="num">+12%</div>
+      <div class="label">WTI 하루 상승폭<br>(43년 만에 최대)</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">+35.6%</div>
+      <div class="label">전쟁 발발 후<br>1주간 상승률</div>
+    </div>
+    <div class="stat-card">
+      <div class="num dark">$90+</div>
+      <div class="label">현재 WTI<br>(90달러 돌파)</div>
+    </div>
+    <div class="stat-card">
+      <div class="num blue">7,000</div>
+      <div class="label">골드만삭스<br>KOSPI 신규 목표치</div>
+    </div>
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- SECTION 1: 유가 급등 배경 -->
+<div class="section fade-in">
+  <div class="section-label">Issue 01</div>
+  <h2>유가가 폭등한 이유 — 호르무즈 봉쇄</h2>
+  <p>
+    이번 전쟁 발발 후 서부 텍사스 원유(WTI)는 단 하루에 <strong>12% 이상</strong> 급등하며 43년 만에 최대 상승폭을 기록했다. 전쟁 발발 첫 1주일 동안 누적 상승률은 <strong>35.6%</strong>에 달했다.
+  </p>
+  <p>
+    초기 1주일간 80달러대를 간신히 유지했던 것은 각국이 비축 물량을 풀고, 트럼프 대통령의 발언으로 시장 불안을 진정시켰기 때문이다.
+  </p>
+
+  <div class="timeline">
+    <div class="tl-item fade-in">
+      <div class="tl-dot">1주</div>
+      <div class="tl-content">
+        <strong>비축 물량 방출 + 트럼프 구두 개입</strong>
+        <p>"이란 대공망 완전 파괴, 곧 승리" 등 발언으로 유가 급등 억제</p>
+      </div>
+    </div>
+    <div class="tl-item fade-in">
+      <div class="tl-dot">2주</div>
+      <div class="tl-content">
+        <strong>$90 돌파 → 선물시장 직접 개입 선언 (3/6)</strong>
+        <p>트럼프 행정부, 원유 선물 시장에 미국 정부가 직접 개입하겠다고 선언</p>
+      </div>
+    </div>
+    <div class="tl-item fade-in">
+      <div class="tl-dot gray">?주</div>
+      <div class="tl-content">
+        <strong>저장 탱크 한계 도달 → 유전 셧인 위기</strong>
+        <p>앞으로 약 2주 내 저장 탱크가 가득 찰 것으로 예상</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="pull-quote fade-in">
+    세계 원유의 <strong>20% 이상</strong>이 통과하는 호르무즈 해협이 마비됐다. 게다가 이란이 중국에 몰래 팔던 물량까지 중단되어, 실제 원유 공급은 <strong>23~25% 감소</strong>했다.
+  </div>
+</div>
+
+<!-- CHART 1: OIL PRICE -->
+<div class="section fade-in">
+  <div class="section-label">Chart 01</div>
+  <h2>WTI 유가 흐름 (전쟁 전후)</h2>
+  <div class="chart-container fade-in">
+    <canvas id="oilChart" height="220"></canvas>
+  </div>
+  <p class="chart-caption">※ 전쟁 발발 전후 주별 유가 흐름 (상대적 수준 도식화)</p>
+</div>
+
+<hr class="rule">
+
+<!-- SECTION 2: 저장 탱크 & 유전 셧인 위기 -->
+<div class="section fade-in">
+  <div class="section-label">Issue 02</div>
+  <h2>딱 2주 — 저장 탱크가 꽉 찬다</h2>
+  <p>
+    산유국들의 저장 탱크는 일반적으로 <strong>2~3주치 용량</strong>을 가진다. 전쟁 발발 시점에 이미 상당량이 비어 있었다고 해도, 유조선까지 동원하면 약 <strong>3주</strong>가 한계다. 방송 시점(3/7) 기준 전쟁이 1주 경과했으므로, <strong>앞으로 2주 내(3월 중순)</strong>에 저장 공간이 포화 상태에 이른다.
+  </p>
+
+  <div class="highlight-box fade-in">
+    <div class="hl-title">⚠ 저장 탱크가 꽉 차면 어떻게 되나?</div>
+    <p>원유는 계속 뿜어져 나오는데 저장할 곳이 없어진다. 선택지는 세 가지뿐이다.</p>
+    <p><strong>① 바다에 투기</strong> — 국제법 위반 + 걸프만 환경 오염 → 불가</p>
+    <p><strong>② 플레어링(태우기)</strong> — 원유는 액체 상태라 폭발 위험 → 사실상 불가</p>
+    <p><strong>③ 유전 밸브 잠금(셧인)</strong> — 선택 가능하지만 <strong style="color:#ffe0e7;">유전 영구 손상</strong> 위험</p>
+  </div>
+
+  <div class="section-label" style="margin-top:20px;">유전 셧인이 왜 치명적인가</div>
+  <p>
+    유전은 수도꼭지처럼 마음대로 잠갔다가 다시 열 수 없다. 원유가 흐르지 않으면 아스팔트 등 중질 성분이 굳어 지하 암반 틈새를 막아버린다.
+  </p>
+  <div class="pull-quote fade-in">
+    1991년 걸프전 당시 쿠웨이트 유전이 이렇게 망가져, 복구에 <strong>무려 5년</strong>이 걸렸다. 기존 파이프는 전부 폐기하고 유전을 새로 개발해야 하는 수준이다.
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- SECTION 3: 에너지 자급률 비교 -->
+<div class="section fade-in">
+  <div class="section-label">Issue 03</div>
+  <h2>에너지 자급률 국가별 비교 — 한국이 가장 취약</h2>
+  <p>
+    일부에서는 "유가가 올라도 중국이 가장 타격받는다"고 주장하지만, 실제 에너지 자급률을 보면 전혀 다른 그림이 나온다.
+  </p>
+
+  <!-- CHART 2: Energy Self-Sufficiency -->
+  <div class="chart-container fade-in">
+    <canvas id="energyChart" height="240"></canvas>
+  </div>
+  <p class="chart-caption">※ 국제에너지기구(IEA) 기준. 원전 포함 수치. (출처: 영상 내 언급 수치)</p>
+
+  <div class="tbl-wrap fade-in">
+    <table>
+      <thead>
+        <tr>
+          <th>국가</th>
+          <th>에너지 자급률</th>
+          <th>석유·가스 의존도</th>
+          <th>비고</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>🇺🇸 미국</td><td class="td-blue">105%</td><td>에너지 순수출국</td><td>최대 수혜국</td></tr>
+        <tr><td>🇨🇳 중국</td><td>85%</td><td>전체 에너지의 약 9%</td><td>러시아산 대안 가능</td></tr>
+        <tr><td>🇪🇺 유럽</td><td>45%</td><td>55% 수입</td><td>태양광 등 신재생 확충</td></tr>
+        <tr><td>🇰🇷 한국</td><td class="td-red">19%</td><td>81% 수입</td><td>우라늄 40% 러시아산</td></tr>
+        <tr><td>🇯🇵 일본</td><td class="td-red">13%</td><td>87% 수입</td><td>동아시아 3국 취약</td></tr>
+        <tr><td>🇹🇼 대만</td><td class="td-red">4%</td><td>96% 수입</td><td>가장 취약</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="warn-box fade-in">
+    <div class="warn-title">⚠ 한국의 실질 에너지 자급률은 19%도 안 된다</div>
+    원전 가동에 필요한 농축 우라늄의 <strong>40%가 러시아산</strong>이다. 러시아를 적대국으로 분류하는 현 상황에서 이 19%조차 신뢰하기 어렵다.
+  </div>
+</div>
+
+<!-- CHART 3: KOREA vs CHINA OIL DEPENDENCY -->
+<div class="section fade-in">
+  <div class="section-label">Chart 03</div>
+  <h2>중국의 실질 석유 의존도 — 오해를 바로잡다</h2>
+  <p>
+    "중국 석유 자급률 40%"라는 수치를 내세워 '중국이 유가 상승으로 망한다'는 주장이 많다. 하지만 이 숫자는 에너지 전체가 아닌 <b>석유 부문만의 수치</b>다.
+  </p>
+
+  <div class="stat-grid fade-in">
+    <div class="stat-card">
+      <div class="num">91%</div>
+      <div class="label">중국 실질<br>에너지 자급률<br><small style="color:#aaa">(태양광·풍력·원전·수력 포함)</small></div>
+    </div>
+    <div class="stat-card">
+      <div class="num">~9%</div>
+      <div class="label">중국 에너지 중<br>석유·가스<br>수입 의존 비중</div>
+    </div>
+  </div>
+
+  <div class="chart-container fade-in">
+    <canvas id="chinaChart" height="220"></canvas>
+  </div>
+  <p class="chart-caption">※ 한국(82%)과 중국(9%) 전체 에너지 대비 석유의존도 비교</p>
+
+  <p style="margin-top:14px;">
+    더불어 중국은 <strong>러시아산 원유를 국제 가격 대비 20~30% 할인된 가격</strong>으로 구매할 수 있는 대안이 있다. 유럽이 러시아산 원유를 살 수 없는 상황에서 중국·인도만 에너지 가격 경쟁력이 오히려 높아지는 역설이 발생한다.
+  </p>
+</div>
+
+<hr class="rule">
+
+<!-- SECTION 4: 전쟁 일정 & 60일 시한 -->
+<div class="section fade-in">
+  <div class="section-label">Issue 04</div>
+  <h2>전쟁 일정 — 계속 연장되는 목표 시한</h2>
+
+  <div class="tbl-wrap fade-in">
+    <table>
+      <thead>
+        <tr><th>발언 시점</th><th>트럼프 행정부 전쟁 종결 발언</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>전쟁 초기</td><td>"3~4주 안에 전쟁 끝낼 수 있다"</td></tr>
+        <tr><td>3월 6일</td><td class="td-red">"전쟁 발발로부터 4~6주 내 작전 목표 달성"<br>→ 실질 5~7주로 연장</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="highlight-box fade-in" style="background: var(--text);">
+    <div class="hl-title">⚖ 미국 전쟁 권한법(War Powers Act)</div>
+    <p>미국 대통령은 의회 승인 없이 <strong>최대 60일</strong>간 독자적으로 군사작전을 수행할 수 있다.</p>
+    <p>60일이 지나면 의회 승인이 필요하므로, 트럼프 대통령 입장에서도 <strong>60일이라는 암묵적 시한</strong>이 존재한다.</p>
+  </div>
+
+  <p style="margin-top:16px;">
+    그러나 게릴라·비대칭 전술로 드론 수만 기와 대함 미사일을 운용하는 이란의 전술 앞에서 해상 에스코트는 매우 위험하다. 유조선 한 척만 피격돼도 항해 회사들의 이탈이 불가피하다.
+  </p>
+  <p>
+    또한 하메이 사망 전에 "지휘 시스템이 마비돼도 일선 부대가 각자 알아서 공격하라"는 명령을 내려 놓아, 현재 각 부대가 독립적으로 게릴라전을 수행 중이다.
+  </p>
+</div>
+
+<hr class="rule">
+
+<!-- SECTION 5: 중국 전략적 계산 -->
+<div class="section fade-in">
+  <div class="section-label">Issue 05</div>
+  <h2>중국의 전략적 계산 — 호르무즈 봉쇄가 오히려 유리?</h2>
+  <p>
+    중국은 겉으로 이란에 "호르무즈 열어라"고 경고하지만, 실제 본심은 반대일 수 있다는 분석이다.
+  </p>
+
+  <div class="step-list fade-in">
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-text">
+        미국이 이란과 장기전을 벌이면서 <strong>토마호크 미사일, 공대지 정밀 미사일</strong>을 대량 소진
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-text">
+        미국의 운용 가능한 항모전단은 총 <strong>5개</strong>. 이란전에 2개 사용 시 3개만 남음
+        <br><small style="color:var(--text2)">→ 미국 본토 + 유럽 + 중국 견제에 각 1개씩밖에 배정 불가</small>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-text">
+        중국 입장에서 <strong>대만 침공 최적의 타이밍</strong>이 앞당겨질 수 있다는 오판 가능성
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">4</div>
+      <div class="step-text">
+        유가 소폭 상승의 고통을 감내하는 대가로 <strong>미국 패권에 훨씬 큰 타격</strong>을 줄 수 있는 계산
+      </div>
+    </div>
+  </div>
+
+  <div class="pull-quote fade-in">
+    패권 전쟁의 본질은 <strong>"나의 고통을 감내하면서 상대방에게 더 큰 타격을 줄 수 있으면 그 정책을 고집하는 것"</strong>이다. 중국이 호르무즈 해제에 소극적일 수밖에 없는 이유다.
+  </div>
+</div>
+
+<hr class="rule">
+
+<!-- SECTION 6: KOSPI & 증권가 비판 -->
+<div class="section fade-in">
+  <div class="section-label">Issue 06</div>
+  <h2>KOSPI 전망 — 골드만삭스 7,000 상향의 문제점</h2>
+
+  <div class="tbl-wrap fade-in">
+    <table>
+      <thead>
+        <tr><th>변수</th><th>현재 상황</th><th>KOSPI 영향</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>유가 ($100 돌파 시)</td><td class="td-red">무역수지 적자 전환</td><td class="td-red">원화 약세 → 외국인 이탈</td></tr>
+        <tr><td>한전 전기요금</td><td>부채 200조+ (이자 4.3조/년)</td><td>전기요금 인상 압력</td></tr>
+        <tr><td>반도체 원가</td><td>전력 비용 급등</td><td>실적 하방 압력</td></tr>
+        <tr><td>美 인플레이션</td><td>스태그플레이션 신호</td><td>연준 금리인하 지연</td></tr>
+        <tr><td>네오클라우드 자금</td><td>데이터센터 투자 지연</td><td>메모리 수요 위축 우려</td></tr>
+        <tr><td>외국인 매도</td><td>월 ~20조원 순매도 지속</td><td>수급 악화</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="margin-top:14px;">
+    3월 5일 골드만삭스가 코스피 목표치를 6,400 → <strong>7,000</strong>으로 상향했지만, 정작 외국인은 3월에도 순매도를 지속했다. 목표치를 상향한 기관이 왜 실제로는 팔고 있는지 논리적으로 모순이다.
+  </p>
+
+  <div class="badge-row fade-in">
+    <span class="badge filled">외국인 순매도 지속</span>
+    <span class="badge">유가 불안 미해소</span>
+    <span class="badge">스태그플레이션 신호</span>
+    <span class="badge">전망치 상향 근거 부재</span>
+  </div>
+</div>
+
+<!-- CHART 4: RISK FACTOR RADAR -->
+<div class="section fade-in">
+  <div class="section-label">Chart 04</div>
+  <h2>유가 상승이 한국에 미치는 영향 경로</h2>
+  <div class="chart-container fade-in">
+    <canvas id="impactChart" height="240"></canvas>
+  </div>
+  <p class="chart-caption">※ 5점 만점 기준 충격 강도 평가 (영상 내 언급 내용 기반)</p>
+</div>
+
+<hr class="rule">
+
+<!-- SECTION 7: 핵심 요약 -->
+<div class="section fade-in">
+  <div class="section-label">Summary</div>
+  <h2>핵심 메시지 정리</h2>
+
+  <div class="step-list fade-in">
+    <div class="step-item">
+      <div class="step-num" style="background:var(--red);">①</div>
+      <div class="step-text">
+        <strong>3월 중순까지</strong> — 산유국 저장 탱크 포화. 이후 유전 셧인(영구 손상) 위기
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num" style="background:var(--red);">②</div>
+      <div class="step-text">
+        <strong>한국·일본·대만</strong>이 이번 유가 충격의 최대 피해자. 중국은 대안(러시아산)이 있어 상대적 유리
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num" style="background:var(--red);">③</div>
+      <div class="step-text">
+        <strong>미국의 항모 전단 소모</strong>가 중국에게 전략적 기회를 제공할 위험 있음
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num" style="background:var(--red);">④</div>
+      <div class="step-text">
+        <strong>KOSPI 전망치 상향</strong>은 불안 요인이 해소되지 않은 상태에서 근거가 부족. 차분한 대응 필요
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer fade-in">
+  <p>
+    <strong>본 문서는 박종훈의 지식한방 유튜브 영상(2026.03.07) 내용을 분석·정리한 교육 자료입니다.</strong><br>
+    투자 판단은 반드시 본인이 직접 하시기 바랍니다. 본 분석은 투자 권유가 아닙니다.
+  </p>
+</div>
+
+<script>
+// ── FADE-IN OBSERVER ──
+const fadeObs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+      fadeObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-in').forEach(el => fadeObs.observe(el));
+
+// ── CHART CONFIGS ──
+const chartConfigs = {};
+
+// Chart 1: Oil Price Timeline
+chartConfigs['oilChart'] = () => {
+  new Chart(document.getElementById('oilChart'), {
+    type: 'line',
+    data: {
+      labels: ['전쟁 전', '전쟁 D+1', 'D+3', 'D+5', 'D+7(1주)', 'D+10', 'D+14(2주)'],
+      datasets: [{
+        label: 'WTI 유가 (상대 지수)',
+        data: [66, 70, 72, 76, 90, 93, 96],
+        borderColor: '#e11d48',
+        backgroundColor: 'rgba(225,29,72,0.10)',
+        borderWidth: 2.5,
+        pointBackgroundColor: '#e11d48',
+        pointRadius: 5,
+        tension: 0.4,
+        fill: true
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: { duration: 1800, easing: 'easeInOutQuart' },
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => ` 지수: ${ctx.raw}` } }
+      },
+      scales: {
+        x: { ticks: { font: { size: 11 }, color: '#777' }, grid: { color: '#f0f0f0' } },
+        y: {
+          ticks: { font: { size: 11 }, color: '#777' },
+          grid: { color: '#f0f0f0' },
+          min: 60,
+          title: { display: true, text: '상대 지수 (전쟁 전=66)', font: { size: 10 }, color: '#aaa' }
+        }
+      }
+    }
+  });
+};
+
+// Chart 2: Energy Self-Sufficiency
+chartConfigs['energyChart'] = () => {
+  new Chart(document.getElementById('energyChart'), {
+    type: 'bar',
+    data: {
+      labels: ['미국', '중국', '유럽', '한국', '일본', '대만'],
+      datasets: [{
+        label: '에너지 자급률 (%)',
+        data: [105, 85, 45, 19, 13, 4],
+        backgroundColor: ['#2563eb','#6b7280','#6b7280','#e11d48','#e11d48','#e11d48'],
+        borderRadius: 6,
+        borderSkipped: false,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: {
+        duration: 1500, easing: 'easeInOutQuart',
+        delay: ctx => ctx.dataIndex * 150
+      },
+      animations: { y: { from: 0 } },
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => ` 자급률: ${ctx.raw}%` } }
+      },
+      scales: {
+        x: { ticks: { font: { size: 12 }, color: '#1a1a1a' }, grid: { display: false } },
+        y: {
+          ticks: { font: { size: 11 }, color: '#777', callback: v => v + '%' },
+          grid: { color: '#f0f0f0' },
+          max: 120,
+          title: { display: true, text: '자급률 (%)', font: { size: 10 }, color: '#aaa' }
+        }
+      }
+    }
+  });
+};
+
+// Chart 3: China vs Korea oil dependency donut
+chartConfigs['chinaChart'] = () => {
+  new Chart(document.getElementById('chinaChart'), {
+    type: 'bar',
+    data: {
+      labels: ['한국 석유의존도', '중국 석유의존도'],
+      datasets: [{
+        label: '전체 에너지 대비 석유 의존 비중',
+        data: [82, 9],
+        backgroundColor: ['#e11d48', '#2563eb'],
+        borderRadius: 8,
+        borderSkipped: false,
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: { duration: 1500, easing: 'easeInOutQuart' },
+      animations: { x: { from: 0 } },
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => ` ${ctx.raw}%` } }
+      },
+      scales: {
+        x: {
+          ticks: { font: { size: 11 }, color: '#777', callback: v => v + '%' },
+          grid: { color: '#f0f0f0' },
+          max: 100
+        },
+        y: { ticks: { font: { size: 12 }, color: '#1a1a1a' }, grid: { display: false } }
+      }
+    }
+  });
+};
+
+// Chart 4: Impact Radar
+chartConfigs['impactChart'] = () => {
+  new Chart(document.getElementById('impactChart'), {
+    type: 'radar',
+    data: {
+      labels: ['무역수지\n악화', '원화 약세\n(환율 급등)', '전기요금\n인상', '반도체\n원가 상승', '인플레이션\n가속', '외국인\n이탈'],
+      datasets: [{
+        label: '유가 상승 충격 강도',
+        data: [4.5, 4.5, 4, 3.5, 4, 4.5],
+        borderColor: '#e11d48',
+        backgroundColor: 'rgba(225,29,72,0.15)',
+        pointBackgroundColor: '#e11d48',
+        borderWidth: 2,
+        pointRadius: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: { duration: 1800, easing: 'easeInOutQuart', delay: ctx => ctx.dataIndex * 120 },
+      plugins: { legend: { display: false } },
+      scales: {
+        r: {
+          min: 0, max: 5,
+          ticks: { display: false },
+          grid: { color: '#e5e5e5' },
+          pointLabels: { font: { size: 11 }, color: '#1a1a1a' }
+        }
+      }
+    }
+  });
+};
+
+// ── CHART OBSERVER ──
+const chartObs = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const canvas = entry.target.querySelector('canvas');
+      if (canvas && chartConfigs[canvas.id]) {
+        setTimeout(() => {
+          chartConfigs[canvas.id]();
+          entry.target.classList.add('chart-ready');
+          delete chartConfigs[canvas.id];
+        }, 200);
+      }
+      chartObs.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.25 });
+
+document.querySelectorAll('.chart-container').forEach(el => chartObs.observe(el));
+</script>
+</body>
+</html>
